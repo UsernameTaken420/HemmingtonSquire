@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -32,9 +35,14 @@ public class VentanaPrincipal extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNahueSeLa = new JLabel("Nahue se la come");
+		lblNahueSeLa.setFont(new Font("Comic Sans MS", Font.BOLD, 16));
+		lblNahueSeLa.setBounds(123, 83, 301, 85);
+		contentPane.add(lblNahueSeLa);
 	}
-
 }
