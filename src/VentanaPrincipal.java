@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JSpinner;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -41,8 +42,16 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNahueSeLa = new JLabel("Nahue se la come");
-		lblNahueSeLa.setFont(new Font("Comic Sans MS", Font.BOLD, 16));
 		lblNahueSeLa.setBounds(123, 83, 301, 85);
+		lblNahueSeLa.setFont(new Font("Comic Sans MS", Font.BOLD, 16));
 		contentPane.add(lblNahueSeLa);
+		
+		JSpinner spinner = new JSpinner();
+		spinner.setBounds(227, 179, 29, 20);
+		contentPane.add(spinner);
+		
+		JLabel lblCuantasSeCome = new JLabel("Cuantas se come?");
+		lblCuantasSeCome.setBounds(98, 179, 103, 20);
+		contentPane.add(lblCuantasSeCome);
 	}
 }
