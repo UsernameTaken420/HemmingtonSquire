@@ -4,10 +4,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JSpinner;
+
+
 
 public class VentanaPrincipal extends JFrame {
 
@@ -38,7 +41,9 @@ public class VentanaPrincipal extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+
 		contentPane.setLayout(null);
 		
 		JLabel lblNahueSeLa = new JLabel("Nahue se la come");
@@ -53,5 +58,7 @@ public class VentanaPrincipal extends JFrame {
 		JLabel lblCuantasSeCome = new JLabel("Cuantas se come?");
 		lblCuantasSeCome.setBounds(98, 179, 103, 20);
 		contentPane.add(lblCuantasSeCome);
+
 	}
+
 }
