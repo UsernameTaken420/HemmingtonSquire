@@ -64,6 +64,7 @@ Documentación
 Conformación de grupo de proyecto
  No se podrá trabajar en forma individual.
  Los grupos serán formados de 2 o 3 perdonas máximo.
+
 Fecha de la Entrega
  Fecha de entrega: 2 clases antes de la última clase.
  No se puede entregar fuera de fecha y del horario de clases.
