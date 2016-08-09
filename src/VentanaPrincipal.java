@@ -9,12 +9,15 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JSpinner;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 
 public class VentanaPrincipal extends JFrame {
 
 	private JPanel contentPane;
+	
 
 	/**
 	 * Launch the application.
@@ -36,29 +39,19 @@ public class VentanaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaPrincipal() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				System.exit(0);
+			}
+		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(50, 10, 1275, 700);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.DARK_GRAY);
+		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-
 		contentPane.setLayout(null);
-		
-		JLabel lblNahueSeLa = new JLabel("Nahue se la come");
-		lblNahueSeLa.setBounds(123, 83, 301, 85);
-		lblNahueSeLa.setFont(new Font("Comic Sans MS", Font.BOLD, 16));
-		contentPane.add(lblNahueSeLa);
-		
-		JSpinner spinner = new JSpinner();
-		spinner.setBounds(227, 179, 29, 20);
-		contentPane.add(spinner);
-		
-		JLabel lblCuantasSeCome = new JLabel("Cuantas se come?");
-		lblCuantasSeCome.setBounds(98, 179, 103, 20);
-		contentPane.add(lblCuantasSeCome);
-
 	}
 
 }
