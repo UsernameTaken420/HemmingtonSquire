@@ -26,6 +26,7 @@ public class VentanaPrincipal extends JFrame {
 	String User[] = { "Admin", "Vendedor" };
 	String Password[] = { "rootlindo", "12345" };
 
+	
 	/**
 	 * Launch the application.
 	 */
@@ -67,8 +68,9 @@ public class VentanaPrincipal extends JFrame {
 				String Usuario = String.valueOf(JOptionPane.showInputDialog("Ingrese nombre de usuario"));
 				String Contraseña = String.valueOf(JOptionPane.showInputDialog("Ingrese la contraseña"));
 				for (i = 0; i < 2; i++) {
-					if ((Usuario == User[i]) && (Contraseña == Password[i])) {
+					if ((User[i].contains(Usuario)) && (Password[i].contains(Contraseña))) {
 						JOptionPane.showMessageDialog(null, "Congratu-fucking-lations");
+						break;
 					} else {
 						errorTotal++;
 					}
