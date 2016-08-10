@@ -12,6 +12,7 @@ import javax.swing.JSpinner;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import java.util.ArrayList;
 
 
 public class VentanaPrincipal extends JFrame {
@@ -23,6 +24,8 @@ public class VentanaPrincipal extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		String User[] = {"Admin", "Vendedor"};
+		String Password[] = {"rootlindo", "12345"};
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
