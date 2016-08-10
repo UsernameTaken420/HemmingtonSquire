@@ -22,9 +22,9 @@ import java.awt.event.ActionEvent;
 public class VentanaPrincipal extends JFrame {
 
 	private JPanel contentPane;
+	private static ArrayList <String> user=new ArrayList <String>();
+	private static ArrayList <String> pass=new ArrayList <String>();
 	public int i, errorTotal = 0;
-	String User[] = { "Admin", "Vendedor" };
-	String Password[] = { "rootlindo", "12345" };
 
 	
 	/**
@@ -61,6 +61,8 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		user.add("Admin");
+		pass.add("rootlindo");
 
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
@@ -68,7 +70,7 @@ public class VentanaPrincipal extends JFrame {
 				String Usuario = String.valueOf(JOptionPane.showInputDialog("Ingrese nombre de usuario"));
 				String Contraseña = String.valueOf(JOptionPane.showInputDialog("Ingrese la contraseña"));
 				for (i = 0; i < 2; i++) {
-					if ((User[i].contains(Usuario)) && (Password[i].contains(Contraseña))) {
+					if ((user.contains(Usuario)) && (pass.contains(Contraseña))) {
 						JOptionPane.showMessageDialog(null, "Congratu-fucking-lations");
 						break;
 					} else {
