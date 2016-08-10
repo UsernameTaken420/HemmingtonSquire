@@ -70,6 +70,7 @@ public class VentanaPrincipal extends JFrame {
 				for (i = 0; i < 2; i++) {
 					if ((User[i].contains(Usuario)) && (Password[i].contains(Contraseña))) {
 						JOptionPane.showMessageDialog(null, "Congratu-fucking-lations");
+						break;
 					} else {
 						errorTotal++;
 					}
