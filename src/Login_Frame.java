@@ -48,6 +48,7 @@ public class Login_Frame extends JFrame {
 	 * Create the frame.
 	 */
 	public Login_Frame() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Usuario\\Pictures\\Tux.png"));
 		setTitle("Login Ferreteria");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 427, 232);

@@ -25,7 +25,6 @@ public class VentanaPrincipal extends JFrame {
 	private static ArrayList <String> user=new ArrayList <String>();
 	private static ArrayList <String> pass=new ArrayList <String>();
 	public int i, errorTotal = 0;
-	public String a = "NahuePuto"; 
 
 	
 	/**
