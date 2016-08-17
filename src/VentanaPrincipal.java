@@ -63,6 +63,8 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.setLayout(null);
 		user.add("Admin");
 		pass.add("rootlindo");
+		Login_Frame Login = new Login_Frame();
+		
 
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
