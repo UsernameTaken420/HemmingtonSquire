@@ -18,6 +18,12 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -25,6 +31,7 @@ public class VentanaPrincipal extends JFrame {
 	private static ArrayList <String> user=new ArrayList <String>();
 	private static ArrayList <String> pass=new ArrayList <String>();
 	public int i, errorTotal = 0;
+	private JTextField textField;
 
 	
 	/**
@@ -56,48 +63,63 @@ public class VentanaPrincipal extends JFrame {
 		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(50, 10, 1275, 700);
+		JMenuBar menuBar = new JMenuBar();
+		 setJMenuBar(menuBar);
+		 JMenu mnArchivo = new JMenu("Archivo");
+		 menuBar.add(mnArchivo);
+		 JMenuItem mntmConfirmarCambios = new JMenuItem("Confirmar cambios");
+		 mnArchivo.add(mntmConfirmarCambios);
+		 JMenuItem mntmConfirmarCambiosY = new JMenuItem("Confirmar cambios y salir");
+		 mnArchivo.add(mntmConfirmarCambiosY);
+		 JMenuItem mntmNewMenuItem = new JMenuItem("Salir");
+		 mnArchivo.add(mntmNewMenuItem);
+		 JMenu mnUsuarios = new JMenu("Usuarios");
+		 menuBar.add(mnUsuarios);	
+		 JMenuItem mntmAgregar = new JMenuItem("Agregar");
+		 mnUsuarios.add(mntmAgregar);
+		 JMenuItem mntmEliminar = new JMenuItem("Eliminar");
+		 mnUsuarios.add(mntmEliminar);
+		 JMenu mnMercaderia = new JMenu("Mercaderia");
+		 menuBar.add(mnMercaderia);
+		 JMenuItem mntmAgregar_1 = new JMenuItem("Agregar");
+		 mnMercaderia.add(mntmAgregar_1);	
+		 JMenuItem mntmEliminar_1 = new JMenuItem("Eliminar");
+		 mnMercaderia.add(mntmEliminar_1);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		user.add("Admin");
 		pass.add("rootlindo");
 		Login_Frame Login = new Login_Frame();
 		
-		
-
-		JButton btnLogin = new JButton("Login");
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String Usuario = String.valueOf(JOptionPane.showInputDialog("Ingrese nombre de usuario"));
-				String Contraseña = String.valueOf(JOptionPane.showInputDialog("Ingrese la contraseña"));
-				for (i = 0; i < 2; i++) {
-					if ((user.contains(Usuario)) && (pass.contains(Contraseña))) {
-						JOptionPane.showMessageDialog(null, "Congratu-fucking-lations");
-						break;
-					} else {
-						errorTotal++;
-					}
-					if (errorTotal == 2) {
-						JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña incorrecta", "ERROR",
-								JOptionPane.ERROR_MESSAGE);
-					}
-				}
-
-			}
-
-		});
-		btnLogin.setBounds(103, 575, 89, 23);
-		contentPane.add(btnLogin);
-
-		JButton btnExit = new JButton("Exit");
-		btnExit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
-			}
-		});
-		btnExit.setBounds(338, 575, 89, 23);
-		contentPane.add(btnExit);
+		contentPane.setLayout(null);
+		 textField = new JTextField();
+		 textField.setBounds(10, 41, 108, 20);
+		 contentPane.add(textField);
+		 textField.setColumns(10);
+		 JLabel lblCodigoDeProducto = new JLabel("Codigo de producto");
+		 lblCodigoDeProducto.setBounds(10, 11, 139, 26);
+		 lblCodigoDeProducto.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		 contentPane.add(lblCodigoDeProducto);
+		 JButton btnNewButton = new JButton("Buscar");
+		 btnNewButton.setBounds(128, 40, 67, 23);
+		 contentPane.add(btnNewButton);
+		 JScrollPane scrollPane = new JScrollPane();
+		 scrollPane.setBounds(10, 72, 185, 290);
+		 contentPane.add(scrollPane);
+		 JTextArea textArea = new JTextArea();
+		 scrollPane.setViewportView(textArea);
+		 JLabel lblImagen = new JLabel("Imagen");
+		 lblImagen.setBounds(205, 139, 203, 201);
+		 contentPane.add(lblImagen);
+		 JLabel lblDescripcion = new JLabel("Descripcion");
+		 lblDescripcion.setBounds(209, 11, 139, 26);
+		 lblDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		 contentPane.add(lblDescripcion);
+		 
+		 JTextArea textArea_1 = new JTextArea();
+		 textArea_1.setBounds(205, 48, 203, 82);
+		 contentPane.add(textArea_1);
 	}
 }
