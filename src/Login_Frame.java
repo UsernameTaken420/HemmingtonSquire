@@ -51,7 +51,7 @@ public class Login_Frame extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Usuario\\Pictures\\Tux.png"));
 		setTitle("Login Ferreteria");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 427, 232);
+		setBounds(100, 100, 626, 361);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaption);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -60,21 +60,21 @@ public class Login_Frame extends JFrame {
 		
 		JLabel lblLogin = new JLabel("Nombre:");
 		lblLogin.setFont(new Font("Mangal", Font.BOLD, 16));
-		lblLogin.setBounds(171, 68, 72, 31);
+		lblLogin.setBounds(353, 68, 72, 31);
 		contentPane.add(lblLogin);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
 		lblContrasea.setFont(new Font("Mangal", Font.BOLD, 16));
-		lblContrasea.setBounds(171, 94, 100, 31);
+		lblContrasea.setBounds(353, 94, 100, 31);
 		contentPane.add(lblContrasea);
 		
 		textField = new JTextField();
-		textField.setBounds(281, 76, 107, 20);
+		textField.setBounds(463, 76, 107, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(281, 102, 107, 20);
+		passwordField.setBounds(463, 102, 107, 20);
 		contentPane.add(passwordField);
 		
 		JSeparator separator = new JSeparator();
@@ -84,16 +84,16 @@ public class Login_Frame extends JFrame {
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Login_Frame.class.getResource("/Imagenes/Ferreteria.png")));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(0, 45, 171, 127);
+		lblNewLabel.setBounds(0, 21, 353, 281);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblInicioDelSistema = new JLabel("Inicio del sistema");
 		lblInicioDelSistema.setFont(new Font("Sylfaen", Font.BOLD, 13));
-		lblInicioDelSistema.setBounds(281, 45, 120, 20);
+		lblInicioDelSistema.setBounds(399, 45, 120, 20);
 		contentPane.add(lblInicioDelSistema);
 		
 		JButton btnNewButton = new JButton("Login");
-		btnNewButton.setBounds(287, 149, 89, 23);
+		btnNewButton.setBounds(463, 148, 107, 23);
 		contentPane.add(btnNewButton);
 	}
 }
