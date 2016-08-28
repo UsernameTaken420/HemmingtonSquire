@@ -82,8 +82,9 @@ public class Login_Frame extends JFrame {
 		contentPane.add(separator);
 		
 		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(Login_Frame.class.getResource("/Imagenes/Ferreteria.png")));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(40, 45, 131, 127);
+		lblNewLabel.setBounds(0, 45, 171, 127);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblInicioDelSistema = new JLabel("Inicio del sistema");
