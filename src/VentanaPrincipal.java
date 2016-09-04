@@ -44,6 +44,7 @@ public class VentanaPrincipal extends JFrame {
 	private JMenu mnMercaderia;
 	private JMenuItem mntmEliminar_1;
 	private JMenuItem mntmAgregar_1;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -74,7 +75,7 @@ public class VentanaPrincipal extends JFrame {
 		});
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(50, 10, 620, 380);
+		setBounds(50, 10, 781, 406);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -147,7 +148,7 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.add(lblCodigoDeProducto);
 		
 		btnNewButton = new JButton("Buscar");
-		btnNewButton.setBounds(128, 40, 67, 23);
+		btnNewButton.setBounds(128, 40, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		JLabel lblImagen = new JLabel("Imagen");
@@ -167,5 +168,23 @@ public class VentanaPrincipal extends JFrame {
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(10, 87, 319, 188);
 		contentPane.add(textArea);
+		
+		JLabel lblVenta = new JLabel("Venta");
+		lblVenta.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblVenta.setBounds(605, 11, 139, 26);
+		contentPane.add(lblVenta);
+		
+		JTextArea textArea_2 = new JTextArea();
+		textArea_2.setBounds(605, 119, 139, 125);
+		contentPane.add(textArea_2);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(605, 60, 86, 20);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JButton btnNewButton_1 = new JButton("Confirmar venta");
+		btnNewButton_1.setBounds(605, 278, 139, 23);
+		contentPane.add(btnNewButton_1);
 	}
 }
