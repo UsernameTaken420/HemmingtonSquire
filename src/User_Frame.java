@@ -7,13 +7,14 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
 
-public class Root_Frame extends JFrame {
+public class User_Frame extends JFrame {
 
-	public JPanel contentPane;
-	
-	public Root_Frame() {
-		setTitle("Root");
+	private JPanel contentPane;
+
+	public User_Frame() {
+		setTitle("Usuario");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent arg0) {
@@ -28,5 +29,4 @@ public class Root_Frame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 	}
-
 }
