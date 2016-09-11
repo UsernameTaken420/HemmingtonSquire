@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -21,12 +23,18 @@ import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.awt.event.ActionEvent;
 
 public class Login_Frame extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField textField;
-	private JPasswordField passwordField;
+	private JPanel Contenedor;
+	private JTextField NombreT;
+	private JPasswordField ContraseñaT;
+	private static ArrayList <String> user=new ArrayList <String>();
+	private static ArrayList <String> pass=new ArrayList <String>();
+	
 
 	/**
 	 * Launch the application.
@@ -48,52 +56,100 @@ public class Login_Frame extends JFrame {
 	 * Create the frame.
 	 */
 	public Login_Frame() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Usuario\\Pictures\\Tux.png"));
+
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Usuario\\Documents\\GitHub\\HemmingtonSquire\\Imagenes\\Ferreteria.png"));
+
+		user.add("Root");
+		pass.add("Rootlindo");
+		user.add("Usuario");
+		pass.add("Usuariolindo");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login_Frame.class.getResource("/Imagenes/Ferreteria.png")));
+
 		setTitle("Login Ferreteria");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 250);
-		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.inactiveCaption);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		setBounds(100, 100, 427, 232);
+		Contenedor = new JPanel();
+		Contenedor.setBackground(SystemColor.inactiveCaption);
+		Contenedor.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(Contenedor);
+		Contenedor.setLayout(null);
 		
 		JLabel lblLogin = new JLabel("Nombre:");
 		lblLogin.setFont(new Font("Mangal", Font.BOLD, 16));
-		lblLogin.setBounds(201, 53, 72, 31);
-		contentPane.add(lblLogin);
+		lblLogin.setBounds(171, 68, 72, 31);
+		Contenedor.add(lblLogin);
 		
-		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
-		lblContrasea.setFont(new Font("Mangal", Font.BOLD, 16));
-		lblContrasea.setBounds(201, 95, 100, 31);
-		contentPane.add(lblContrasea);
+		JLabel lblContraseña = new JLabel("Contrase\u00F1a:");
+		lblContraseña.setFont(new Font("Mangal", Font.BOLD, 16));
+		lblContraseña.setBounds(171, 94, 100, 31);
+		Contenedor.add(lblContraseña);
 		
-		textField = new JTextField();
-		textField.setBounds(311, 61, 107, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		NombreT = new JTextField();
+		NombreT.setBounds(281, 76, 107, 20);
+		Contenedor.add(NombreT);
+		NombreT.setColumns(10);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(311, 103, 107, 20);
-		contentPane.add(passwordField);
+		ContraseñaT = new JPasswordField();
+		ContraseñaT.setBounds(281, 102, 107, 20);
+		Contenedor.add(ContraseñaT);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(171, 45, 0, 127);
-		contentPane.add(separator);
+		Contenedor.add(separator);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Login_Frame.class.getResource("/Imagenes/Ferreteria.png")));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(10, 55, 160, 78);
-		contentPane.add(lblNewLabel);
+		lblNewLabel.setBounds(40, 45, 131, 127);
+		Contenedor.add(lblNewLabel);
 		
 		JLabel lblInicioDelSistema = new JLabel("Inicio del sistema");
 		lblInicioDelSistema.setFont(new Font("Sylfaen", Font.BOLD, 13));
-		lblInicioDelSistema.setBounds(298, 26, 120, 20);
-		contentPane.add(lblInicioDelSistema);
+		lblInicioDelSistema.setBounds(281, 45, 120, 20);
+		Contenedor.add(lblInicioDelSistema);
 		
-		JButton btnNewButton = new JButton("Login");
-		btnNewButton.setBounds(311, 144, 107, 23);
-		contentPane.add(btnNewButton);
+		JButton LoginBoton = new JButton("Login");
+		LoginBoton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				/*Login*/
+				String Usuario = NombreT.getText();
+				String Contraseña = ContraseñaT.getText();
+
+				if(user.indexOf(Usuario)!=-1){
+
+						if ((pass.get(user.indexOf(Usuario)).equals(Contraseña))) {
+							if(Usuario.equals("Root")){
+								Root_Frame kys = new Root_Frame();
+								Login_Frame frame = new Login_Frame();
+								kys.setVisible(true);
+								frame.setEnabled(false);
+								frame.setAlwaysOnTop(false);
+								kys.setAlwaysOnTop(true);
+
+							}else{
+								User_Frame kys = new User_Frame();
+								Login_Frame frame = new Login_Frame();
+								kys.setVisible(true);
+								frame.setEnabled(false);
+								frame.setAlwaysOnTop(false);
+								kys.setAlwaysOnTop(true);
+
+							}
+						
+						} else {
+								JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "ERROR",JOptionPane.ERROR_MESSAGE);
+
+						}
+
+				
+				}else{
+					JOptionPane.showMessageDialog(null, "Nombre de usuario incorrecto", "ERROR",JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		LoginBoton.setBounds(287, 149, 89, 23);
+		Contenedor.add(LoginBoton);
 	}
+
 }

@@ -1,0 +1,2 @@
+Usuario : Tomar el valor de el ingreso en Nombres en la ventana login	
+Contraseña : Tomar el valor de el ingreso en Contraseña en la ventana login
