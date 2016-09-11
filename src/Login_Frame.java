@@ -54,7 +54,7 @@ public class Login_Frame extends JFrame {
 	 * Create the frame.
 	 */
 	public Login_Frame() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Usuario\\Documents\\GitHub\\HemmingtonSquire\\Imagenes\\Ferreteria.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login_Frame.class.getResource("/Imagenes/Ferreteria.png")));
 		setTitle("Login Ferreteria");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 427, 232);
@@ -87,10 +87,11 @@ public class Login_Frame extends JFrame {
 		separator.setBounds(171, 45, 0, 127);
 		Contenedor.add(separator);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(40, 45, 131, 127);
-		Contenedor.add(lblNewLabel);
+		JLabel FotoFerreteria = new JLabel("");
+		FotoFerreteria.setIcon(new ImageIcon(Login_Frame.class.getResource("/Imagenes/Ferreteria.png")));
+		FotoFerreteria.setHorizontalAlignment(SwingConstants.CENTER);
+		FotoFerreteria.setBounds(0, 0, 162, 183);
+		Contenedor.add(FotoFerreteria);
 		
 		JLabel lblInicioDelSistema = new JLabel("Inicio del sistema");
 		lblInicioDelSistema.setFont(new Font("Sylfaen", Font.BOLD, 13));
