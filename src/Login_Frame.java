@@ -34,6 +34,8 @@ public class Login_Frame extends JFrame {
 	private JPasswordField ContraseñaT;
 	private static ArrayList <String> user=new ArrayList <String>();
 	private static ArrayList <String> pass=new ArrayList <String>();
+	
+
 	/**
 	 * Launch the application.
 	 */
@@ -54,7 +56,15 @@ public class Login_Frame extends JFrame {
 	 * Create the frame.
 	 */
 	public Login_Frame() {
+
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Usuario\\Documents\\GitHub\\HemmingtonSquire\\Imagenes\\Ferreteria.png"));
+
+		user.add("Root");
+		pass.add("Rootlindo");
+		user.add("Usuario");
+		pass.add("Usuariolindo");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login_Frame.class.getResource("/Imagenes/Ferreteria.png")));
+
 		setTitle("Login Ferreteria");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 427, 232);
@@ -105,10 +115,6 @@ public class Login_Frame extends JFrame {
 				/*Login*/
 				String Usuario = NombreT.getText();
 				String Contraseña = ContraseñaT.getText();
-				user.add("Root");
-				pass.add("Rootlindo");
-				user.add("Usuario");
-				pass.add("Usuariolindo");
 
 				if(user.indexOf(Usuario)!=-1){
 
