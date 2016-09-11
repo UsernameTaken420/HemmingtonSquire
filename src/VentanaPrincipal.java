@@ -1,24 +1,31 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class Root_Frame extends JFrame {
+import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
+import java.awt.Font;
+import javax.swing.JSpinner;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import java.util.ArrayList;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+
+public class VentanaPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private static ArrayList<String> user = new ArrayList<String>();
@@ -59,7 +66,7 @@ public class Root_Frame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Root_Frame() {
+	public VentanaPrincipal() {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent arg0) {
@@ -180,5 +187,4 @@ public class Root_Frame extends JFrame {
 		btnNewButton_1.setBounds(605, 278, 139, 23);
 		contentPane.add(btnNewButton_1);
 	}
-
 }
