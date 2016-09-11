@@ -13,7 +13,6 @@ public class Root_Frame extends JFrame {
 	public JPanel contentPane;
 	
 	public Root_Frame() {
-		setTitle("Root");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent arg0) {
