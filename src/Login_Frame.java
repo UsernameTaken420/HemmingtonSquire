@@ -98,8 +98,8 @@ public class Login_Frame extends JFrame {
 		lblInicioDelSistema.setBounds(281, 45, 120, 20);
 		Contenedor.add(lblInicioDelSistema);
 		
-		JButton btnNewButton = new JButton("Login");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton LoginBoton = new JButton("Login");
+		LoginBoton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				
@@ -108,30 +108,43 @@ public class Login_Frame extends JFrame {
 				String Contraseña = ContraseñaT.getText();
 				user.add("Root");
 				pass.add("Rootlindo");
-				boolean c = true;
-				do {
-					if ((user.contains(Usuario)) && (pass.contains(Contraseña))) {
-						Root_Frame kys = new Root_Frame();
-						Login_Frame frame = new Login_Frame();
-					    kys.setVisible(true);
-					    frame.setEnabled(false);
-					    frame.setAlwaysOnTop(false);
-					    kys.setAlwaysOnTop(true);
-						c=false;
-					} else {
+				user.add("Usuario");
+				pass.add("Usuariolindo");
+
+				if(user.indexOf(Usuario)!=-1){
+
+						if ((pass.get(user.indexOf(Usuario)).equals(Contraseña))) {
+							if(Usuario.equals("Root")){
+								Root_Frame kys = new Root_Frame();
+								Login_Frame frame = new Login_Frame();
+								kys.setVisible(true);
+								frame.setEnabled(false);
+								frame.setAlwaysOnTop(false);
+								kys.setAlwaysOnTop(true);
+
+							}else{
+								User_Frame kys = new User_Frame();
+								Login_Frame frame = new Login_Frame();
+								kys.setVisible(true);
+								frame.setEnabled(false);
+								frame.setAlwaysOnTop(false);
+								kys.setAlwaysOnTop(true);
+
+							}
 						
-						if(user.contains(Usuario)){
-							JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "ERROR",JOptionPane.ERROR_MESSAGE);
-						}else{
-						JOptionPane.showMessageDialog(null, "Nombre de usuario incorrecto", "ERROR",JOptionPane.ERROR_MESSAGE);
+						} else {
+								JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "ERROR",JOptionPane.ERROR_MESSAGE);
+
 						}
-						c=false;
-					}
-				}while(c);
+
+				
+				}else{
+					JOptionPane.showMessageDialog(null, "Nombre de usuario incorrecto", "ERROR",JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
-		btnNewButton.setBounds(287, 149, 89, 23);
-		Contenedor.add(btnNewButton);
+		LoginBoton.setBounds(287, 149, 89, 23);
+		Contenedor.add(LoginBoton);
 	}
 
 }
