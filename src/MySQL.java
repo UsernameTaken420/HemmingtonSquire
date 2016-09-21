@@ -15,7 +15,7 @@ public class MySQL {
 
 	}
 	
-public static boolean registry(){
+public static boolean register(){
 		
 		boolean x;
 	try {
