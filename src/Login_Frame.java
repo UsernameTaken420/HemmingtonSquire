@@ -67,7 +67,6 @@ public class Login_Frame extends JFrame {
 		pass.add("Rootlindo");
 		user.add("Usuario");
 		pass.add("Usuariolindo");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Login_Frame.class.getResource("/Imagenes/Ferreteria.png")));
 
 =======
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Usuario\\Documents\\GitHub\\HemmingtonSquire\\Imagenes\\Ferreteria.png"));
