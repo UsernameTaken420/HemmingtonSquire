@@ -12,10 +12,13 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Root_Frame extends JFrame {
 
@@ -38,6 +41,8 @@ public class Root_Frame extends JFrame {
 	private JMenuItem remove_merchandise;
 	private JMenuItem add_merchandise;
 	private JTextField sell_cuantity;
+	public static Root_Frame frame;
+	
 
 	/**
 	 * Launch the application.
@@ -47,7 +52,7 @@ public class Root_Frame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Root_Frame frame = new Root_Frame();
+					frame = new Root_Frame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -89,9 +94,30 @@ public class Root_Frame extends JFrame {
 		menuBar.add(user_menu);
 		
 		add_user = new JMenuItem("Agregar");
+		add_user.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				User_Add v1 = new User_Add();
+				v1.setVisible(true);
+				frame.setEnabled(false);
+				v1.setAlwaysOnTop(true);
+
+				
+			}
+		});
 		user_menu.add(add_user);
 		
 		remove_user = new JMenuItem("Eliminar");
+		remove_user.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				User_Remove v1 = new User_Remove();
+				v1.setVisible(true);
+				frame.setEnabled(false);
+				v1.setAlwaysOnTop(true);
+
+			}
+		});
 		user_menu.add(remove_user);
 		
 		mnMercaderia = new JMenu("Mercaderia");
@@ -180,5 +206,21 @@ public class Root_Frame extends JFrame {
 		sell_button.setBounds(605, 278, 139, 23);
 		contentPane.add(sell_button);
 	}
-
+	/*
+	public static boolean vacio() {
+		if (u.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Error No Ingreso el Usuario... ingrese nuevamente");
+			return false;
+		}
+		if (p.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Error No Ingreso la Contraseña... ingrese nuevamente");
+			return false;
+		}
+		if (id1.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Error No Ingreso la Contraseña... ingrese nuevamente");
+			return false;
+		}
+		return true;
+	}
+*/
 }
