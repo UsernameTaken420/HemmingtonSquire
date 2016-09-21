@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 
 public class Boceto extends JFrame {
 
@@ -34,7 +35,6 @@ public class Boceto extends JFrame {
 	private JTextField textField_6;
 	private JTextField textField_10;
 	private JTextField textField_11;
-	private JTextField textField_16;
 	private JTextField textField_12;
 	private JTextField textField_13;
 	private JTextField textField_14;
@@ -65,7 +65,7 @@ public class Boceto extends JFrame {
 	 */
 	public Boceto() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1143, 493);
+		setBounds(100, 100, 1248, 859);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -236,11 +236,6 @@ public class Boceto extends JFrame {
 		button_1.setBounds(238, 389, 182, 23);
 		contentPane.add(button_1);
 		
-		textField_16 = new JTextField();
-		textField_16.setColumns(10);
-		textField_16.setBounds(334, 699, 86, 20);
-		contentPane.add(textField_16);
-		
 		JLabel label_9 = new JLabel("Consultas de mercaderia");
 		label_9.setBounds(526, 36, 139, 14);
 		contentPane.add(label_9);
@@ -372,5 +367,21 @@ public class Boceto extends JFrame {
 		JButton button_5 = new JButton("Confirmar");
 		button_5.setBounds(942, 264, 182, 23);
 		contentPane.add(button_5);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(53, 450, 493, 251);
+		contentPane.add(tabbedPane);
+		
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("New tab", null, panel, null);
+		
+		JPanel panel_1 = new JPanel();
+		tabbedPane.addTab("New tab", null, panel_1, null);
+		
+		JPanel panel_2 = new JPanel();
+		tabbedPane.addTab("New tab", null, panel_2, null);
+		
+		JPanel panel_3 = new JPanel();
+		tabbedPane.addTab("New tab", null, panel_3, null);
 	}
 }

@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 
 public class User_Remove extends JFrame {
@@ -36,7 +38,20 @@ public class User_Remove extends JFrame {
 	 * Create the frame.
 	 */
 	public User_Remove() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				
+				User_Remove.this.dispose();
+				Root_Frame.frame.setEnabled(true);
+				Root_Frame.frame.setAlwaysOnTop(true);
+
+			}
+		});
+		
+		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 217, 226);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
