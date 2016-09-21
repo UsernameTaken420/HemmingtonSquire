@@ -24,20 +24,20 @@ public class Root_Frame extends JFrame {
 	private static ArrayList<String> user = new ArrayList<String>();
 	private static ArrayList<String> pass = new ArrayList<String>();
 	public int i, errorTotal = 0;
-	private JTextField textField;
-	private JTextArea textArea_1;
-	private JButton btnNewButton;
-	private JMenu mnArchivo;
-	private JMenuItem mntmConfirmarCambios;
-	private JMenuItem mntmConfirmarCambiosY;
-	private JMenuItem mntmNewMenuItem;
-	private JMenu mnUsuarios;
-	private JMenuItem mntmAgregar;
-	private JMenuItem mntmEliminar;
+	private JTextField search_textArea;
+	private JTextArea description;
+	private JButton search_button;
+	private JMenu file_menu;
+	private JMenuItem confirm;
+	private JMenuItem confirm_exit;
+	private JMenuItem exit;
+	private JMenu user_menu;
+	private JMenuItem add_user;
+	private JMenuItem remove_user;
 	private JMenu mnMercaderia;
-	private JMenuItem mntmEliminar_1;
-	private JMenuItem mntmAgregar_1;
-	private JTextField textField_1;
+	private JMenuItem remove_merchandise;
+	private JMenuItem add_merchandise;
+	private JTextField sell_cuantity;
 
 	/**
 	 * Launch the application.
@@ -47,7 +47,7 @@ public class Root_Frame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaPrincipal frame = new VentanaPrincipal();
+					Root_Frame frame = new Root_Frame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -73,47 +73,47 @@ public class Root_Frame extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		mnArchivo = new JMenu("Archivo");
-		menuBar.add(mnArchivo);
+		file_menu = new JMenu("Archivo");
+		menuBar.add(file_menu);
 		
-		mntmConfirmarCambios = new JMenuItem("Confirmar cambios");
-		mnArchivo.add(mntmConfirmarCambios);
+		confirm = new JMenuItem("Confirmar cambios");
+		file_menu.add(confirm);
 		
-		mntmConfirmarCambiosY = new JMenuItem("Confirmar cambios y salir");
-		mnArchivo.add(mntmConfirmarCambiosY);
+		confirm_exit = new JMenuItem("Confirmar cambios y salir");
+		file_menu.add(confirm_exit);
 		
-		mntmNewMenuItem = new JMenuItem("Salir");
-		mnArchivo.add(mntmNewMenuItem);
+		exit = new JMenuItem("Salir");
+		file_menu.add(exit);
 		
-		mnUsuarios = new JMenu("Usuarios");
-		menuBar.add(mnUsuarios);
+		user_menu = new JMenu("Usuarios");
+		menuBar.add(user_menu);
 		
-		mntmAgregar = new JMenuItem("Agregar");
-		mnUsuarios.add(mntmAgregar);
+		add_user = new JMenuItem("Agregar");
+		user_menu.add(add_user);
 		
-		mntmEliminar = new JMenuItem("Eliminar");
-		mnUsuarios.add(mntmEliminar);
+		remove_user = new JMenuItem("Eliminar");
+		user_menu.add(remove_user);
 		
 		mnMercaderia = new JMenu("Mercaderia");
 		menuBar.add(mnMercaderia);
 		
-		mntmAgregar_1 = new JMenuItem("Agregar");
-		mnMercaderia.add(mntmAgregar_1);
+		add_merchandise = new JMenuItem("Agregar");
+		mnMercaderia.add(add_merchandise);
 		
-		mntmEliminar_1 = new JMenuItem("Eliminar");
-		mnMercaderia.add(mntmEliminar_1);
+		remove_merchandise = new JMenuItem("Eliminar");
+		mnMercaderia.add(remove_merchandise);
 		
-		JMenuItem mntmModificarIva = new JMenuItem("Modificar IVA");
-		mnMercaderia.add(mntmModificarIva);
+		JMenuItem modify_merchandise = new JMenuItem("Modificar IVA");
+		mnMercaderia.add(modify_merchandise);
 		
-		JMenuItem mntmActualizarMercaderia = new JMenuItem("Actualizar mercaderia");
-		mnMercaderia.add(mntmActualizarMercaderia);
+		JMenuItem update_merchandise = new JMenuItem("Actualizar mercaderia");
+		mnMercaderia.add(update_merchandise);
 		
 		JMenu mnLogs = new JMenu("Logs");
 		menuBar.add(mnLogs);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Movimientos");
-		mnLogs.add(mntmNewMenuItem_1);
+		JMenuItem movments = new JMenuItem("Movimientos");
+		mnLogs.add(movments);
 		
 		JMenuItem mntmVentas = new JMenuItem("Ventas");
 		mnLogs.add(mntmVentas);
@@ -129,10 +129,10 @@ public class Root_Frame extends JFrame {
 		Login_Frame Login = new Login_Frame();
 		contentPane.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(10, 41, 108, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		search_textArea = new JTextField();
+		search_textArea.setBounds(10, 41, 108, 20);
+		contentPane.add(search_textArea);
+		search_textArea.setColumns(10);
 		
 		JLabel lblCodigoDeProducto = new JLabel("Codigo de producto");
 		lblCodigoDeProducto.setBounds(10, 11, 139, 26);
@@ -140,13 +140,13 @@ public class Root_Frame extends JFrame {
 		lblCodigoDeProducto.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(lblCodigoDeProducto);
 		
-		btnNewButton = new JButton("Buscar");
-		btnNewButton.setBounds(128, 40, 89, 23);
-		contentPane.add(btnNewButton);
+		search_button = new JButton("Buscar");
+		search_button.setBounds(128, 40, 89, 23);
+		contentPane.add(search_button);
 		
-		JLabel lblImagen = new JLabel("Imagen");
-		lblImagen.setBounds(366, 56, 139, 119);
-		contentPane.add(lblImagen);
+		JLabel Image = new JLabel("Imagen");
+		Image.setBounds(366, 56, 139, 119);
+		contentPane.add(Image);
 		
 		JLabel lblDescripcion = new JLabel("Descripcion");
 		lblDescripcion.setBounds(366, 11, 139, 26);
@@ -154,31 +154,31 @@ public class Root_Frame extends JFrame {
 		lblDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(lblDescripcion);
 
-		textArea_1 = new JTextArea();
-		textArea_1.setBounds(366, 186, 203, 82);
-		contentPane.add(textArea_1);
+		description = new JTextArea();
+		description.setBounds(366, 186, 203, 82);
+		contentPane.add(description);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(10, 87, 319, 188);
-		contentPane.add(textArea);
+		JTextArea display_serarch = new JTextArea();
+		display_serarch.setBounds(10, 87, 319, 188);
+		contentPane.add(display_serarch);
 		
 		JLabel lblVenta = new JLabel("Venta");
 		lblVenta.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblVenta.setBounds(605, 11, 139, 26);
 		contentPane.add(lblVenta);
 		
-		JTextArea textArea_2 = new JTextArea();
-		textArea_2.setBounds(605, 119, 139, 125);
-		contentPane.add(textArea_2);
+		JTextArea sell_textArea = new JTextArea();
+		sell_textArea.setBounds(605, 119, 139, 125);
+		contentPane.add(sell_textArea);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(605, 60, 86, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		sell_cuantity = new JTextField();
+		sell_cuantity.setBounds(605, 60, 86, 20);
+		contentPane.add(sell_cuantity);
+		sell_cuantity.setColumns(10);
 		
-		JButton btnNewButton_1 = new JButton("Confirmar venta");
-		btnNewButton_1.setBounds(605, 278, 139, 23);
-		contentPane.add(btnNewButton_1);
+		JButton sell_button = new JButton("Confirmar venta");
+		sell_button.setBounds(605, 278, 139, 23);
+		contentPane.add(sell_button);
 	}
 
 }
