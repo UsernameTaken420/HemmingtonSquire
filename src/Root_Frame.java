@@ -47,7 +47,7 @@ public class Root_Frame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaPrincipal frame = new VentanaPrincipal();
+					Root_Frame frame = new Root_Frame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
