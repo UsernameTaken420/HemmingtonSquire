@@ -6,6 +6,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,45 +15,51 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class Root_Frame extends JFrame {
 
-
-	private JPanel contentPane;
-	private static ArrayList<String> user = new ArrayList<String>();
-	private static ArrayList<String> pass = new ArrayList<String>();
-	public int i, errorTotal = 0;
-	private JTextField search_textArea;
-	private JTextArea description;
-	private JButton search_button;
-	private JMenu file_menu;
-	private JMenuItem confirm;
-	private JMenuItem confirm_exit;
-	private JMenuItem exit;
-	private JMenu user_menu;
-	private JMenuItem add_user;
-	private JMenuItem remove_user;
-	private JMenu mnMercaderia;
-	private JMenuItem remove_merchandise;
-	private JMenuItem add_merchandise;
-	private JTextField sell_cuantity;
-	public static Root_Frame frame;
 	
+	private JPanel contentPane;
+	private static JTextField u;
+	private JTextField u2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
+	private JTextField textField_8;
+	private JTextField textField_10;
+	private JTextField textField_9;
+	private JTextField textField_11;
+	private JTextField textField_12;
+	private JTextField textField_13;
+	private JTextField textField_14;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JTextField textField_15;
+	private JTextField textField_16;
+	private JTextField textField_17;
+	private JTextField textField_18;
+	private JButton add_user;
+	private JButton remove_user;
+	private JPanel panel_1;
+	private static JPasswordField p;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frame = new Root_Frame();
+					Root_Frame frame = new Root_Frame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -65,148 +72,535 @@ public class Root_Frame extends JFrame {
 	 * Create the frame.
 	 */
 	public Root_Frame() {
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosed(WindowEvent arg0) {
-				System.exit(0);
-			}
-		});
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(50, 10, 781, 406);
+		setBounds(100, 100, 667, 528);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		file_menu = new JMenu("Archivo");
-		menuBar.add(file_menu);
+		JMenu mnArchivo = new JMenu("Archivo");
+		menuBar.add(mnArchivo);
 		
-		confirm = new JMenuItem("Confirmar cambios");
-		file_menu.add(confirm);
+		JMenuItem mntmSalir = new JMenuItem("Salir");
+		mnArchivo.add(mntmSalir);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		confirm_exit = new JMenuItem("Confirmar cambios y salir");
-		file_menu.add(confirm_exit);
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(10, 11, 639, 458);
+		contentPane.add(tabbedPane);
 		
-		exit = new JMenuItem("Salir");
-		file_menu.add(exit);
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("Control de mercaderia", null, panel, null);
+		panel.setLayout(null);
 		
-		user_menu = new JMenu("Usuarios");
-		menuBar.add(user_menu);
+		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane_1.setBounds(10, 11, 614, 411);
+		panel.add(tabbedPane_1);
 		
-		add_user = new JMenuItem("Agregar");
+		JPanel panel_2 = new JPanel();
+		tabbedPane_1.addTab("Agregar", null, panel_2, null);
+		panel_2.setLayout(null);
+		
+		JLabel label_5 = new JLabel("Codigo");
+		label_5.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_5.setBounds(10, 59, 123, 27);
+		panel_2.add(label_5);
+		
+		JLabel label_6 = new JLabel("IVA");
+		label_6.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_6.setBounds(10, 101, 123, 14);
+		panel_2.add(label_6);
+		
+		JLabel label_7 = new JLabel("Nombre");
+		label_7.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_7.setBounds(10, 139, 123, 14);
+		panel_2.add(label_7);
+		
+		JLabel label_8 = new JLabel("Stock inicial");
+		label_8.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_8.setBounds(10, 180, 123, 14);
+		panel_2.add(label_8);
+		
+		JLabel label_9 = new JLabel("Precio Unitario");
+		label_9.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_9.setBounds(10, 220, 123, 14);
+		panel_2.add(label_9);
+		
+		JLabel label_10 = new JLabel("Precio de venta");
+		label_10.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_10.setBounds(10, 260, 123, 14);
+		panel_2.add(label_10);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(143, 63, 111, 20);
+		panel_2.add(textField_3);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(143, 99, 111, 20);
+		panel_2.add(textField_4);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(143, 137, 111, 20);
+		panel_2.add(textField_5);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(143, 178, 111, 20);
+		panel_2.add(textField_6);
+		
+		textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		textField_7.setBounds(143, 218, 111, 20);
+		panel_2.add(textField_7);
+		
+		textField_8 = new JTextField();
+		textField_8.setColumns(10);
+		textField_8.setBounds(143, 258, 111, 20);
+		panel_2.add(textField_8);
+		
+		JButton button_2 = new JButton("Confirmar");
+		button_2.setBounds(349, 257, 182, 23);
+		panel_2.add(button_2);
+		
+		JPanel panel_3 = new JPanel();
+		tabbedPane_1.addTab("Vender", null, panel_3, null);
+		panel_3.setLayout(null);
+		
+		JLabel lblCodigoDelProducto = new JLabel("Codigo del producto");
+		lblCodigoDelProducto.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblCodigoDelProducto.setBounds(10, 29, 157, 18);
+		panel_3.add(lblCodigoDelProducto);
+		
+		textField_10 = new JTextField();
+		textField_10.setColumns(10);
+		textField_10.setBounds(10, 58, 110, 20);
+		panel_3.add(textField_10);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(10, 110, 231, 245);
+		panel_3.add(textArea);
+		
+		JButton button_3 = new JButton("Buscar");
+		button_3.setBounds(152, 58, 89, 23);
+		panel_3.add(button_3);
+		
+		JTextArea textArea_1 = new JTextArea();
+		textArea_1.setBounds(260, 203, 174, 152);
+		panel_3.add(textArea_1);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(261, 58, 174, 123);
+		panel_3.add(lblNewLabel);
+		
+		textField_9 = new JTextField();
+		textField_9.setColumns(10);
+		textField_9.setBounds(538, 58, 61, 20);
+		panel_3.add(textField_9);
+		
+		JTextArea textArea_2 = new JTextArea();
+		textArea_2.setBounds(460, 203, 139, 115);
+		panel_3.add(textArea_2);
+		
+		JButton button_4 = new JButton("Confirmar venta");
+		button_4.setBounds(460, 332, 139, 23);
+		panel_3.add(button_4);
+		
+		JLabel lblDescripcion = new JLabel("Descripcion");
+		lblDescripcion.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblDescripcion.setBounds(260, 32, 157, 18);
+		panel_3.add(lblDescripcion);
+		
+		JLabel lblVenta = new JLabel("Venta");
+		lblVenta.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblVenta.setBounds(503, 29, 61, 18);
+		panel_3.add(lblVenta);
+		
+		JLabel lblCantidad = new JLabel("Cantidad");
+		lblCantidad.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblCantidad.setBounds(460, 58, 68, 18);
+		panel_3.add(lblCantidad);
+		
+		JLabel label_14 = new JLabel("Precio Final");
+		label_14.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_14.setBounds(487, 163, 89, 18);
+		panel_3.add(label_14);
+		
+		JButton btnVisualizar = new JButton("Visualizar");
+		btnVisualizar.setBounds(473, 121, 91, 23);
+		panel_3.add(btnVisualizar);
+		
+		JPanel panel_9 = new JPanel();
+		panel_9.setLayout(null);
+		tabbedPane_1.addTab("Comprar", null, panel_9, null);
+		
+		JLabel label_11 = new JLabel("Codigo del producto");
+		label_11.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_11.setBounds(10, 29, 157, 18);
+		panel_9.add(label_11);
+		
+		textField_11 = new JTextField();
+		textField_11.setColumns(10);
+		textField_11.setBounds(10, 58, 110, 20);
+		panel_9.add(textField_11);
+		
+		JTextArea textArea_3 = new JTextArea();
+		textArea_3.setBounds(10, 110, 231, 245);
+		panel_9.add(textArea_3);
+		
+		JButton button_5 = new JButton("Buscar");
+		button_5.setBounds(152, 58, 89, 23);
+		panel_9.add(button_5);
+		
+		JTextArea textArea_4 = new JTextArea();
+		textArea_4.setBounds(260, 203, 174, 152);
+		panel_9.add(textArea_4);
+		
+		JLabel label_12 = new JLabel("New label");
+		label_12.setBounds(261, 58, 174, 123);
+		panel_9.add(label_12);
+		
+		textField_12 = new JTextField();
+		textField_12.setColumns(10);
+		textField_12.setBounds(538, 58, 61, 20);
+		panel_9.add(textField_12);
+		
+		JTextArea textArea_5 = new JTextArea();
+		textArea_5.setBounds(460, 203, 139, 115);
+		panel_9.add(textArea_5);
+		
+		JButton btnConfirmarCompra = new JButton("Confirmar compra");
+		btnConfirmarCompra.setBounds(460, 332, 139, 23);
+		panel_9.add(btnConfirmarCompra);
+		
+		JLabel label_13 = new JLabel("Descripcion");
+		label_13.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_13.setBounds(260, 32, 157, 18);
+		panel_9.add(label_13);
+		
+		JLabel lblCompra = new JLabel("Compra");
+		lblCompra.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblCompra.setBounds(503, 29, 61, 18);
+		panel_9.add(lblCompra);
+		
+		JLabel label_15 = new JLabel("Cantidad");
+		label_15.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_15.setBounds(460, 58, 68, 18);
+		panel_9.add(label_15);
+		
+		JLabel lblPrecioFnal = new JLabel("Precio Final");
+		lblPrecioFnal.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblPrecioFnal.setBounds(487, 163, 89, 18);
+		panel_9.add(lblPrecioFnal);
+		
+		JButton button_7 = new JButton("Visualizar");
+		button_7.setBounds(487, 110, 91, 23);
+		panel_9.add(button_7);
+		
+		JPanel panel_6 = new JPanel();
+		tabbedPane_1.addTab("Baja Logica", null, panel_6, null);
+		panel_6.setLayout(null);
+		
+		JLabel label_16 = new JLabel("Codigo del producto");
+		label_16.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_16.setBounds(10, 33, 157, 18);
+		panel_6.add(label_16);
+		
+		textField_13 = new JTextField();
+		textField_13.setColumns(10);
+		textField_13.setBounds(10, 76, 110, 20);
+		panel_6.add(textField_13);
+		
+		JTextArea textArea_6 = new JTextArea();
+		textArea_6.setBounds(10, 118, 231, 245);
+		panel_6.add(textArea_6);
+		
+		JButton button_6 = new JButton("Buscar");
+		button_6.setBounds(152, 75, 89, 23);
+		panel_6.add(button_6);
+		
+		JLabel label_17 = new JLabel("Descripcion");
+		label_17.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_17.setBounds(255, 36, 157, 18);
+		panel_6.add(label_17);
+		
+		JLabel label_18 = new JLabel("New label");
+		label_18.setBounds(255, 79, 174, 123);
+		panel_6.add(label_18);
+		
+		JTextArea textArea_7 = new JTextArea();
+		textArea_7.setBounds(251, 211, 174, 152);
+		panel_6.add(textArea_7);
+		
+		JButton btnConfirmarBajaLogica = new JButton("Confirmar baja logica");
+		btnConfirmarBajaLogica.setBounds(439, 75, 160, 23);
+		panel_6.add(btnConfirmarBajaLogica);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setLayout(null);
+		tabbedPane_1.addTab("Obtener montos", null, panel_4, null);
+		
+		JLabel lblCodigoDeVenta = new JLabel("Codigo de venta");
+		lblCodigoDeVenta.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblCodigoDeVenta.setBounds(10, 29, 157, 18);
+		panel_4.add(lblCodigoDeVenta);
+		
+		textField_14 = new JTextField();
+		textField_14.setColumns(10);
+		textField_14.setBounds(10, 58, 110, 20);
+		panel_4.add(textField_14);
+		
+		JTextArea textArea_8 = new JTextArea();
+		textArea_8.setBounds(10, 110, 231, 245);
+		panel_4.add(textArea_8);
+		
+		JButton button_8 = new JButton("Buscar");
+		button_8.setBounds(152, 58, 89, 23);
+		panel_4.add(button_8);
+		
+		JTextArea textArea_9 = new JTextArea();
+		textArea_9.setBounds(260, 203, 174, 152);
+		panel_4.add(textArea_9);
+		
+		JLabel label_20 = new JLabel("New label");
+		label_20.setBounds(261, 58, 174, 123);
+		panel_4.add(label_20);
+		
+		JTextArea textArea_10 = new JTextArea();
+		textArea_10.setBounds(460, 203, 139, 152);
+		panel_4.add(textArea_10);
+		
+		JButton btnConfirmarMontos = new JButton("Confirmar Montos");
+		btnConfirmarMontos.setBounds(460, 158, 139, 23);
+		panel_4.add(btnConfirmarMontos);
+		
+		JLabel label_21 = new JLabel("Descripcion");
+		label_21.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_21.setBounds(260, 32, 157, 18);
+		panel_4.add(label_21);
+		
+		JLabel lblMontos = new JLabel("Montos");
+		lblMontos.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblMontos.setBounds(503, 29, 61, 18);
+		panel_4.add(lblMontos);
+		
+		JRadioButton radioButton = new JRadioButton("Por dia");
+		buttonGroup.add(radioButton);
+		radioButton.setBounds(479, 58, 109, 23);
+		panel_4.add(radioButton);
+		
+		JRadioButton radioButton_1 = new JRadioButton("Por mes");
+		buttonGroup.add(radioButton_1);
+		radioButton_1.setBounds(479, 86, 109, 23);
+		panel_4.add(radioButton_1);
+		
+		JRadioButton radioButton_2 = new JRadioButton("Por a\u00F1o");
+		buttonGroup.add(radioButton_2);
+		radioButton_2.setBounds(479, 118, 109, 23);
+		panel_4.add(radioButton_2);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setLayout(null);
+		tabbedPane_1.addTab("Actualizar", null, panel_5, null);
+		
+		JLabel label_22 = new JLabel("Codigo del producto");
+		label_22.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_22.setBounds(10, 29, 157, 18);
+		panel_5.add(label_22);
+		
+		textField_15 = new JTextField();
+		textField_15.setColumns(10);
+		textField_15.setBounds(10, 58, 110, 20);
+		panel_5.add(textField_15);
+		
+		JTextArea textArea_11 = new JTextArea();
+		textArea_11.setBounds(10, 110, 231, 245);
+		panel_5.add(textArea_11);
+		
+		JButton button_10 = new JButton("Buscar");
+		button_10.setBounds(152, 58, 89, 23);
+		panel_5.add(button_10);
+		
+		JTextArea textArea_12 = new JTextArea();
+		textArea_12.setBounds(260, 203, 174, 152);
+		panel_5.add(textArea_12);
+		
+		JLabel label_23 = new JLabel("New label");
+		label_23.setBounds(261, 58, 174, 123);
+		panel_5.add(label_23);
+		
+		JButton btnConfirmarPrecio = new JButton("Confirmar precio");
+		btnConfirmarPrecio.setBounds(460, 203, 139, 23);
+		panel_5.add(btnConfirmarPrecio);
+		
+		JLabel label_24 = new JLabel("Descripcion");
+		label_24.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_24.setBounds(260, 32, 157, 18);
+		panel_5.add(label_24);
+		
+		JLabel lblActualizar = new JLabel("Actualizar");
+		lblActualizar.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblActualizar.setBounds(490, 29, 96, 18);
+		panel_5.add(lblActualizar);
+		
+		JLabel lblNuevoPrecio = new JLabel("Nuevo Precio");
+		lblNuevoPrecio.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblNuevoPrecio.setBounds(477, 111, 96, 18);
+		panel_5.add(lblNuevoPrecio);
+		
+		textField_16 = new JTextField();
+		textField_16.setBounds(462, 161, 126, 20);
+		panel_5.add(textField_16);
+		textField_16.setColumns(10);
+		
+		JPanel panel_7 = new JPanel();
+		panel_7.setLayout(null);
+		tabbedPane_1.addTab("Modificar IVA", null, panel_7, null);
+		
+		JLabel label_25 = new JLabel("Codigo del producto");
+		label_25.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_25.setBounds(10, 29, 157, 18);
+		panel_7.add(label_25);
+		
+		textField_17 = new JTextField();
+		textField_17.setColumns(10);
+		textField_17.setBounds(10, 58, 110, 20);
+		panel_7.add(textField_17);
+		
+		JTextArea textArea_13 = new JTextArea();
+		textArea_13.setBounds(10, 110, 231, 245);
+		panel_7.add(textArea_13);
+		
+		JButton button_12 = new JButton("Buscar");
+		button_12.setBounds(152, 58, 89, 23);
+		panel_7.add(button_12);
+		
+		JTextArea textArea_14 = new JTextArea();
+		textArea_14.setBounds(260, 203, 174, 152);
+		panel_7.add(textArea_14);
+		
+		JLabel label_26 = new JLabel("New label");
+		label_26.setBounds(261, 58, 174, 123);
+		panel_7.add(label_26);
+		
+		JButton btnConfirmarPrecio_1 = new JButton("Confirmar precio");
+		btnConfirmarPrecio_1.setBounds(460, 203, 139, 23);
+		panel_7.add(btnConfirmarPrecio_1);
+		
+		JLabel label_27 = new JLabel("Descripcion");
+		label_27.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_27.setBounds(260, 32, 157, 18);
+		panel_7.add(label_27);
+		
+		JLabel lblModificar = new JLabel("Modificar");
+		lblModificar.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblModificar.setBounds(490, 29, 96, 18);
+		panel_7.add(lblModificar);
+		
+		JLabel lblNuevoPorcentaje = new JLabel("Nuevo Porcentaje");
+		lblNuevoPorcentaje.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblNuevoPorcentaje.setBounds(460, 111, 139, 18);
+		panel_7.add(lblNuevoPorcentaje);
+		
+		textField_18 = new JTextField();
+		textField_18.setColumns(10);
+		textField_18.setBounds(462, 161, 137, 20);
+		panel_7.add(textField_18);
+		
+		panel_1 = new JPanel();
+		tabbedPane.addTab("Control de usuarios", null, panel_1, null);
+		panel_1.setLayout(null);
+		
+		JLabel label = new JLabel("Agregar usuarios");
+		label.setBounds(40, 52, 129, 14);
+		panel_1.add(label);
+		
+		JLabel label_1 = new JLabel("Nombre");
+		label_1.setBounds(10, 142, 66, 14);
+		panel_1.add(label_1);
+		
+		JLabel label_2 = new JLabel("Contrase\u00F1a");
+		label_2.setBounds(10, 188, 66, 14);
+		panel_1.add(label_2);
+		
+		JLabel label_3 = new JLabel("Eliminar usuarios");
+		label_3.setBounds(429, 64, 100, 14);
+		panel_1.add(label_3);
+		
+		add_user = new JButton("Confirmar");
 		add_user.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				User_Add v1 = new User_Add();
-				v1.setVisible(true);
-				frame.setEnabled(false);
-				v1.setAlwaysOnTop(true);
-
-				
-			}
-		});
-		user_menu.add(add_user);
+				if (vacio()) {
+					
+					boolean x=MySQL.register();
+					
+					if(x){
+						
+						System.out.println("Conecto");
+						MySQL.AddUser(p, u);
 		
-		remove_user = new JMenuItem("Eliminar");
+						
+					}else{
+						
+						System.out.println("Hubo error");
+					}
+			}
+				
+		}});
+		add_user.setBounds(10, 239, 182, 23);
+		panel_1.add(add_user);
+		
+		u = new JTextField();
+		u.setColumns(10);
+		u.setBounds(106, 142, 86, 20);
+		panel_1.add(u);
+		
+		JLabel label_4 = new JLabel("Nombre");
+		label_4.setBounds(385, 142, 66, 14);
+		panel_1.add(label_4);
+		
+		u2 = new JTextField();
+		u2.setColumns(10);
+		u2.setBounds(490, 139, 86, 20);
+		panel_1.add(u2);
+		
+		remove_user = new JButton("Confirmar");
 		remove_user.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				User_Remove v1 = new User_Remove();
-				v1.setVisible(true);
-				frame.setEnabled(false);
-				v1.setAlwaysOnTop(true);
-
+				if (vacio1()) {
+					
+					boolean x=MySQL.register();
+					
+					if(x){
+						
+						System.out.println("Conecto");
+						MySQL.RemoveUser(u);
+		
+						
+					}else{
+						
+						System.out.println("Hubo error");
+					}
+			}	
+				
+				
 			}
 		});
-		user_menu.add(remove_user);
+		remove_user.setBounds(385, 216, 182, 23);
+		panel_1.add(remove_user);
 		
-		mnMercaderia = new JMenu("Mercaderia");
-		menuBar.add(mnMercaderia);
-		
-		add_merchandise = new JMenuItem("Agregar");
-		mnMercaderia.add(add_merchandise);
-		
-		remove_merchandise = new JMenuItem("Eliminar");
-		mnMercaderia.add(remove_merchandise);
-		
-		JMenuItem modify_merchandise = new JMenuItem("Modificar IVA");
-		mnMercaderia.add(modify_merchandise);
-		
-		JMenuItem update_merchandise = new JMenuItem("Actualizar mercaderia");
-		mnMercaderia.add(update_merchandise);
-		
-		JMenu mnLogs = new JMenu("Logs");
-		menuBar.add(mnLogs);
-		
-		JMenuItem movments = new JMenuItem("Movimientos");
-		mnLogs.add(movments);
-		
-		JMenuItem mntmVentas = new JMenuItem("Ventas");
-		mnLogs.add(mntmVentas);
-		
-		contentPane = new JPanel();
-		contentPane.setBackground(Color.LIGHT_GRAY);
-		
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		user.add("Admin");
-		pass.add("rootlindo");
-		
-		Login_Frame Login = new Login_Frame();
-		contentPane.setLayout(null);
-		
-		search_textArea = new JTextField();
-		search_textArea.setBounds(10, 41, 108, 20);
-		contentPane.add(search_textArea);
-		search_textArea.setColumns(10);
-		
-		JLabel lblCodigoDeProducto = new JLabel("Codigo de producto");
-		lblCodigoDeProducto.setBounds(10, 11, 139, 26);
-		
-		lblCodigoDeProducto.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		contentPane.add(lblCodigoDeProducto);
-		
-		search_button = new JButton("Buscar");
-		search_button.setBounds(128, 40, 89, 23);
-		contentPane.add(search_button);
-		
-		JLabel Image = new JLabel("Imagen");
-		Image.setBounds(366, 56, 139, 119);
-		contentPane.add(Image);
-		
-		JLabel lblDescripcion = new JLabel("Descripcion");
-		lblDescripcion.setBounds(366, 11, 139, 26);
-		
-		lblDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		contentPane.add(lblDescripcion);
-
-		description = new JTextArea();
-		description.setBounds(366, 186, 203, 82);
-		contentPane.add(description);
-		
-		JTextArea display_serarch = new JTextArea();
-		display_serarch.setBounds(10, 87, 319, 188);
-		contentPane.add(display_serarch);
-		
-		JLabel lblVenta = new JLabel("Venta");
-		lblVenta.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblVenta.setBounds(605, 11, 139, 26);
-		contentPane.add(lblVenta);
-		
-		JTextArea sell_textArea = new JTextArea();
-		sell_textArea.setBounds(605, 119, 139, 125);
-		contentPane.add(sell_textArea);
-		
-		sell_cuantity = new JTextField();
-		sell_cuantity.setBounds(605, 60, 86, 20);
-		contentPane.add(sell_cuantity);
-		sell_cuantity.setColumns(10);
-		
-		JButton sell_button = new JButton("Confirmar venta");
-		sell_button.setBounds(605, 278, 139, 23);
-		contentPane.add(sell_button);
+		p = new JPasswordField();
+		p.setBounds(106, 185, 86, 17);
+		panel_1.add(p);
 	}
-	/*
+	
 	public static boolean vacio() {
 		if (u.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "Error No Ingreso el Usuario... ingrese nuevamente");
@@ -216,11 +610,16 @@ public class Root_Frame extends JFrame {
 			JOptionPane.showMessageDialog(null, "Error No Ingreso la Contraseña... ingrese nuevamente");
 			return false;
 		}
-		if (id1.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso la Contraseña... ingrese nuevamente");
-			return false;
-		}
+		
 		return true;
 	}
-*/
+	
+	public static boolean vacio1() {
+		if (u.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Error No Ingreso el Usuario... ingrese nuevamente");
+			return false;
+		}
+		
+		return true;
+	}
 }
