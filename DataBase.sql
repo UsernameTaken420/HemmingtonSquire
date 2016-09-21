@@ -54,6 +54,7 @@ CREATE TABLE `log` (
   `Date` date DEFAULT NULL,
   `Movement` int(10) NOT NULL,
   `Item` int(10) NOT NULL,
+  `Price` int(10) NOT NULL,
   PRIMARY KEY (`Code`),
   KEY `User` (`User`),
   CONSTRAINT `log_ibfk_1` FOREIGN KEY (`User`) REFERENCES `user` (`Username`)
