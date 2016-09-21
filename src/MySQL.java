@@ -46,7 +46,7 @@ public static boolean register(){
 		
 		String user="root";
 		String pw="RootLindo"; 
-		String db="DataBase";
+		String db="hemmingtonsquire";
 		
 		String parche="?autoReconnect=true&useSSL=false";
 				
