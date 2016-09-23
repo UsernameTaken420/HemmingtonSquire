@@ -543,7 +543,7 @@ public class Root_Frame extends JFrame {
 					if(x){
 						
 						System.out.println("Conecto");
-						MySQL.AddUser(p, u);
+						MySQL.AddUser(p.getText(), u.getText());
 		
 						
 					}else{

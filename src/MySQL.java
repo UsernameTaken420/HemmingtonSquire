@@ -40,7 +40,7 @@ public static boolean register(){
 	}
 	
 	
-	public static boolean AddUser(JPasswordField p,JTextField u){
+	public static boolean AddUser(String p,String u){
 		
 		boolean x = false;
 		
@@ -60,21 +60,12 @@ public static boolean register(){
 			
 			con=DriverManager.getConnection(url,user,pw);
 			
-			if(con!=null){
-				
-				JOptionPane.showMessageDialog(null, "Se conecto a la base de datos");
-			}
-			
 			int rs = 0;
 			Statement cmd = null;
 			
 			cmd = con.createStatement();
 
-			
-			String uS= u.getText();
-			String pS= p.getText();
-
-			rs = cmd.executeUpdate("INSERT INTO User VALUES ('" + uS + "', '" + pS + "')");
+			rs = cmd.executeUpdate("INSERT INTO User VALUES ('" + u + "', '" + p + "')");
 
 			
 			con.close();
