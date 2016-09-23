@@ -1,4 +1,7 @@
+
+
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -23,6 +26,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 
 public class Root_Frame extends JFrame {
 
@@ -30,12 +34,12 @@ public class Root_Frame extends JFrame {
 	private JPanel contentPane;
 	private static JTextField u;
 	private JTextField u2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
+	private static JTextField add_code;
+	private static JTextField add_VAT;
+	private static JTextField add_name;
+	private static JTextField add_initial;
+	private static JTextField add_unitaryPrice;
+	private static JTextField add_sellPrice;
 	private JTextField textField_10;
 	private JTextField textField_9;
 	private JTextField textField_11;
@@ -51,6 +55,8 @@ public class Root_Frame extends JFrame {
 	private JButton remove_user;
 	private JPanel panel_1;
 	private static JPasswordField p;
+	private JButton add_button;
+	private JTextField add_manufacturer;
 
 	/**
 	 * Launch the application.
@@ -134,39 +140,95 @@ public class Root_Frame extends JFrame {
 		label_10.setBounds(10, 260, 123, 14);
 		panel_2.add(label_10);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(143, 63, 111, 20);
-		panel_2.add(textField_3);
+		add_code = new JTextField();
+		add_code.setColumns(10);
+		add_code.setBounds(143, 63, 111, 20);
+		panel_2.add(add_code);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(143, 99, 111, 20);
-		panel_2.add(textField_4);
+		add_VAT = new JTextField();
+		add_VAT.setColumns(10);
+		add_VAT.setBounds(143, 99, 111, 20);
+		panel_2.add(add_VAT);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(143, 137, 111, 20);
-		panel_2.add(textField_5);
+		add_name = new JTextField();
+		add_name.setColumns(10);
+		add_name.setBounds(143, 137, 111, 20);
+		panel_2.add(add_name);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(143, 178, 111, 20);
-		panel_2.add(textField_6);
+		add_initial = new JTextField();
+		add_initial.setColumns(10);
+		add_initial.setBounds(143, 178, 111, 20);
+		panel_2.add(add_initial);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(143, 218, 111, 20);
-		panel_2.add(textField_7);
+		add_unitaryPrice = new JTextField();
+		add_unitaryPrice.setColumns(10);
+		add_unitaryPrice.setBounds(143, 218, 111, 20);
+		panel_2.add(add_unitaryPrice);
 		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(143, 258, 111, 20);
-		panel_2.add(textField_8);
+		add_sellPrice = new JTextField();
+		add_sellPrice.setColumns(10);
+		add_sellPrice.setBounds(143, 258, 111, 20);
+		panel_2.add(add_sellPrice);
 		
-		JButton button_2 = new JButton("Confirmar");
-		button_2.setBounds(349, 257, 182, 23);
-		panel_2.add(button_2);
+		add_manufacturer = new JTextField();
+		add_manufacturer.setColumns(10);
+		add_manufacturer.setBounds(143, 300, 111, 20);
+		panel_2.add(add_manufacturer);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(376, 62, 182, 172);
+		panel_2.add(scrollPane);
+		
+		JTextArea add_description = new JTextArea();
+		scrollPane.setViewportView(add_description);
+		
+		JLabel lblFabricante = new JLabel("Fabricante");
+		lblFabricante.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblFabricante.setBounds(10, 296, 123, 27);
+		panel_2.add(lblFabricante);
+		
+		JLabel lblDescripcion_1 = new JLabel("Descripcion");
+		lblDescripcion_1.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblDescripcion_1.setBounds(422, 24, 123, 27);
+		panel_2.add(lblDescripcion_1);
+		
+		add_button = new JButton("Confirmar");
+		add_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				if(empty_add()){
+					
+					try{
+						int cod = Integer.parseInt(add_code.getText().trim());
+						int vat = Integer.parseInt(add_VAT.getText().trim());
+						int ini = Integer.parseInt(add_initial.getText().trim());
+						int uni = Integer.parseInt(add_unitaryPrice.getText().trim());
+						int sell = Integer.parseInt(add_sellPrice.getText().trim());
+
+
+
+					}catch( java.lang.NumberFormatException e23){
+						JOptionPane.showMessageDialog(null, "Error debe ingresar numeros en los campos codigo, IVA, cantidad inicial, precio unitario y precio de venta");
+						add_code.setText("");
+						add_VAT.setText("");
+						add_initial.setText("");
+						add_unitaryPrice.setText("");
+						add_sellPrice.setText("");
+
+					}
+					
+					MySQL.AddMerchandise(add_code, add_name, add_manufacturer, add_initial, add_VAT, add_unitaryPrice, add_sellPrice, add_description);
+					
+					
+				}
+				
+				
+				
+			}
+		});
+		add_button.setBounds(379, 257, 182, 23);
+		panel_2.add(add_button);
 		
 		JPanel panel_3 = new JPanel();
 		tabbedPane_1.addTab("Vender", null, panel_3, null);
@@ -543,7 +605,7 @@ public class Root_Frame extends JFrame {
 					if(x){
 						
 						System.out.println("Conecto");
-						MySQL.AddUser(p.getText(), u.getText());
+						MySQL.AddUser(p, u);
 		
 						
 					}else{
@@ -620,6 +682,35 @@ public class Root_Frame extends JFrame {
 			return false;
 		}
 		
+		return true;
+	}
+	
+	public static boolean empty_add() {
+		if (add_code.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Error No Ingreso el Codigo... ingrese nuevamente");
+			return false;
+		}
+		if (add_VAT.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Error No Ingreso el IVA... ingrese nuevamente");
+			return false;
+		}
+		if (add_name.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Error No Ingreso el Nombre... ingrese nuevamente");
+			return false;
+		}
+		if (add_initial.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Error No Ingreso el Stock Inicial... ingrese nuevamente");
+			return false;
+		}
+		if (add_unitaryPrice.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Error No Ingreso el Precio Unitario... ingrese nuevamente");
+			return false;
+		}
+		if (add_sellPrice.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Error No Ingreso la Precio de Venta... ingrese nuevamente");
+			return false;
+		}
+
 		return true;
 	}
 }
