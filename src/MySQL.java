@@ -6,6 +6,7 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class MySQL {
@@ -40,7 +41,7 @@ public static boolean register(){
 	}
 	
 	
-	public static boolean AddUser(String p,String u){
+	public static boolean AddUser(JPasswordField p,JTextField u){
 		
 		boolean x = false;
 		
@@ -60,12 +61,21 @@ public static boolean register(){
 			
 			con=DriverManager.getConnection(url,user,pw);
 			
+			if(con!=null){
+				
+				JOptionPane.showMessageDialog(null, "Se conecto a la base de datos");
+			}
+			
 			int rs = 0;
 			Statement cmd = null;
 			
 			cmd = con.createStatement();
 
-			rs = cmd.executeUpdate("INSERT INTO User VALUES ('" + u + "', '" + p + "')");
+			
+			String uS= u.getText();
+			String pS= p.getText();
+
+			rs = cmd.executeUpdate("INSERT INTO User VALUES ('" + uS + "', '" + pS + "')");
 
 			
 			con.close();
@@ -128,5 +138,57 @@ public static boolean RemoveUser(JTextField u){
 		
 		
 	}
+
+public static boolean AddMerchandise(JTextField add_code,JTextField add_name,
+		JTextField add_manufacturer,JTextField add_initial, JTextField add_VAT,
+		JTextField add_unitaryPrice,JTextField add_sellPrice,JTextArea add_description){
+	
+	boolean x = false;
+	
+	String user="root";
+	String pw="RootLindo"; 
+	String db="DataBase";
+	
+	String parche="?autoReconnect=true&useSSL=false";
+			
+	
+	String url="jdbc:mysql://Sec-Lab23-Doc:3306/"+db+parche;
+	
+	
+	Connection con=null;
+	
+	try{
+		
+		con=DriverManager.getConnection(url,user,pw);
+		
+		if(con!=null){
+			
+			JOptionPane.showMessageDialog(null, "Se conecto a la base de datos");
+		}
+		
+		int rs = 0;
+		Statement cmd = null;
+		
+		cmd = con.createStatement();
+
+
+		rs = cmd.executeUpdate("INSERT INTO item values ('" + add_code.getText() +"', " + add_name.getText()  +"', "
+				+ add_manufacturer.getText()  +"', "+ add_initial.getText()  +"', "+ add_VAT.getText()  +"', "
+				+ add_unitaryPrice.getText()  +"', "
+				+ add_sellPrice.getText()  +"', "+ add_description.getText()  +"'); ");
+
+		
+		con.close();
+	}catch(SQLException ex){
+		
+		JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+		x=false;
+	}
+		
+	return x;
+	
+	
+	
+}
 
 }
