@@ -6,7 +6,6 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class MySQL {
@@ -41,7 +40,7 @@ public static boolean register(){
 	}
 	
 	
-	public static boolean AddUser(JPasswordField p,JTextField u){
+	public static boolean AddUser(String p,String u){
 		
 		boolean x = false;
 		
@@ -61,21 +60,12 @@ public static boolean register(){
 			
 			con=DriverManager.getConnection(url,user,pw);
 			
-			if(con!=null){
-				
-				JOptionPane.showMessageDialog(null, "Se conecto a la base de datos");
-			}
-			
 			int rs = 0;
 			Statement cmd = null;
 			
 			cmd = con.createStatement();
 
-			
-			String uS= u.getText();
-			String pS= p.getText();
-
-			rs = cmd.executeUpdate("INSERT INTO User VALUES ('" + uS + "', '" + pS + "')");
+			rs = cmd.executeUpdate("INSERT INTO User VALUES ('" + u + "', '" + p + "')");
 
 			
 			con.close();
@@ -90,8 +80,8 @@ public static boolean register(){
 		
 		
 	}
-	
-public static boolean RemoveUser(JTextField u){
+
+public static boolean RemoveUser(String u){
 		
 		boolean x = false;
 		
@@ -121,8 +111,6 @@ public static boolean RemoveUser(JTextField u){
 			
 			cmd = con.createStatement();
 
-			String uS= u.getText();
-
 			rs = cmd.executeUpdate("DELETE FROM User WHERE UserName='"+ u +"'; ");
 
 			
@@ -139,9 +127,9 @@ public static boolean RemoveUser(JTextField u){
 		
 	}
 
-public static boolean AddMerchandise(JTextField add_code,JTextField add_name,
-		JTextField add_manufacturer,JTextField add_initial, JTextField add_VAT,
-		JTextField add_unitaryPrice,JTextField add_sellPrice,JTextArea add_description){
+public static boolean AddMerchandise(String add_code, String add_name,
+		String add_manufacturer,String add_initial, String add_VAT,
+		String add_unitaryPrice,String add_sellPrice, String add_description){
 	
 	boolean x = false;
 	
@@ -172,10 +160,10 @@ public static boolean AddMerchandise(JTextField add_code,JTextField add_name,
 		cmd = con.createStatement();
 
 
-		rs = cmd.executeUpdate("INSERT INTO item values ('" + add_code.getText() +"', " + add_name.getText()  +"', "
-				+ add_manufacturer.getText()  +"', "+ add_initial.getText()  +"', "+ add_VAT.getText()  +"', "
-				+ add_unitaryPrice.getText()  +"', "
-				+ add_sellPrice.getText()  +"', "+ add_description.getText()  +"'); ");
+		rs = cmd.executeUpdate("INSERT INTO item values ('" + add_code +"', " + add_name  +"', "
+				+ add_manufacturer  +"', "+ add_initial  +"', "+ add_VAT  +"', "
+				+ add_unitaryPrice  +"', "
+				+ add_sellPrice  +"', "+ add_description +"'); ");
 
 		
 		con.close();
