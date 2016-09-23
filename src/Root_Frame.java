@@ -32,7 +32,7 @@ public class Root_Frame extends JFrame {
 
 	
 	private JPanel contentPane;
-	private static JTextField u;
+	private static JTextField userToAdd;
 	private JTextField u2;
 	private static JTextField add_code;
 	private static JTextField add_VAT;
@@ -54,7 +54,7 @@ public class Root_Frame extends JFrame {
 	private JButton add_user;
 	private JButton remove_user;
 	private JPanel panel_1;
-	private static JPasswordField p;
+	private static JPasswordField passToAdd;
 	private JButton add_button;
 	private JTextField add_manufacturer;
 
@@ -218,7 +218,7 @@ public class Root_Frame extends JFrame {
 
 					}
 					
-					MySQL.AddMerchandise(add_code, add_name, add_manufacturer, add_initial, add_VAT, add_unitaryPrice, add_sellPrice, add_description);
+					MySQL.AddMerchandise(add_code.getText(), add_name.getText(), add_manufacturer.getText(), add_initial.getText(), add_VAT.getText(), add_unitaryPrice.getText(), add_sellPrice.getText(), add_description.getText());
 					
 					
 				}
@@ -605,7 +605,7 @@ public class Root_Frame extends JFrame {
 					if(x){
 						
 						System.out.println("Conecto");
-						MySQL.AddUser(p, u);
+						MySQL.AddUser(passToAdd.getText(), userToAdd.getText());
 		
 						
 					}else{
@@ -618,10 +618,10 @@ public class Root_Frame extends JFrame {
 		add_user.setBounds(10, 239, 182, 23);
 		panel_1.add(add_user);
 		
-		u = new JTextField();
-		u.setColumns(10);
-		u.setBounds(106, 142, 86, 20);
-		panel_1.add(u);
+		userToAdd = new JTextField();
+		userToAdd.setColumns(10);
+		userToAdd.setBounds(106, 142, 86, 20);
+		panel_1.add(userToAdd);
 		
 		JLabel label_4 = new JLabel("Nombre");
 		label_4.setBounds(385, 142, 66, 14);
@@ -643,7 +643,7 @@ public class Root_Frame extends JFrame {
 					if(x){
 						
 						System.out.println("Conecto");
-						MySQL.RemoveUser(u);
+						MySQL.RemoveUser(userToAdd.getText());
 		
 						
 					}else{
@@ -658,17 +658,17 @@ public class Root_Frame extends JFrame {
 		remove_user.setBounds(385, 216, 182, 23);
 		panel_1.add(remove_user);
 		
-		p = new JPasswordField();
-		p.setBounds(106, 185, 86, 17);
-		panel_1.add(p);
+		passToAdd = new JPasswordField();
+		passToAdd.setBounds(106, 185, 86, 17);
+		panel_1.add(passToAdd);
 	}
 	
 	public static boolean vacio() {
-		if (u.getText().equals("")) {
+		if (userToAdd.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "Error No Ingreso el Usuario... ingrese nuevamente");
 			return false;
 		}
-		if (p.getText().equals("")) {
+		if (passToAdd.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "Error No Ingreso la Contraseña... ingrese nuevamente");
 			return false;
 		}
@@ -677,7 +677,7 @@ public class Root_Frame extends JFrame {
 	}
 	
 	public static boolean vacio1() {
-		if (u.getText().equals("")) {
+		if (userToAdd.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "Error No Ingreso el Usuario... ingrese nuevamente");
 			return false;
 		}
