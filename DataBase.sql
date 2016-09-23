@@ -26,8 +26,13 @@ DROP TABLE IF EXISTS `item`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `item` (
   `Code` int(10),
+  `Name` int(15) NOT NULL,
   `Manufacturer` varchar(15) NOT NULL,
-  `Stock` int (10) NOT NULL,
+  `Stock` int(10) NOT NULL,
+  `VAR` int(10) NOT NULL,
+  `UPrice` int(10) NOT NULL,
+  `SPrice` int(10) NOT NULL,
+  `Description` varchar(30),
   PRIMARY KEY (`Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
