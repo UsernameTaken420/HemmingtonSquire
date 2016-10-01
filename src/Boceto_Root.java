@@ -16,6 +16,9 @@ import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.awt.event.ActionEvent;
 
 public class Boceto_Root extends JFrame {
 
@@ -154,6 +157,26 @@ public class Boceto_Root extends JFrame {
 		panel_2.add(textField_8);
 		
 		JButton button_2 = new JButton("Confirmar");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ArrayList <String> codigos = new ArrayList <String>();
+				String buscado;
+				
+				codigos.add("100");
+				codigos.add("10");
+				codigos.add("1000");
+				codigos.add("1110");
+				codigos.add("200");
+				codigos.add("101");
+				codigos.add("2101");
+				codigos.add("31");
+				codigos.add("1031");
+				codigos.add("2010");
+				buscado="3";
+				MisMetodos.BuscadorCodigo(codigos, buscado);
+				
+			}
+		});
 		button_2.setBounds(349, 257, 182, 23);
 		panel_2.add(button_2);
 		
