@@ -31,7 +31,7 @@ public class Login_Frame extends JFrame {
 
 	private JPanel Contenedor;
 	private JTextField NombreT;
-	private JPasswordField ContraseñaT;
+	private JPasswordField Contrasena;
 	private static ArrayList <String> user=new ArrayList <String>();
 	private static ArrayList <String> pass=new ArrayList <String>();
 
@@ -78,19 +78,19 @@ public class Login_Frame extends JFrame {
 		lblLogin.setBounds(171, 68, 72, 31);
 		Contenedor.add(lblLogin);
 		
-		JLabel lblContraseña = new JLabel("Contrase\u00F1a:");
-		lblContraseña.setFont(new Font("Mangal", Font.BOLD, 16));
-		lblContraseña.setBounds(171, 94, 100, 31);
-		Contenedor.add(lblContraseña);
+		JLabel lblContrasena = new JLabel("Contrase\u00F1a:");
+		lblContrasena.setFont(new Font("Mangal", Font.BOLD, 16));
+		lblContrasena.setBounds(171, 94, 100, 31);
+		Contenedor.add(lblContrasena);
 		
 		NombreT = new JTextField();
 		NombreT.setBounds(281, 76, 107, 20);
 		Contenedor.add(NombreT);
 		NombreT.setColumns(10);
 		
-		ContraseñaT = new JPasswordField();
-		ContraseñaT.setBounds(281, 102, 107, 20);
-		Contenedor.add(ContraseñaT);
+		Contrasena = new JPasswordField();
+		Contrasena.setBounds(281, 102, 107, 20);
+		Contenedor.add(Contrasena);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(171, 45, 0, 127);
@@ -106,20 +106,19 @@ public class Login_Frame extends JFrame {
 		lblInicioDelSistema.setBounds(281, 45, 120, 20);
 		Contenedor.add(lblInicioDelSistema);
 		
-		JButton LoginBoton = new JButton("Login");
-		LoginBoton.addActionListener(new ActionListener() {
+
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				
-				/*Login*/
+				
 				String Usuario = NombreT.getText();
-				String Contraseña = ContraseñaT.getText();
+				String Contrasenea = Contrasena.getText();
 
 				if(user.indexOf(Usuario)!=-1){
 
-						if ((pass.get(user.indexOf(Usuario)).equals(Contraseña))) {
+						if ((pass.get(user.indexOf(Usuario)).equals(Contrasenea))) {
 							if(Usuario.equals("Root")){
 								Root_Frame kys = new Root_Frame();
 								Login_Frame frame = new Login_Frame();
@@ -149,34 +148,9 @@ public class Login_Frame extends JFrame {
 				}
 			}
 		});
-		LoginBoton.setBounds(287, 149, 89, 23);
-		Contenedor.add(LoginBoton);
-				user.add("Root");
-				pass.add("Rootlindo");
-				boolean c = true;
-				do {
-					if ((user.contains(Usuario)) && (pass.contains(Contraseña))) {
-						Root_Frame kys = new Root_Frame();
-						Login_Frame frame = new Login_Frame();
-					    kys.setVisible(true);
-					    frame.setEnabled(false);
-					    frame.setAlwaysOnTop(false);
-					    kys.setAlwaysOnTop(true);
-						c=false;
-					} else {
-						
-						if(user.contains(Usuario)){
-							JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "ERROR",JOptionPane.ERROR_MESSAGE);
-						}else{
-						JOptionPane.showMessageDialog(null, "Nombre de usuario incorrecto", "ERROR",JOptionPane.ERROR_MESSAGE);
-						}
-						c=false;
-					}
-				}while(c);
-			}
-		});
 		btnNewButton.setBounds(287, 149, 89, 23);
 		Contenedor.add(btnNewButton);
+				
 	}
 
 }
