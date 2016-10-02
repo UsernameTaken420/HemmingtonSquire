@@ -24,6 +24,11 @@ import java.awt.Toolkit;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
@@ -31,10 +36,9 @@ public class Login_Frame extends JFrame {
 
 	private JPanel Contenedor;
 	private JTextField NombreT;
-	private JPasswordField ContraseñaT;
-	private static ArrayList <String> user=new ArrayList <String>();
-	private static ArrayList <String> pass=new ArrayList <String>();
-	
+	private JPasswordField Password;
+	private static ArrayList<String> user = new ArrayList<String>();
+	private static ArrayList<String> pass = new ArrayList<String>();
 
 	/**
 	 * Launch the application.
@@ -63,8 +67,8 @@ public class Login_Frame extends JFrame {
 		pass.add("Rootlindo");
 		user.add("Usuario");
 		pass.add("Usuariolindo");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Login_Frame.class.getResource("/Imagenes/Ferreteria.png")));
 
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Usuario\\Documents\\GitHub\\HemmingtonSquire\\Imagenes\\Ferreteria.png"));
 		setTitle("Login Ferreteria");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 427, 232);
@@ -79,19 +83,19 @@ public class Login_Frame extends JFrame {
 		lblLogin.setBounds(171, 68, 72, 31);
 		Contenedor.add(lblLogin);
 		
-		JLabel lblContraseña = new JLabel("Contrase\u00F1a:");
-		lblContraseña.setFont(new Font("Mangal", Font.BOLD, 16));
-		lblContraseña.setBounds(171, 94, 100, 31);
-		Contenedor.add(lblContraseña);
+		JLabel lblPassword = new JLabel("Contrase\u00F1a:");
+		lblPassword.setFont(new Font("Mangal", Font.BOLD, 16));
+		lblPassword.setBounds(171, 94, 100, 31);
+		Contenedor.add(lblPassword);
 		
 		NombreT = new JTextField();
 		NombreT.setBounds(281, 76, 107, 20);
 		Contenedor.add(NombreT);
 		NombreT.setColumns(10);
 		
-		ContraseñaT = new JPasswordField();
-		ContraseñaT.setBounds(281, 102, 107, 20);
-		Contenedor.add(ContraseñaT);
+		JPasswordField PasswordT = new JPasswordField();
+		PasswordT.setBounds(281, 102, 107, 20);
+		Contenedor.add(PasswordT);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(171, 45, 0, 127);
@@ -109,47 +113,53 @@ public class Login_Frame extends JFrame {
 		
 		JButton LoginBoton = new JButton("Login");
 		LoginBoton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
+				String logon = NombreT.getText();
+				boolean x = false;
+				String user="root";
+				String pw="RootLindo"; 
+				String db="hemmingtonsquire";
+				String parche="?autoReconnect=true&useSSL=false";
+				String url="jdbc:mysql://localhost:3306/"+db+parche;
 				
+				Connection con=null;
 				
-				/*Login*/
-				String Usuario = NombreT.getText();
-				String Contraseña = ContraseñaT.getText();
+				try{
+					
+					con=DriverManager.getConnection(url,user,pw);
+					
+					ResultSet rs = null;
+					Statement cmd = null;
 
-				if(user.indexOf(Usuario)!=-1){
-
-						if ((pass.get(user.indexOf(Usuario)).equals(Contraseña))) {
-							if(Usuario.equals("Root")){
-								Root_Frame kys = new Root_Frame();
-								Login_Frame frame = new Login_Frame();
-								kys.setVisible(true);
-								frame.setEnabled(false);
-								frame.setAlwaysOnTop(false);
-								kys.setAlwaysOnTop(true);
-
-							}else{
-								User_Frame kys = new User_Frame();
-								Login_Frame frame = new Login_Frame();
-								kys.setVisible(true);
-								frame.setEnabled(false);
-								frame.setAlwaysOnTop(false);
-								kys.setAlwaysOnTop(true);
-
+					cmd = con.createStatement();
+					rs = cmd.executeQuery("SELECT Password from User where Username ="+ logon + "");
+					
+					while (rs.next()) {
+						if (PasswordT.getText().toLowerCase().equals(rs.getString(1))) {
+							if (logon == "Root") {
+								
+							} else {
+								
 							}
-						
-						} else {
-								JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "ERROR",JOptionPane.ERROR_MESSAGE);
-
 						}
-
-				
-				}else{
-					JOptionPane.showMessageDialog(null, "Nombre de usuario incorrecto", "ERROR",JOptionPane.ERROR_MESSAGE);
+					}
+					
+					NombreT.setText("");
+					PasswordT.setText("");
+					con.close();
+				}catch(SQLException ex){
+					
+					JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+					x=false;
 				}
+					
+				return;
 			}
 		});
 		LoginBoton.setBounds(287, 149, 89, 23);
 		Contenedor.add(LoginBoton);
-	}
+}
+	
+	
 
 }
