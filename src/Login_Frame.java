@@ -35,10 +35,13 @@ import java.awt.event.ActionEvent;
 public class Login_Frame extends JFrame {
 
 	private JPanel Contenedor;
-	private JTextField NombreT;
+	private static JTextField name;
 	private JPasswordField Password;
 	private static ArrayList<String> user = new ArrayList<String>();
 	private static ArrayList<String> pass = new ArrayList<String>();
+
+	public static Login_Frame frame;
+	private static JPasswordField password;
 
 	/**
 	 * Launch the application.
@@ -47,7 +50,7 @@ public class Login_Frame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login_Frame frame = new Login_Frame();
+					frame = new Login_Frame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,14 +64,16 @@ public class Login_Frame extends JFrame {
 	 */
 	public Login_Frame() {
 
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Usuario\\Documents\\GitHub\\HemmingtonSquire\\Imagenes\\Ferreteria.png"));
+		setIconImage(Toolkit.getDefaultToolkit()
+				.getImage("C:\\Users\\Usuario\\Documents\\GitHub\\HemmingtonSquire\\Imagenes\\Ferreteria.png"));
 
 		user.add("Root");
 		pass.add("Rootlindo");
 		user.add("Usuario");
 		pass.add("Usuariolindo");
 
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Usuario\\Documents\\GitHub\\HemmingtonSquire\\Imagenes\\Ferreteria.png"));
+		setIconImage(Toolkit.getDefaultToolkit()
+				.getImage("C:\\Users\\Usuario\\Documents\\GitHub\\HemmingtonSquire\\Imagenes\\Ferreteria.png"));
 		setTitle("Login Ferreteria");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 427, 232);
@@ -77,89 +82,62 @@ public class Login_Frame extends JFrame {
 		Contenedor.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(Contenedor);
 		Contenedor.setLayout(null);
-		
+
 		JLabel lblLogin = new JLabel("Nombre:");
 		lblLogin.setFont(new Font("Mangal", Font.BOLD, 16));
 		lblLogin.setBounds(171, 68, 72, 31);
 		Contenedor.add(lblLogin);
-		
+
 		JLabel lblPassword = new JLabel("Contrase\u00F1a:");
 		lblPassword.setFont(new Font("Mangal", Font.BOLD, 16));
 		lblPassword.setBounds(171, 94, 100, 31);
 		Contenedor.add(lblPassword);
-		
-		NombreT = new JTextField();
-		NombreT.setBounds(281, 76, 107, 20);
-		Contenedor.add(NombreT);
-		NombreT.setColumns(10);
-		
-		JPasswordField PasswordT = new JPasswordField();
-		PasswordT.setBounds(281, 102, 107, 20);
-		Contenedor.add(PasswordT);
-		
+
+		name = new JTextField();
+		name.setBounds(281, 76, 107, 20);
+		Contenedor.add(name);
+		name.setColumns(10);
+
+		password = new JPasswordField();
+		password.setBounds(281, 102, 107, 20);
+		Contenedor.add(password);
+
 		JSeparator separator = new JSeparator();
 		separator.setBounds(171, 45, 0, 127);
 		Contenedor.add(separator);
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(40, 45, 131, 127);
-		Contenedor.add(lblNewLabel);
-		
+
 		JLabel lblInicioDelSistema = new JLabel("Inicio del sistema");
 		lblInicioDelSistema.setFont(new Font("Sylfaen", Font.BOLD, 13));
 		lblInicioDelSistema.setBounds(281, 45, 120, 20);
 		Contenedor.add(lblInicioDelSistema);
-		
+
 		JButton LoginBoton = new JButton("Login");
 		LoginBoton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String logon = NombreT.getText();
-				boolean x = false;
-				String user="root";
-				String pw="RootLindo"; 
-				String db="hemmingtonsquire";
-				String parche="?autoReconnect=true&useSSL=false";
-				String url="jdbc:mysql://localhost:3306/"+db+parche;
-				
-				Connection con=null;
-				
-				try{
-					
-					con=DriverManager.getConnection(url,user,pw);
-					
-					ResultSet rs = null;
-					Statement cmd = null;
 
-					cmd = con.createStatement();
-					rs = cmd.executeQuery("SELECT Password from User where Username ="+ logon + "");
-					
-					while (rs.next()) {
-						if (PasswordT.getText().toLowerCase().equals(rs.getString(1))) {
-							if (logon == "Root") {
-								
-							} else {
-								
-							}
-						}
-					}
-					
-					NombreT.setText("");
-					PasswordT.setText("");
-					con.close();
-				}catch(SQLException ex){
-					
-					JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
-					x=false;
+				if (empty()) {
+					MySQL.login(name.toString(), password.getText());
+
 				}
-					
-				return;
+
 			}
 		});
 		LoginBoton.setBounds(287, 149, 89, 23);
 		Contenedor.add(LoginBoton);
-}
-	
-	
+	}
+
+	public static boolean empty() {
+		if (name.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Error No Ingreso el Codigo... ingrese nuevamente");
+			return false;
+		}
+
+		if (password.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Error No Ingreso el Codigo... ingrese nuevamente");
+			return false;
+		}
+
+		return true;
+	}
 
 }
