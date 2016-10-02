@@ -31,10 +31,9 @@ public class Login_Frame extends JFrame {
 
 	private JPanel Contenedor;
 	private JTextField NombreT;
-	private JPasswordField Contrase�aT;
+	private JPasswordField ContraseñaT;
 	private static ArrayList <String> user=new ArrayList <String>();
 	private static ArrayList <String> pass=new ArrayList <String>();
-	
 
 	/**
 	 * Launch the application.
@@ -64,6 +63,7 @@ public class Login_Frame extends JFrame {
 		user.add("Usuario");
 		pass.add("Usuariolindo");
 
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Usuario\\Documents\\GitHub\\HemmingtonSquire\\Imagenes\\Ferreteria.png"));
 		setTitle("Login Ferreteria");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 427, 232);
@@ -78,19 +78,19 @@ public class Login_Frame extends JFrame {
 		lblLogin.setBounds(171, 68, 72, 31);
 		Contenedor.add(lblLogin);
 		
-		JLabel lblContrase�a = new JLabel("Contrase\u00F1a:");
-		lblContrase�a.setFont(new Font("Mangal", Font.BOLD, 16));
-		lblContrase�a.setBounds(171, 94, 100, 31);
-		Contenedor.add(lblContrase�a);
+		JLabel lblContraseña = new JLabel("Contrase\u00F1a:");
+		lblContraseña.setFont(new Font("Mangal", Font.BOLD, 16));
+		lblContraseña.setBounds(171, 94, 100, 31);
+		Contenedor.add(lblContraseña);
 		
 		NombreT = new JTextField();
 		NombreT.setBounds(281, 76, 107, 20);
 		Contenedor.add(NombreT);
 		NombreT.setColumns(10);
 		
-		Contrase�aT = new JPasswordField();
-		Contrase�aT.setBounds(281, 102, 107, 20);
-		Contenedor.add(Contrase�aT);
+		ContraseñaT = new JPasswordField();
+		ContraseñaT.setBounds(281, 102, 107, 20);
+		Contenedor.add(ContraseñaT);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(171, 45, 0, 127);
@@ -108,16 +108,18 @@ public class Login_Frame extends JFrame {
 		
 		JButton LoginBoton = new JButton("Login");
 		LoginBoton.addActionListener(new ActionListener() {
+		JButton btnNewButton = new JButton("Login");
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				
 				/*Login*/
 				String Usuario = NombreT.getText();
-				String Contrase�a = Contrase�aT.getText();
+				String Contraseña = ContraseñaT.getText();
 
 				if(user.indexOf(Usuario)!=-1){
 
-						if ((pass.get(user.indexOf(Usuario)).equals(Contrase�a))) {
+						if ((pass.get(user.indexOf(Usuario)).equals(Contraseña))) {
 							if(Usuario.equals("Root")){
 								Root_Frame kys = new Root_Frame();
 								Login_Frame frame = new Login_Frame();
@@ -137,7 +139,7 @@ public class Login_Frame extends JFrame {
 							}
 						
 						} else {
-								JOptionPane.showMessageDialog(null, "Contrase�a incorrecta", "ERROR",JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "ERROR",JOptionPane.ERROR_MESSAGE);
 
 						}
 
@@ -149,6 +151,32 @@ public class Login_Frame extends JFrame {
 		});
 		LoginBoton.setBounds(287, 149, 89, 23);
 		Contenedor.add(LoginBoton);
+				user.add("Root");
+				pass.add("Rootlindo");
+				boolean c = true;
+				do {
+					if ((user.contains(Usuario)) && (pass.contains(Contraseña))) {
+						Root_Frame kys = new Root_Frame();
+						Login_Frame frame = new Login_Frame();
+					    kys.setVisible(true);
+					    frame.setEnabled(false);
+					    frame.setAlwaysOnTop(false);
+					    kys.setAlwaysOnTop(true);
+						c=false;
+					} else {
+						
+						if(user.contains(Usuario)){
+							JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "ERROR",JOptionPane.ERROR_MESSAGE);
+						}else{
+						JOptionPane.showMessageDialog(null, "Nombre de usuario incorrecto", "ERROR",JOptionPane.ERROR_MESSAGE);
+						}
+						c=false;
+					}
+				}while(c);
+			}
+		});
+		btnNewButton.setBounds(287, 149, 89, 23);
+		Contenedor.add(btnNewButton);
 	}
 
 }

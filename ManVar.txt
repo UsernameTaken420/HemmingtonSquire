@@ -1,2 +1,6 @@
 Usuario : Tomar el valor de el ingreso en Nombres en la ventana login	
 Contraseña : Tomar el valor de el ingreso en Contraseña en la ventana login
+contador : variable de contador para estructuras repetitivas
+contador 2: variable de contador para estructuras repetitivas cuando ya existe contador
+contador 3: variable de contador para estructuras repetitivas cuando ya existe contador 2 y contador
+contador 4: variable de contador para estructuras repetitivas cuando ya existe contador , contador 2 y contador 3
