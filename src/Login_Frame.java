@@ -34,8 +34,11 @@ public class Login_Frame extends JFrame {
 	private JPasswordField ContraseñaT;
 	private static ArrayList <String> user=new ArrayList <String>();
 	private static ArrayList <String> pass=new ArrayList <String>();
+<<<<<<< HEAD
 	
 
+=======
+>>>>>>> refs/remotes/origin/master
 	/**
 	 * Launch the application.
 	 */
@@ -56,6 +59,7 @@ public class Login_Frame extends JFrame {
 	 * Create the frame.
 	 */
 	public Login_Frame() {
+<<<<<<< HEAD
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Usuario\\Documents\\GitHub\\HemmingtonSquire\\Imagenes\\Ferreteria.png"));
 
@@ -64,6 +68,9 @@ public class Login_Frame extends JFrame {
 		user.add("Usuario");
 		pass.add("Usuariolindo");
 
+=======
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Usuario\\Documents\\GitHub\\HemmingtonSquire\\Imagenes\\Ferreteria.png"));
+>>>>>>> refs/remotes/origin/master
 		setTitle("Login Ferreteria");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 427, 232);
@@ -106,14 +113,20 @@ public class Login_Frame extends JFrame {
 		lblInicioDelSistema.setBounds(281, 45, 120, 20);
 		Contenedor.add(lblInicioDelSistema);
 		
+<<<<<<< HEAD
 		JButton LoginBoton = new JButton("Login");
 		LoginBoton.addActionListener(new ActionListener() {
+=======
+		JButton btnNewButton = new JButton("Login");
+		btnNewButton.addActionListener(new ActionListener() {
+>>>>>>> refs/remotes/origin/master
 			public void actionPerformed(ActionEvent arg0) {
 				
 				
 				/*Login*/
 				String Usuario = NombreT.getText();
 				String Contraseña = ContraseñaT.getText();
+<<<<<<< HEAD
 
 				if(user.indexOf(Usuario)!=-1){
 
@@ -149,6 +162,34 @@ public class Login_Frame extends JFrame {
 		});
 		LoginBoton.setBounds(287, 149, 89, 23);
 		Contenedor.add(LoginBoton);
+=======
+				user.add("Root");
+				pass.add("Rootlindo");
+				boolean c = true;
+				do {
+					if ((user.contains(Usuario)) && (pass.contains(Contraseña))) {
+						Root_Frame kys = new Root_Frame();
+						Login_Frame frame = new Login_Frame();
+					    kys.setVisible(true);
+					    frame.setEnabled(false);
+					    frame.setAlwaysOnTop(false);
+					    kys.setAlwaysOnTop(true);
+						c=false;
+					} else {
+						
+						if(user.contains(Usuario)){
+							JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "ERROR",JOptionPane.ERROR_MESSAGE);
+						}else{
+						JOptionPane.showMessageDialog(null, "Nombre de usuario incorrecto", "ERROR",JOptionPane.ERROR_MESSAGE);
+						}
+						c=false;
+					}
+				}while(c);
+			}
+		});
+		btnNewButton.setBounds(287, 149, 89, 23);
+		Contenedor.add(btnNewButton);
+>>>>>>> refs/remotes/origin/master
 	}
 
 }

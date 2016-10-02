@@ -78,6 +78,15 @@ public class Root_Frame extends JFrame {
 	 * Create the frame.
 	 */
 	public Root_Frame() {
+		setTitle("Root");
+
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				System.exit(0);
+			}
+		});
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 667, 528);
 		
@@ -669,7 +678,7 @@ public class Root_Frame extends JFrame {
 			return false;
 		}
 		if (passToAdd.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso la Contraseña... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null, "Error No Ingreso la ContraseÃ±a... ingrese nuevamente");
 			return false;
 		}
 		
