@@ -278,6 +278,65 @@ public class MySQL {
 		}
 
 		return x;
+		
+		
+	}
+	public static boolean buyMerch (String code, int amount) {
+		boolean x = false;
+		try {
+
+			Connection con = conection();
+
+			if (con != null) {
+
+				JOptionPane.showMessageDialog(null, "Se conecto a la base de datos");
+			}
+
+			Statement cmd = null;
+
+			cmd = con.createStatement();
+
+			cmd.executeUpdate("update item set Stock = (Stock + " + amount + ") where code = " + code + ");");
+
+			con.close();
+		} catch (SQLException ex) {
+
+			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			x = false;
+		}
+
+		return x;
+		
+		
+	}
+	
+	public static boolean sellMerch (String code, int amount) {
+		boolean x = false;
+		try {
+
+			Connection con = conection();
+
+			if (con != null) {
+
+				JOptionPane.showMessageDialog(null, "Se conecto a la base de datos");
+			}
+
+			Statement cmd = null;
+
+			cmd = con.createStatement();
+
+			cmd.executeUpdate("update item set Stock = (Stock - " + amount + ") where code = " + code + ");");
+
+			con.close();
+		} catch (SQLException ex) {
+
+			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			x = false;
+		}
+
+		return x;
+		
+		
 	}
 
 }
