@@ -49,7 +49,7 @@ public class MySQL {
 
 		String parche = "?autoReconnect=true&useSSL=false";
 
-		String url = "jdbc:mysql://127.0.0.1:3306/" + db + parche;
+		String url = "jdbc:mysql://localhost:3306/" + db + parche;
 
 		Connection con = null;
 
@@ -214,7 +214,6 @@ public class MySQL {
 			Connection con = conection();
 
 			if (con != null) {
-
 				JOptionPane.showMessageDialog(null, "Se conecto a la base de datos");
 			}
 
@@ -252,6 +251,92 @@ public class MySQL {
 			x = false;
 		}
 
+	}
+	
+	public static boolean changeIVA (String code, int newPerc) {
+		boolean x = false;
+		try {
+
+			Connection con = conection();
+
+			if (con != null) {
+
+				JOptionPane.showMessageDialog(null, "Se conecto a la base de datos");
+			}
+
+			Statement cmd = null;
+
+			cmd = con.createStatement();
+
+			cmd.executeUpdate("UPDATE item set VAR = " + newPerc + " WHERE Code = " + code + ";");
+
+			con.close();
+		} catch (SQLException ex) {
+
+			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			x = false;
+		}
+
+		return x;
+		
+		
+	}
+	public static boolean buyMerch (String code, int amount) {
+		boolean x = false;
+		try {
+
+			Connection con = conection();
+
+			if (con != null) {
+
+				JOptionPane.showMessageDialog(null, "Se conecto a la base de datos");
+			}
+
+			Statement cmd = null;
+
+			cmd = con.createStatement();
+
+			cmd.executeUpdate("update item set Stock = (Stock + " + amount + ") where code = " + code + ");");
+
+			con.close();
+		} catch (SQLException ex) {
+
+			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			x = false;
+		}
+
+		return x;
+		
+		
+	}
+	
+	public static boolean sellMerch (String code, int amount) {
+		boolean x = false;
+		try {
+
+			Connection con = conection();
+
+			if (con != null) {
+
+				JOptionPane.showMessageDialog(null, "Se conecto a la base de datos");
+			}
+
+			Statement cmd = null;
+
+			cmd = con.createStatement();
+
+			cmd.executeUpdate("update item set Stock = (Stock - " + amount + ") where code = " + code + ");");
+
+			con.close();
+		} catch (SQLException ex) {
+
+			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			x = false;
+		}
+
+		return x;
+		
+		
 	}
 
 }
