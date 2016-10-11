@@ -1,3 +1,4 @@
+import java.awt.TextArea;
 import java.sql.Connection;
 
 import java.sql.DriverManager;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class MySQL {
@@ -26,7 +28,6 @@ public class MySQL {
 
 			x = true;
 
-			System.out.println("REGISTRADO");
 		} catch (Exception e) {
 
 			JOptionPane.showMessageDialog(null, e.toString());
@@ -77,7 +78,6 @@ public class MySQL {
 
 			if (con != null) {
 
-				JOptionPane.showMessageDialog(null, "Se conecto a la base de datos");
 			}
 
 			int rs = 0;
@@ -108,7 +108,6 @@ public class MySQL {
 
 			if (con != null) {
 
-				JOptionPane.showMessageDialog(null, "Se conecto a la base de datos");
 			}
 
 			int rs = 0;
@@ -140,7 +139,6 @@ public class MySQL {
 
 			if (con != null) {
 
-				JOptionPane.showMessageDialog(null, "Se conecto a la base de datos");
 			}
 
 			int rs = 0;
@@ -175,7 +173,6 @@ public class MySQL {
 
 			if (con != null) {
 
-				JOptionPane.showMessageDialog(null, "Se conecto a la base de datos");
 			}
 
 			ResultSet rs = null;
@@ -214,7 +211,6 @@ public class MySQL {
 			Connection con = conection();
 
 			if (con != null) {
-				JOptionPane.showMessageDialog(null, "Se conecto a la base de datos");
 			}
 
 			ResultSet rs = null;
@@ -261,7 +257,6 @@ public class MySQL {
 
 			if (con != null) {
 
-				JOptionPane.showMessageDialog(null, "Se conecto a la base de datos");
 			}
 
 			Statement cmd = null;
@@ -289,7 +284,6 @@ public class MySQL {
 
 			if (con != null) {
 
-				JOptionPane.showMessageDialog(null, "Se conecto a la base de datos");
 			}
 
 			Statement cmd = null;
@@ -318,7 +312,6 @@ public class MySQL {
 
 			if (con != null) {
 
-				JOptionPane.showMessageDialog(null, "Se conecto a la base de datos");
 			}
 
 			Statement cmd = null;
@@ -337,6 +330,73 @@ public class MySQL {
 		return x;
 		
 		
+	}
+	
+	public static boolean Find_Description(int code,JTextArea sell_search_des) {
+
+		ArrayList<String> Find_des = new ArrayList<String>();
+		
+		boolean x = false;
+
+		try {
+
+			Connection con = conection();
+
+			if (con != null) {
+			}
+
+			ResultSet rs = null;
+			Statement cmd = null;
+
+			cmd = con.createStatement();
+
+			rs = cmd.executeQuery("SELECT * FROM item WHERE code='" + code + "';");
+
+
+			while (rs.next()) {
+				
+				String cod = rs.getString("code");
+				Find_des.add(cod);
+				
+				String name = rs.getString("name");
+				Find_des.add(name);
+				
+				String manufacturer = rs.getString("manufacturer");
+				Find_des.add(manufacturer);
+				
+				String stock = rs.getString("stock");
+				Find_des.add(stock);
+				
+				String vat = rs.getString("vat");
+				Find_des.add(vat);
+				
+				String uprice = rs.getString("uprice");
+				Find_des.add(uprice);
+				
+				String sprice = rs.getString("sprice");
+				Find_des.add(sprice);
+				
+				String des = rs.getString("description");
+				Find_des.add(des);
+				
+				}
+
+				
+				String text="Codigo del producto: " + Find_des.get(0) + "\n" + "Nombre del producto: "
+						+ Find_des.get(1) + "\n" + "Fabricante: " + Find_des.get(2) + "\n" + "Stock: "
+						+ Find_des.get(3)+ "\n" + "IVA: " + Find_des.get(4) + 
+						"\n" + "Precio Unitario: "+ Find_des.get(5)+"\n" + "Precio de venta: "+ Find_des.get(6)+
+						"\n" + "Descripcion: "+ Find_des.get(7);
+				
+				sell_search_des.setText(text);
+			
+			con.close();
+		} catch (SQLException ex) {
+
+			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			x = false;
+		}
+		return x;
 	}
 
 }
