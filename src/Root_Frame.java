@@ -23,6 +23,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -255,20 +256,23 @@ public class Root_Frame extends JFrame {
 		lblCodigoDelProducto.setFont(new Font("DokChampa", Font.PLAIN, 14));
 		lblCodigoDelProducto.setBounds(10, 29, 157, 18);
 		panel_3.add(lblCodigoDelProducto);
-
-		sell_search_display = new JList();
-		sell_search_display.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				
-				
-				
-				
-			}
-		});
-		sell_search_display.setBounds(10, 99, 227, 256);
-		panel_3.add(sell_search_display);
 		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 99, 227, 256);
+		panel_3.add(scrollPane_1);
+		
+				sell_search_display = new JList();
+				scrollPane_1.setViewportView(sell_search_display);
+				sell_search_display.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						
+						int h=(int) sell_search_display.getSelectedValue();
+						MySQL.Find_Description(h,sell_search_des);
+						
+					}
+				});
+
 		sell_search_search = new JTextField();
 		sell_search_search.setColumns(10);
 		sell_search_search.setBounds(10, 58, 110, 20);
@@ -278,8 +282,9 @@ public class Root_Frame extends JFrame {
 		sell_search_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int cod = 0;
-				
+
 				DefaultListModel dlm = new DefaultListModel();
+				dlm.clear();
 				if (empty_sell()) {
 
 					try {
@@ -292,23 +297,29 @@ public class Root_Frame extends JFrame {
 
 					}
 
-					find=MySQL.Find(cod);
-					dlm.addElement(find);
+					find = MySQL.Find(cod);
+
+					for(int i=0;i<find.size();i++){
+						
+						dlm.addElement(find.get(i));
+						
+					}
+					JOptionPane.showMessageDialog(null, "Busqueda finalizada");
 					
 					sell_search_display.setModel(dlm);
-					//sell_search_display.add(find);
-					
-					System.out.println(find);
 				}
 
 			}
 		});
 		sell_search_button.setBounds(152, 58, 89, 23);
 		panel_3.add(sell_search_button);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(260, 203, 174, 152);
+		panel_3.add(scrollPane_2);
 
 		sell_search_des = new JTextArea();
-		sell_search_des.setBounds(260, 203, 174, 152);
-		panel_3.add(sell_search_des);
+		scrollPane_2.setViewportView(sell_search_des);
 
 		sell_sell_amount = new JTextField();
 		sell_sell_amount.setColumns(10);
@@ -320,6 +331,10 @@ public class Root_Frame extends JFrame {
 		panel_3.add(textArea_2);
 
 		JButton sell_search_confirm = new JButton("Confirmar venta");
+		sell_search_confirm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		sell_search_confirm.setBounds(460, 332, 139, 23);
 		panel_3.add(sell_search_confirm);
 
@@ -344,10 +359,12 @@ public class Root_Frame extends JFrame {
 		panel_3.add(label_14);
 
 		JButton sell_search_see = new JButton("Visualizar");
+		sell_search_see.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		sell_search_see.setBounds(473, 121, 91, 23);
 		panel_3.add(sell_search_see);
-
-
 
 		JPanel panel_9 = new JPanel();
 		panel_9.setLayout(null);
@@ -382,6 +399,10 @@ public class Root_Frame extends JFrame {
 		panel_9.add(lblPrecioFnal);
 
 		JButton button_7 = new JButton("Visualizar");
+		button_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		button_7.setBounds(487, 110, 91, 23);
 		panel_9.add(button_7);
 
