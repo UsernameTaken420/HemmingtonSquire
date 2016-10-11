@@ -1,4 +1,5 @@
 import java.awt.TextArea;
+
 import java.sql.Connection;
 
 import java.sql.DriverManager;
@@ -332,7 +333,7 @@ public class MySQL {
 		
 	}
 	
-	public static boolean Find_Description(int code,JTextArea sell_search_des) {
+	public static boolean Find_Description(int code,JTextArea show) {
 
 		ArrayList<String> Find_des = new ArrayList<String>();
 		
@@ -388,7 +389,7 @@ public class MySQL {
 						"\n" + "Precio Unitario: "+ Find_des.get(5)+"\n" + "Precio de venta: "+ Find_des.get(6)+
 						"\n" + "Descripcion: "+ Find_des.get(7);
 				
-				sell_search_des.setText(text);
+				show.setText(text);
 			
 			con.close();
 		} catch (SQLException ex) {
