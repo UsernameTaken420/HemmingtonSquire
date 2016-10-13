@@ -10,8 +10,10 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class MySQL {
 
@@ -184,11 +186,11 @@ public class MySQL {
 			rs = cmd.executeQuery("SELECT * FROM Item WHERE Code like'" + cod + "%'; ");
 
 			while (rs.next()) {
-				
+
 				int cod_array = rs.getInt("code");
 				find.add(cod_array);
-				
-				}
+
+			}
 
 			con.close();
 		} catch (SQLException ex) {
@@ -249,8 +251,8 @@ public class MySQL {
 		}
 
 	}
-	
-	public static boolean changeIVA (String code, int newPerc) {
+
+	public static boolean changeIVA(String code, int newPerc) {
 		boolean x = false;
 		try {
 
@@ -264,7 +266,7 @@ public class MySQL {
 
 			cmd = con.createStatement();
 
-			cmd.executeUpdate("UPDATE item set VAR = " + newPerc + " WHERE Code = " + code + ";");
+			cmd.executeUpdate("UPDATE item set VAT = " + newPerc + " WHERE Code = " + code + ";");
 
 			con.close();
 		} catch (SQLException ex) {
@@ -274,10 +276,73 @@ public class MySQL {
 		}
 
 		return x;
-		
-		
+
 	}
-	public static boolean buyMerch (String code, int amount) {
+
+	public static boolean changePrice(String code, int newPerc) {
+		boolean x = false;
+		try {
+
+			Connection con = conection();
+
+			if (con != null) {
+
+			}
+
+			Statement cmd = null;
+
+			cmd = con.createStatement();
+
+			cmd.executeUpdate("UPDATE item set Sprice = " + newPerc + " WHERE Code = " + code + ";");
+
+			con.close();
+		} catch (SQLException ex) {
+
+			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			x = false;
+		}
+
+		return x;
+
+	}
+
+	public static boolean Logs(String code, int newPerc, int by) {
+
+		boolean x = false;
+		try {
+
+			Connection con = conection();
+
+			if (con != null) {
+
+			}
+
+			ResultSet rs = null;
+			Statement cmd = null;
+
+			cmd = con.createStatement();
+			if (by == 1) {
+				rs = cmd.executeQuery("SELECT * FROM log WHERE code='" + code + "' and ;");
+			} else {
+
+				if (by == 2) {
+
+				} else {
+
+				}
+			}
+			con.close();
+		} catch (SQLException ex) {
+
+			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			x = false;
+		}
+
+		return x;
+
+	}
+
+	public static boolean buyMerch(String code, int amount) {
 		boolean x = false;
 		try {
 
@@ -301,11 +366,10 @@ public class MySQL {
 		}
 
 		return x;
-		
-		
+
 	}
-	
-	public static boolean sellMerch (String code, int amount) {
+
+	public static boolean sellMerch(String code, int amount) {
 		boolean x = false;
 		try {
 
@@ -329,14 +393,24 @@ public class MySQL {
 		}
 
 		return x;
-		
-		
-	}
-	
-	public static boolean Find_Description(int code,JTextArea show) {
 
-		ArrayList<String> Find_des = new ArrayList<String>();
+	}
+
+	public static boolean Find_Description(int code, JTable table, DefaultTableModel model) {
+
 		
+		model.fireTableRowsInserted(0, model.getRowCount());
+		
+		ArrayList<String> cod = new ArrayList<String>();
+		ArrayList<String> name = new ArrayList<String>();
+		ArrayList<String> manu = new ArrayList<String>();
+		ArrayList<String> vat = new ArrayList<String>();
+		ArrayList<String> uprice = new ArrayList<String>();
+		ArrayList<String> sprice = new ArrayList<String>();
+		ArrayList<String> stock = new ArrayList<String>();
+		ArrayList<String> des = new ArrayList<String>();
+
+		int count = 0;
 		boolean x = false;
 
 		try {
@@ -346,51 +420,64 @@ public class MySQL {
 			if (con != null) {
 			}
 
-			ResultSet rs = null;
+			ResultSet rs = null, rs1 = null;
 			Statement cmd = null;
-
 			cmd = con.createStatement();
 
-			rs = cmd.executeQuery("SELECT * FROM item WHERE code='" + code + "';");
+			rs1 = cmd.executeQuery("SELECT count(*) FROM item WHERE code like '" + code + "%';");
+			while(rs1.next()){
+				
+				count=rs1.getInt("count(*)");
+				
+			}
+			cmd = con.createStatement();
 
-
+			rs = cmd.executeQuery("SELECT * FROM item WHERE code like '" + code + "%';");
+			int i = 0;
 			while (rs.next()) {
-				
-				String cod = rs.getString("code");
-				Find_des.add(cod);
-				
-				String name = rs.getString("name");
-				Find_des.add(name);
-				
-				String manufacturer = rs.getString("manufacturer");
-				Find_des.add(manufacturer);
-				
-				String stock = rs.getString("stock");
-				Find_des.add(stock);
-				
-				String vat = rs.getString("vat");
-				Find_des.add(vat);
-				
-				String uprice = rs.getString("uprice");
-				Find_des.add(uprice);
-				
-				String sprice = rs.getString("sprice");
-				Find_des.add(sprice);
-				
-				String des = rs.getString("description");
-				Find_des.add(des);
-				
-				}
+				cod.add(rs.getString("code"));
+				name.add(rs.getString("name"));
+				manu.add(rs.getString("manufacturer"));
+				vat.add(rs.getString("vat"));
+				uprice.add(rs.getString("uprice"));
+				sprice.add(rs.getString("sprice"));
+				des.add(rs.getString("description"));
+				stock.add(rs.getString("stock"));
 
-				
-				String text="Codigo del producto: " + Find_des.get(0) + "\n" + "Nombre del producto: "
-						+ Find_des.get(1) + "\n" + "Fabricante: " + Find_des.get(2) + "\n" + "Stock: "
-						+ Find_des.get(3)+ "\n" + "IVA: " + Find_des.get(4) + 
-						"\n" + "Precio Unitario: "+ Find_des.get(5)+"\n" + "Precio de venta: "+ Find_des.get(6)+
-						"\n" + "Descripcion: "+ Find_des.get(7);
-				
-				show.setText(text);
+			}
+
+			Object[] rowData = new Object[8];
+
+			Object[] columnsName = new Object[8];
+
+			columnsName[0] = "Codigo";
+			columnsName[1] = "Nombre";
+			columnsName[2] = "Fabricante";
+			columnsName[3] = "Stock";
+			columnsName[4] = "Iva";
+			columnsName[5] = "Precio de venta";
+			columnsName[6] = "Precio unitario";
+			columnsName[7] = "Descripcion";
+
+			model.setColumnIdentifiers(columnsName);
 			
+			for (int i2 = 0; i2 < count; i2++) {
+
+				rowData[0] = cod.get(i2);
+				rowData[1] = name.get(i2);
+				rowData[6] = stock.get(i2);
+				rowData[2] = manu.get(i2);
+				rowData[3] = vat.get(i2);
+				rowData[4] = uprice.get(i2);
+				rowData[5] = sprice.get(i2);
+				rowData[7] = des.get(i2);
+
+				model.addRow(rowData);
+				
+			}
+
+			table.setModel(model);
+
 			con.close();
 		} catch (SQLException ex) {
 

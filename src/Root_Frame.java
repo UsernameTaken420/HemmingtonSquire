@@ -25,6 +25,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
@@ -60,15 +63,14 @@ public class Root_Frame extends JFrame {
 	private JButton add_button;
 	private JTextField add_manufacturer;
 	private JButton sell_search_button;
-	private JTextArea sell_search_des;
-	private JLabel lblDescripcion;
 	private static ArrayList<Integer> find = new ArrayList<Integer>();
-	private JList sell_search_display;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField;
+	private JTable table;
+	private JTable table_1;
 
 	/**
 	 * Launch the application.
@@ -100,7 +102,7 @@ public class Root_Frame extends JFrame {
 		});
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 667, 528);
+		setBounds(100, 100, 844, 528);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -116,7 +118,7 @@ public class Root_Frame extends JFrame {
 		contentPane.setLayout(null);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 11, 639, 458);
+		tabbedPane.setBounds(10, 11, 816, 458);
 		contentPane.add(tabbedPane);
 
 		JPanel panel = new JPanel();
@@ -124,7 +126,7 @@ public class Root_Frame extends JFrame {
 		panel.setLayout(null);
 
 		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane_1.setBounds(10, 11, 614, 411);
+		tabbedPane_1.setBounds(10, 11, 791, 411);
 		panel.add(tabbedPane_1);
 
 		JPanel panel_2 = new JPanel();
@@ -217,7 +219,6 @@ public class Root_Frame extends JFrame {
 		add_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				
 			}
 		});
 		add_button.setBounds(379, 257, 182, 23);
@@ -231,57 +232,53 @@ public class Root_Frame extends JFrame {
 		lblCodigoDelProducto.setFont(new Font("DokChampa", Font.PLAIN, 14));
 		lblCodigoDelProducto.setBounds(10, 29, 157, 18);
 		panel_3.add(lblCodigoDelProducto);
-		
-				lblDescripcion = new JLabel("Descripcion");
-				lblDescripcion.setFont(new Font("DokChampa", Font.PLAIN, 14));
-				lblDescripcion.setBounds(260, 32, 157, 18);
-				panel_3.add(lblDescripcion);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 99, 227, 256);
-		panel_3.add(scrollPane_1);
-		
-				sell_search_display = new JList();
-				scrollPane_1.setViewportView(sell_search_display);
-				sell_search_display.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent arg0) {
-						
-						display(sell_search_display,sell_search_des);
-						
-					}
-				});
 
 		sell_search_search = new JTextField();
 		sell_search_search.setColumns(10);
 		sell_search_search.setBounds(10, 58, 110, 20);
 		panel_3.add(sell_search_search);
 
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 108, 604, 267);
+		panel_3.add(scrollPane_1);
+		table = new JTable();
+		scrollPane_1.setViewportView(table);
+
+		DefaultTableModel model = new DefaultTableModel();
+
+		Object[] columnsName = new Object[8];
+
+		columnsName[0] = "Codigo";
+		columnsName[1] = "Nombre";
+		columnsName[2] = "Fabricante";
+		columnsName[3] = "Stock";
+		columnsName[4] = "Iva";
+		columnsName[5] = "Precio de venta";
+		columnsName[6] = "Precio unitario";
+		columnsName[7] = "Descripcion";
+
+		model.setColumnIdentifiers(columnsName);
+
+		table.setModel(model);
+
 		sell_search_button = new JButton("Buscar");
 		sell_search_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				search(sell_search_search,sell_search_display);
+				search(sell_search_search, table, model);
 
 			}
 		});
 		sell_search_button.setBounds(152, 58, 89, 23);
 		panel_3.add(sell_search_button);
-		
-		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(260, 203, 174, 152);
-		panel_3.add(scrollPane_2);
-
-		sell_search_des = new JTextArea();
-		scrollPane_2.setViewportView(sell_search_des);
 
 		sell_sell_amount = new JTextField();
 		sell_sell_amount.setColumns(10);
-		sell_sell_amount.setBounds(538, 58, 61, 20);
+		sell_sell_amount.setBounds(702, 58, 61, 20);
 		panel_3.add(sell_sell_amount);
 
 		JTextArea textArea_2 = new JTextArea();
-		textArea_2.setBounds(460, 203, 139, 115);
+		textArea_2.setBounds(624, 203, 139, 115);
 		panel_3.add(textArea_2);
 
 		JButton sell_search_confirm = new JButton("Confirmar venta");
@@ -289,22 +286,22 @@ public class Root_Frame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		sell_search_confirm.setBounds(460, 332, 139, 23);
+		sell_search_confirm.setBounds(624, 332, 139, 23);
 		panel_3.add(sell_search_confirm);
 
 		JLabel lblVenta = new JLabel("Venta");
 		lblVenta.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		lblVenta.setBounds(503, 29, 61, 18);
+		lblVenta.setBounds(667, 29, 61, 18);
 		panel_3.add(lblVenta);
 
 		JLabel lblCantidad = new JLabel("Cantidad");
 		lblCantidad.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		lblCantidad.setBounds(460, 58, 68, 18);
+		lblCantidad.setBounds(624, 58, 68, 18);
 		panel_3.add(lblCantidad);
 
 		JLabel label_14 = new JLabel("Precio Final");
 		label_14.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		label_14.setBounds(487, 163, 89, 18);
+		label_14.setBounds(651, 163, 89, 18);
 		panel_3.add(label_14);
 
 		JButton sell_search_see = new JButton("Visualizar");
@@ -312,7 +309,7 @@ public class Root_Frame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		sell_search_see.setBounds(473, 121, 91, 23);
+		sell_search_see.setBounds(649, 120, 91, 23);
 		panel_3.add(sell_search_see);
 
 		JPanel panel_9 = new JPanel();
@@ -354,35 +351,35 @@ public class Root_Frame extends JFrame {
 		});
 		button_7.setBounds(487, 110, 91, 23);
 		panel_9.add(button_7);
-		
+
 		JLabel label_11 = new JLabel("Codigo del producto");
 		label_11.setFont(new Font("DokChampa", Font.PLAIN, 14));
 		label_11.setBounds(10, 29, 157, 18);
 		panel_9.add(label_11);
-		
+
 		textField = new JTextField();
 		textField.setColumns(10);
 		textField.setBounds(10, 58, 110, 20);
 		panel_9.add(textField);
-		
+
 		JScrollPane scrollPane_3 = new JScrollPane();
 		scrollPane_3.setBounds(12, 101, 223, 252);
 		panel_9.add(scrollPane_3);
-		
+
 		JList list = new JList();
 		scrollPane_3.setViewportView(list);
-		
+
 		JButton button = new JButton("Buscar");
 		button.setBounds(152, 58, 89, 23);
 		panel_9.add(button);
-		
+
 		JScrollPane scrollPane_4 = new JScrollPane();
 		scrollPane_4.setBounds(262, 205, 170, 148);
 		panel_9.add(scrollPane_4);
-		
+
 		JTextArea textArea = new JTextArea();
 		scrollPane_4.setViewportView(textArea);
-		
+
 		JLabel label_12 = new JLabel("Descripcion");
 		label_12.setFont(new Font("DokChampa", Font.PLAIN, 14));
 		label_12.setBounds(260, 32, 157, 18);
@@ -395,35 +392,35 @@ public class Root_Frame extends JFrame {
 		JButton btnConfirmarBajaLogica = new JButton("Confirmar baja logica");
 		btnConfirmarBajaLogica.setBounds(439, 75, 160, 23);
 		panel_6.add(btnConfirmarBajaLogica);
-		
+
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
 		textField_1.setBounds(7, 60, 110, 20);
 		panel_6.add(textField_1);
-		
+
 		JLabel label_13 = new JLabel("Codigo del producto");
 		label_13.setFont(new Font("DokChampa", Font.PLAIN, 14));
 		label_13.setBounds(7, 31, 157, 18);
 		panel_6.add(label_13);
-		
+
 		JButton button_1 = new JButton("Buscar");
 		button_1.setBounds(149, 60, 89, 23);
 		panel_6.add(button_1);
-		
+
 		JScrollPane scrollPane_5 = new JScrollPane();
 		scrollPane_5.setBounds(9, 103, 223, 252);
 		panel_6.add(scrollPane_5);
-		
+
 		JList list_1 = new JList();
 		scrollPane_5.setViewportView(list_1);
-		
+
 		JScrollPane scrollPane_6 = new JScrollPane();
 		scrollPane_6.setBounds(259, 207, 170, 148);
 		panel_6.add(scrollPane_6);
-		
+
 		JTextArea textArea_1 = new JTextArea();
 		scrollPane_6.setViewportView(textArea_1);
-		
+
 		JLabel label_16 = new JLabel("Descripcion");
 		label_16.setFont(new Font("DokChampa", Font.PLAIN, 14));
 		label_16.setBounds(257, 34, 157, 18);
@@ -460,35 +457,35 @@ public class Root_Frame extends JFrame {
 		buttonGroup.add(radioButton_2);
 		radioButton_2.setBounds(479, 118, 109, 23);
 		panel_4.add(radioButton_2);
-		
+
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
 		textField_2.setBounds(10, 58, 110, 20);
 		panel_4.add(textField_2);
-		
+
 		JLabel label_17 = new JLabel("Codigo del producto");
 		label_17.setFont(new Font("DokChampa", Font.PLAIN, 14));
 		label_17.setBounds(10, 29, 157, 18);
 		panel_4.add(label_17);
-		
+
 		JButton button_2 = new JButton("Buscar");
 		button_2.setBounds(152, 58, 89, 23);
 		panel_4.add(button_2);
-		
+
 		JScrollPane scrollPane_7 = new JScrollPane();
 		scrollPane_7.setBounds(12, 101, 223, 252);
 		panel_4.add(scrollPane_7);
-		
+
 		JList list_2 = new JList();
 		scrollPane_7.setViewportView(list_2);
-		
+
 		JScrollPane scrollPane_8 = new JScrollPane();
 		scrollPane_8.setBounds(262, 205, 170, 148);
 		panel_4.add(scrollPane_8);
-		
+
 		JTextArea textArea_3 = new JTextArea();
 		scrollPane_8.setViewportView(textArea_3);
-		
+
 		JLabel label_18 = new JLabel("Descripcion");
 		label_18.setFont(new Font("DokChampa", Font.PLAIN, 14));
 		label_18.setBounds(260, 32, 157, 18);
@@ -516,35 +513,35 @@ public class Root_Frame extends JFrame {
 		textField_16.setBounds(462, 161, 126, 20);
 		panel_5.add(textField_16);
 		textField_16.setColumns(10);
-		
+
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
 		textField_3.setBounds(10, 58, 110, 20);
 		panel_5.add(textField_3);
-		
+
 		JLabel label_19 = new JLabel("Codigo del producto");
 		label_19.setFont(new Font("DokChampa", Font.PLAIN, 14));
 		label_19.setBounds(10, 29, 157, 18);
 		panel_5.add(label_19);
-		
+
 		JButton button_3 = new JButton("Buscar");
 		button_3.setBounds(152, 58, 89, 23);
 		panel_5.add(button_3);
-		
+
 		JScrollPane scrollPane_9 = new JScrollPane();
 		scrollPane_9.setBounds(12, 101, 223, 252);
 		panel_5.add(scrollPane_9);
-		
+
 		JList list_3 = new JList();
 		scrollPane_9.setViewportView(list_3);
-		
+
 		JScrollPane scrollPane_10 = new JScrollPane();
 		scrollPane_10.setBounds(262, 205, 170, 148);
 		panel_5.add(scrollPane_10);
-		
+
 		JTextArea textArea_4 = new JTextArea();
 		scrollPane_10.setViewportView(textArea_4);
-		
+
 		JLabel label_20 = new JLabel("Descripcion");
 		label_20.setFont(new Font("DokChampa", Font.PLAIN, 14));
 		label_20.setBounds(260, 32, 157, 18);
@@ -572,17 +569,17 @@ public class Root_Frame extends JFrame {
 		textField_18.setColumns(10);
 		textField_18.setBounds(462, 161, 137, 20);
 		panel_7.add(textField_18);
-		
+
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
 		textField_4.setBounds(10, 58, 110, 20);
 		panel_7.add(textField_4);
-		
+
 		JLabel label_21 = new JLabel("Codigo del producto");
 		label_21.setFont(new Font("DokChampa", Font.PLAIN, 14));
 		label_21.setBounds(10, 29, 157, 18);
 		panel_7.add(label_21);
-		
+
 		JButton button_4 = new JButton("Buscar");
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -590,21 +587,21 @@ public class Root_Frame extends JFrame {
 		});
 		button_4.setBounds(152, 58, 89, 23);
 		panel_7.add(button_4);
-		
+
 		JScrollPane scrollPane_11 = new JScrollPane();
 		scrollPane_11.setBounds(12, 101, 223, 252);
 		panel_7.add(scrollPane_11);
-		
+
 		JList list_4 = new JList();
 		scrollPane_11.setViewportView(list_4);
-		
+
 		JScrollPane scrollPane_12 = new JScrollPane();
 		scrollPane_12.setBounds(262, 205, 170, 148);
 		panel_7.add(scrollPane_12);
-		
+
 		JTextArea textArea_6 = new JTextArea();
 		scrollPane_12.setViewportView(textArea_6);
-		
+
 		JLabel label_22 = new JLabel("Descripcion");
 		label_22.setFont(new Font("DokChampa", Font.PLAIN, 14));
 		label_22.setBounds(260, 32, 157, 18);
@@ -745,45 +742,24 @@ public class Root_Frame extends JFrame {
 
 		return true;
 	}
-	
-	public static void search(JTextField searching,JList display){
-		
+
+	public static void search(JTextField searching, JTable table, DefaultTableModel model) {
+
 		int cod = 0;
 
-		DefaultListModel dlm = new DefaultListModel();
-		dlm.clear();
-		
 		if (empty(searching)) {
 
 			try {
 				cod = Integer.parseInt(searching.getText().trim());
 
 			} catch (java.lang.NumberFormatException e23) {
-				JOptionPane.showMessageDialog(null,
-						"Error debe ingresar numeros en el campo codigo");
+				JOptionPane.showMessageDialog(null, "Error debe ingresar numeros en el campo codigo");
 				searching.setText("");
 
 			}
 
-			find = MySQL.Find(cod);
-
-			for(int i=0;i<find.size();i++){
-				
-				dlm.addElement(find.get(i));
-				
-			}
-			JOptionPane.showMessageDialog(null, "Busqueda finalizada");
-			
-			display.setModel(dlm);
+			MySQL.Find_Description(cod, table, model);
 		}
-		
-		
-	}
-	
-	public static void display(JList display,JTextArea code){
-		
-		int h=(int) display.getSelectedValue();
-		MySQL.Find_Description(h,code);
-		
+
 	}
 }
