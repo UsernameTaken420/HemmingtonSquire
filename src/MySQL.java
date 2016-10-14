@@ -255,19 +255,23 @@ public class MySQL {
 	public static boolean changeIVA(String code, int newPerc) {
 		boolean x = false;
 		try {
-
 			Connection con = conection();
+			Statement cmd = null;
 
 			if (con != null) {
 
 			}
 
-			Statement cmd = null;
+			if (newPerc < 0) {
+				JOptionPane.showMessageDialog(null, "ERROR: el porcentaje ingresado no puede ser menor a 0");
+				con.close();
+			} else {
+				cmd = con.createStatement();
 
-			cmd = con.createStatement();
+				cmd.executeUpdate("UPDATE item set VAT = " + newPerc + " WHERE Code = " + code + ";");
 
-			cmd.executeUpdate("UPDATE item set VAT = " + newPerc + " WHERE Code = " + code + ";");
 
+			}
 			con.close();
 		} catch (SQLException ex) {
 
@@ -279,7 +283,7 @@ public class MySQL {
 
 	}
 
-	public static boolean changePrice(String code, int newPerc) {
+	public static boolean changeSellPrice(String code, int newPrice) {
 		boolean x = false;
 		try {
 
@@ -290,11 +294,42 @@ public class MySQL {
 			}
 
 			Statement cmd = null;
-
+			if (newPrice < 0) {
+				JOptionPane.showMessageDialog(null, "ERROR: el precio no puede ser menor a 0");
+			} else {
 			cmd = con.createStatement();
 
-			cmd.executeUpdate("UPDATE item set Sprice = " + newPerc + " WHERE Code = " + code + ";");
+			cmd.executeUpdate("UPDATE item set Sprice = " + newPrice + " WHERE Code = " + code + ";");
+			}
+			con.close();
+		} catch (SQLException ex) {
 
+			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			x = false;
+		}
+
+		return x;
+
+	}
+	
+	public static boolean changeUnitPrice(String code, int newPrice) {
+		boolean x = false;
+		try {
+
+			Connection con = conection();
+
+			if (con != null) {
+
+			}
+
+			Statement cmd = null;
+			if (newPrice < 0) {
+				JOptionPane.showMessageDialog(null, "ERROR: el precio no puede ser menor a 0");
+			} else {
+			cmd = con.createStatement();
+
+			cmd.executeUpdate("UPDATE item set Uprice = " + newPrice + " WHERE Code = " + code + ";");
+			}
 			con.close();
 		} catch (SQLException ex) {
 
@@ -398,9 +433,8 @@ public class MySQL {
 
 	public static boolean Find_Description(int code, JTable table, DefaultTableModel model) {
 
-		
 		model.fireTableRowsInserted(0, model.getRowCount());
-		
+
 		ArrayList<String> cod = new ArrayList<String>();
 		ArrayList<String> name = new ArrayList<String>();
 		ArrayList<String> manu = new ArrayList<String>();
@@ -425,10 +459,10 @@ public class MySQL {
 			cmd = con.createStatement();
 
 			rs1 = cmd.executeQuery("SELECT count(*) FROM item WHERE code like '" + code + "%';");
-			while(rs1.next()){
-				
-				count=rs1.getInt("count(*)");
-				
+			while (rs1.next()) {
+
+				count = rs1.getInt("count(*)");
+
 			}
 			cmd = con.createStatement();
 
@@ -460,7 +494,7 @@ public class MySQL {
 			columnsName[7] = "Descripcion";
 
 			model.setColumnIdentifiers(columnsName);
-			
+
 			for (int i2 = 0; i2 < count; i2++) {
 
 				rowData[0] = cod.get(i2);
@@ -473,7 +507,7 @@ public class MySQL {
 				rowData[7] = des.get(i2);
 
 				model.addRow(rowData);
-				
+
 			}
 
 			table.setModel(model);
