@@ -66,14 +66,6 @@ public class Login_Frame extends JFrame {
 
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage("C:\\Users\\Usuario\\Documents\\GitHub\\HemmingtonSquire\\Imagenes\\Ferreteria.png"));
-
-		user.add("Root");
-		pass.add("Rootlindo");
-		user.add("Usuario");
-		pass.add("Usuariolindo");
-
-		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage("C:\\Users\\Usuario\\Documents\\GitHub\\HemmingtonSquire\\Imagenes\\Ferreteria.png"));
 		setTitle("Login Ferreteria");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 427, 232);
