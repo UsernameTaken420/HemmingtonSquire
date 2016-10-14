@@ -221,7 +221,7 @@ public class MySQL {
 
 			cmd = con.createStatement();
 
-			rs = cmd.executeQuery("SELECT * FROM User WHERE username='" + user + "';");
+			rs = cmd.executeQuery("SELECT * FROM User WHERE username = '" + user + "';");
 
 			while (rs.next()) {
 				if (rs.getString(0) == "root") {
@@ -357,7 +357,7 @@ public class MySQL {
 
 			cmd = con.createStatement();
 			if (by == 1) {
-				rs = cmd.executeQuery("SELECT * FROM log WHERE code='" + code + "' and ;");
+				rs = cmd.executeQuery("SELECT * FROM log WHERE code= '" + code + "';");
 			} else {
 
 				if (by == 2) {
@@ -417,7 +417,7 @@ public class MySQL {
 			Statement cmd = null;
 
 			cmd = con.createStatement();
-			rs = cmd.executeQuery("select stock from item where code =" + code + ";");
+			rs = cmd.executeQuery("select stock from item where code = " + code + ";");
 			while (rs.next()) {
 				stock = rs.getInt(1);
 			}
