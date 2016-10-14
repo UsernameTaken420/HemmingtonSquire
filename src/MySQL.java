@@ -407,9 +407,9 @@ public class MySQL {
 	public static boolean sellMerch(String code, int amount) {
 		boolean x = false;
 		try {
-
+			int stock = 0;
 			Connection con = conection();
-
+			ResultSet rs = null;
 			if (con != null) {
 
 			}
@@ -417,9 +417,18 @@ public class MySQL {
 			Statement cmd = null;
 
 			cmd = con.createStatement();
-
-			cmd.executeUpdate("update item set Stock = (Stock - " + amount + ") where code = " + code + ");");
-
+			rs = cmd.executeQuery("select stock from item where code =" + code + ";");
+			while (rs.next()) {
+				stock = rs.getInt(1);
+			}
+			if (amount > stock) {
+				JOptionPane.showMessageDialog(null, "ERROR: no se puede vender más de lo que se tiene en stock");
+			} else {
+				if (stock == amount) {
+					JOptionPane.showMessageDialog(null, "ALERTA: el stock quedará en 0");
+				}
+				cmd.executeUpdate("update item set Stock = (Stock - " + amount + ") where code = " + code + ");");
+			}
 			con.close();
 		} catch (SQLException ex) {
 
