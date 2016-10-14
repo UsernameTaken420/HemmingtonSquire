@@ -284,6 +284,20 @@ public class Root_Frame extends JFrame {
 		JButton sell_search_confirm = new JButton("Confirmar venta");
 		sell_search_confirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (table.getSelectedRow()<0){
+					JOptionPane.showMessageDialog(null, "Se deve seleccionar un producto en la tabla");
+				}else{
+						if(MisMetodos.SN(sell_sell_amount.getText())){
+							JOptionPane.showMessageDialog(null, "La cantidad de venta debe ser un numero");
+						}else{
+							if(sell_sell_amount.getText().equals("")){
+								JOptionPane.showMessageDialog(null, "La cantidad de venta no debe estar vacia");
+							}else{
+								MySQL.sellMerch((String)table.getValueAt(table.getSelectedRow(), 1),Integer.parseInt(sell_sell_amount.getText()));
+								JOptionPane.showMessageDialog(null, "Se an vendido "+sell_sell_amount.getText()+"del producto "+(String)table.getValueAt(table.getSelectedRow(), 1)+", se deben cobrar "+String.valueOf(Integer.parseInt(sell_sell_amount.getText())*(int) table.getValueAt(table.getSelectedRow(),6))+" $");
+							}
+						}
+				}
 			}
 		});
 		sell_search_confirm.setBounds(624, 332, 139, 23);
@@ -307,6 +321,21 @@ public class Root_Frame extends JFrame {
 		JButton sell_search_see = new JButton("Visualizar");
 		sell_search_see.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if (table.getSelectedRow()<0){
+					JOptionPane.showMessageDialog(null, "Se deve seleccionar un producto en la tabla");
+					}else{
+						
+						int Nrow=table.getSelectedRow();
+						if(MisMetodos.SN(sell_sell_amount.getText())){
+							JOptionPane.showMessageDialog(null, "La cantidad de venta debe ser un numero");
+						}else{
+							if(sell_sell_amount.getText().equals("")){
+								JOptionPane.showMessageDialog(null, "La cantidad de venta no debe estar vacia");
+							}else{
+								textArea_2.setText(String.valueOf(Integer.parseInt(sell_sell_amount.getText())*(int) table.getValueAt(Nrow,6)));
+							}
+						}
+					}
 			}
 		});
 		sell_search_see.setBounds(649, 120, 91, 23);

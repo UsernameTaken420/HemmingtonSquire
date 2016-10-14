@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class MisMetodos {
 	static ArrayList<String> BuscadorCodigo (ArrayList<String> codigos,String buscado){
 	/*
-	 * ingresas un string y te debuelbe todos los strings de codigoque contienen esa secuancia
+	 * ingresas un string y te debuelbe todos los strings de codigo que contienen esa secuancia
 	 */
 		ArrayList <String>respuesta =new ArrayList<String>();
 	
@@ -31,6 +31,21 @@ public class MisMetodos {
 		System.out.println("CODIGOS"+codigos);
 		
 		return respuesta;
+		
+	}
+public static boolean SN (String S) {
+		
+		try {
+			Integer.parseInt(S);
+			if(S.equals("")){
+				return false;
+			}else{
+				return true;
+			}
+		} catch (NumberFormatException e){
+			return false;
+		}
+		
 		
 	}
 }
