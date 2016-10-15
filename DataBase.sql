@@ -131,9 +131,13 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `Username` varchar(15) NOT NULL,
   `Password` varchar(15) NOT NULL,
+  `Type` varchar (10) NOT NULL,
   PRIMARY KEY (`Username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+ALTER TABLE `user` ADD CONSTRAINT 
+constraint_type CHECK (Type = 'Seller' OR Type = 'Admin')
 
 --
 -- Dumping data for table `user`
