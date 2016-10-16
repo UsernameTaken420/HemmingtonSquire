@@ -288,8 +288,6 @@ public class Root_Frame extends JFrame {
 					JOptionPane.showMessageDialog(null, "Se deve seleccionar un producto en la tabla");
 				}else{
 						if(MisMetodos.SN(sell_sell_amount.getText())){
-							JOptionPane.showMessageDialog(null, "La cantidad de venta debe ser un numero");
-						}else{
 							if(sell_sell_amount.getText().equals("")){
 								JOptionPane.showMessageDialog(null, "La cantidad de venta no debe estar vacia");
 							}else{
@@ -297,6 +295,8 @@ public class Root_Frame extends JFrame {
 								JOptionPane.showMessageDialog(null, "Se an vendido "+sell_sell_amount.getText()+" del producto "+(String)table.getValueAt(table.getSelectedRow(), 1)+","
 										+ " se deben cobrar "+String.valueOf(Integer.parseInt(sell_sell_amount.getText())*(int) table.getValueAt(table.getSelectedRow(),6))+" $");
 							}
+						}else{							
+							JOptionPane.showMessageDialog(null, "La cantidad de venta debe ser un numero");
 						}
 				}
 			}
@@ -327,14 +327,14 @@ public class Root_Frame extends JFrame {
 					}else{
 
 						int Nrow=table.getSelectedRow();
-						if(MisMetodos.SN(sell_sell_amount.getText())){
-							JOptionPane.showMessageDialog(null, "La cantidad de venta debe ser un numero");
-						}else{
+						if(MisMetodos.SN(sell_sell_amount.getText())){						
 							if(sell_sell_amount.getText().equals("")){
 								JOptionPane.showMessageDialog(null, "La cantidad de venta no debe estar vacia");
 							}else{
 								textArea_2.setText(String.valueOf(Integer.parseInt(sell_sell_amount.getText())*(int) table.getValueAt(Nrow,6)));
 							}
+						}else{
+							JOptionPane.showMessageDialog(null, "La cantidad de venta debe ser un numero");
 						}
 					}
 			}
