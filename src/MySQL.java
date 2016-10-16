@@ -207,7 +207,7 @@ public class MySQL {
 
 		ArrayList<Integer> find = new ArrayList<Integer>();
 
-		int right = 2;
+		String right = "";
 		String pass2 = null;
 		boolean x = false;
 
@@ -228,14 +228,14 @@ public class MySQL {
 			while (rs.next()) {
 				
 				pass2 = rs.getString("passpword");
-				right = rs.getInt("right");
+				right = rs.getString("right");
 
 			}
-			if (right == 2) {
+			if (right == "") {
 				JOptionPane.showMessageDialog(null, "Error al ingresar el usuario");
 			} else {
 				if (pass == pass2) {
-					if (right == 1) {
+					if (right == "Root") {
 						Root_Frame kys = new Root_Frame();
 						Login_Frame frame = new Login_Frame();
 						kys.setVisible(true);
