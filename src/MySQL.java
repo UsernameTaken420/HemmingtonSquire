@@ -207,6 +207,8 @@ public class MySQL {
 
 		ArrayList<Integer> find = new ArrayList<Integer>();
 
+		String right = "";
+		String pass2 = null;
 		boolean x = false;
 
 		try {
@@ -224,25 +226,35 @@ public class MySQL {
 			rs = cmd.executeQuery("SELECT * FROM User WHERE username = '" + user + "';");
 
 			while (rs.next()) {
-				if (rs.getString(0) == "root") {
-
-					Root_Frame v1 = new Root_Frame();
-					v1.setVisible(true);
-
-					Login_Frame v2 = new Login_Frame();
-					v1.setVisible(false);
-
-				} else {
-
-					Login_Frame v1 = new Login_Frame();
-					v1.setVisible(true);
-
-					Login_Frame v2 = new Login_Frame();
-					v1.setVisible(false);
-
-				}
+				
+				pass2 = rs.getString("passpword");
+				right = rs.getString("right");
 
 			}
+			if (right == "") {
+				JOptionPane.showMessageDialog(null, "Error al ingresar el usuario");
+			} else {
+				if (pass == pass2) {
+					if (right == "Root") {
+						Root_Frame kys = new Root_Frame();
+						Login_Frame frame = new Login_Frame();
+						kys.setVisible(true);
+						frame.setEnabled(false);
+						frame.setAlwaysOnTop(false);
+						kys.setAlwaysOnTop(true);
+					} else {
+						User_Frame kys = new User_Frame();
+						Login_Frame frame = new Login_Frame();
+						kys.setVisible(true);
+						frame.setEnabled(false);
+						frame.setAlwaysOnTop(false);
+						kys.setAlwaysOnTop(true);
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Error al ingresar la contraseña");
+				}
+			}
+
 			con.close();
 		} catch (SQLException ex) {
 
@@ -270,7 +282,6 @@ public class MySQL {
 
 				cmd.executeUpdate("UPDATE item set VAT = " + newPerc + " WHERE Code = " + code + ";");
 
-
 			}
 			con.close();
 		} catch (SQLException ex) {
@@ -297,9 +308,9 @@ public class MySQL {
 			if (newPrice < 0) {
 				JOptionPane.showMessageDialog(null, "ERROR: el precio no puede ser menor a 0");
 			} else {
-			cmd = con.createStatement();
+				cmd = con.createStatement();
 
-			cmd.executeUpdate("UPDATE item set Sprice = " + newPrice + " WHERE Code = " + code + ";");
+				cmd.executeUpdate("UPDATE item set Sprice = " + newPrice + " WHERE Code = " + code + ";");
 			}
 			con.close();
 		} catch (SQLException ex) {
@@ -311,7 +322,7 @@ public class MySQL {
 		return x;
 
 	}
-	
+
 	public static boolean changeUnitPrice(String code, int newPrice) {
 		boolean x = false;
 		try {
@@ -326,9 +337,9 @@ public class MySQL {
 			if (newPrice < 0) {
 				JOptionPane.showMessageDialog(null, "ERROR: el precio no puede ser menor a 0");
 			} else {
-			cmd = con.createStatement();
+				cmd = con.createStatement();
 
-			cmd.executeUpdate("UPDATE item set Uprice = " + newPrice + " WHERE Code = " + code + ";");
+				cmd.executeUpdate("UPDATE item set Uprice = " + newPrice + " WHERE Code = " + code + ";");
 			}
 			con.close();
 		} catch (SQLException ex) {
@@ -530,4 +541,5 @@ public class MySQL {
 		return x;
 	}
 
+	
 }
