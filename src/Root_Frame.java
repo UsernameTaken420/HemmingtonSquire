@@ -43,7 +43,7 @@ public class Root_Frame extends JFrame {
 
 	private JPanel contentPane;
 	private static JTextField userToAdd;
-	private JTextField u2;
+	private JTextField removeUser;
 	private static JTextField add_code;
 	private static JTextField add_VAT;
 	private static JTextField add_name;
@@ -52,25 +52,34 @@ public class Root_Frame extends JFrame {
 	private static JTextField add_sellPrice;
 	private static JTextField sell_search_search;
 	private JTextField sell_sell_amount;
-	private JTextField textField_12;
+	private JTextField buy_quantity;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JTextField textField_16;
-	private JTextField textField_18;
+	private JTextField update_price;
+	private JTextField vat_value;
 	private JButton add_user;
 	private JButton remove_user;
 	private JPanel panel_1;
 	private static JPasswordField passToAdd;
 	private JButton add_button;
-	private JTextField add_manufacturer;
+	private static JTextField add_manufacturer;
 	private JButton sell_search_button;
 	private static ArrayList<Integer> find = new ArrayList<Integer>();
-	private JTextField textField_1;
+	private JTextField logicDeletion_code;
 	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField;
+	private JTextField update_code;
+	private JTextField vat_code;
+	private JTextField buy_textField;
 	private JTable table;
 	private JTable table_1;
+	private JTable add_find;
+	private JTable logicDeletion_search;
+	private JTable table_3;
+	private JTable update_search;
+	private JTable vat_search;
+	private static JTextArea add_description;
+	private JRadioButton seller;
+	private JRadioButton admin;
+	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
 
 	/**
 	 * Launch the application.
@@ -202,7 +211,7 @@ public class Root_Frame extends JFrame {
 		scrollPane.setBounds(376, 62, 182, 172);
 		panel_2.add(scrollPane);
 
-		JTextArea add_description = new JTextArea();
+		add_description = new JTextArea();
 		scrollPane.setViewportView(add_description);
 
 		JLabel lblFabricante = new JLabel("Fabricante");
@@ -218,6 +227,9 @@ public class Root_Frame extends JFrame {
 		add_button = new JButton("Confirmar");
 		add_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
+				add_merchandise(add_code, add_name, add_manufacturer, add_initial, add_VAT, add_unitaryPrice,
+						add_sellPrice, add_description);
 
 			}
 		});
@@ -277,28 +289,16 @@ public class Root_Frame extends JFrame {
 		sell_sell_amount.setBounds(702, 58, 61, 20);
 		panel_3.add(sell_sell_amount);
 
-		JTextArea textArea_2 = new JTextArea();
-		textArea_2.setBounds(624, 203, 139, 115);
-		panel_3.add(textArea_2);
+		JTextArea sell_textArea = new JTextArea();
+		sell_textArea.setBounds(624, 203, 139, 115);
+		panel_3.add(sell_textArea);
 
 		JButton sell_search_confirm = new JButton("Confirmar venta");
 		sell_search_confirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (table.getSelectedRow()<0){
-					JOptionPane.showMessageDialog(null, "Se deve seleccionar un producto en la tabla");
-				}else{
-						if(MisMetodos.SN(sell_sell_amount.getText())){
-							if(sell_sell_amount.getText().equals("")){
-								JOptionPane.showMessageDialog(null, "La cantidad de venta no debe estar vacia");
-							}else{
-								MySQL.sellMerch((String)table.getValueAt(table.getSelectedRow(), 1),Integer.parseInt(sell_sell_amount.getText()));
-								JOptionPane.showMessageDialog(null, "Se an vendido "+sell_sell_amount.getText()+" del producto "+(String)table.getValueAt(table.getSelectedRow(), 1)+","
-										+ " se deben cobrar "+String.valueOf(Integer.parseInt(sell_sell_amount.getText())*(int) table.getValueAt(table.getSelectedRow(),6))+" $");
-							}
-						}else{							
-							JOptionPane.showMessageDialog(null, "La cantidad de venta debe ser un numero");
-						}
-				}
+
+				sell_confirm(table, sell_sell_amount, sell_textArea);
+
 			}
 		});
 		sell_search_confirm.setBounds(624, 332, 139, 23);
@@ -322,21 +322,9 @@ public class Root_Frame extends JFrame {
 		JButton sell_search_see = new JButton("Visualizar");
 		sell_search_see.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (table.getSelectedRow()<0){
-					JOptionPane.showMessageDialog(null, "Se deve seleccionar un producto en la tabla");
-					}else{
 
-						int Nrow=table.getSelectedRow();
-						if(MisMetodos.SN(sell_sell_amount.getText())){						
-							if(sell_sell_amount.getText().equals("")){
-								JOptionPane.showMessageDialog(null, "La cantidad de venta no debe estar vacia");
-							}else{
-								textArea_2.setText(String.valueOf(Integer.parseInt(sell_sell_amount.getText())*(int) table.getValueAt(Nrow,6)));
-							}
-						}else{
-							JOptionPane.showMessageDialog(null, "La cantidad de venta debe ser un numero");
-						}
-					}
+				sell(table, sell_sell_amount, sell_textArea);
+
 			}
 		});
 		sell_search_see.setBounds(649, 120, 91, 23);
@@ -346,146 +334,141 @@ public class Root_Frame extends JFrame {
 		panel_9.setLayout(null);
 		tabbedPane_1.addTab("Comprar", null, panel_9, null);
 
-		textField_12 = new JTextField();
-		textField_12.setColumns(10);
-		textField_12.setBounds(538, 58, 61, 20);
-		panel_9.add(textField_12);
+		buy_quantity = new JTextField();
+		buy_quantity.setColumns(10);
+		buy_quantity.setBounds(715, 58, 61, 20);
+		panel_9.add(buy_quantity);
 
-		JTextArea textArea_5 = new JTextArea();
-		textArea_5.setBounds(460, 203, 139, 115);
-		panel_9.add(textArea_5);
+		JTextArea buy_textArea = new JTextArea();
+		buy_textArea.setBounds(637, 203, 139, 115);
+		panel_9.add(buy_textArea);
 
-		JButton btnConfirmarCompra = new JButton("Confirmar compra");
-		btnConfirmarCompra.setBounds(460, 332, 139, 23);
-		panel_9.add(btnConfirmarCompra);
+		JButton buy_confirm = new JButton("Confirmar compra");
+		buy_confirm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				buy_confirm(add_find, buy_quantity, buy_textArea);
+
+			}
+		});
+		buy_confirm.setBounds(637, 332, 139, 23);
+		panel_9.add(buy_confirm);
 
 		JLabel lblCompra = new JLabel("Compra");
 		lblCompra.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		lblCompra.setBounds(503, 29, 61, 18);
+		lblCompra.setBounds(680, 29, 61, 18);
 		panel_9.add(lblCompra);
 
 		JLabel label_15 = new JLabel("Cantidad");
 		label_15.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		label_15.setBounds(460, 58, 68, 18);
+		label_15.setBounds(637, 58, 68, 18);
 		panel_9.add(label_15);
 
 		JLabel lblPrecioFnal = new JLabel("Precio Final");
 		lblPrecioFnal.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		lblPrecioFnal.setBounds(487, 163, 89, 18);
+		lblPrecioFnal.setBounds(664, 163, 89, 18);
 		panel_9.add(lblPrecioFnal);
 
-		JButton button_7 = new JButton("Visualizar");
-		button_7.addActionListener(new ActionListener() {
+		JButton buy_preview = new JButton("Visualizar");
+		buy_preview.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				buy(add_find, buy_quantity, buy_textArea);
+
 			}
 		});
-		button_7.setBounds(487, 110, 91, 23);
-		panel_9.add(button_7);
+		buy_preview.setBounds(664, 110, 91, 23);
+		panel_9.add(buy_preview);
 
 		JLabel label_11 = new JLabel("Codigo del producto");
 		label_11.setFont(new Font("DokChampa", Font.PLAIN, 14));
 		label_11.setBounds(10, 29, 157, 18);
 		panel_9.add(label_11);
 
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(10, 58, 110, 20);
-		panel_9.add(textField);
+		buy_textField = new JTextField();
+		buy_textField.setColumns(10);
+		buy_textField.setBounds(10, 58, 110, 20);
+		panel_9.add(buy_textField);
 
-		JScrollPane scrollPane_3 = new JScrollPane();
-		scrollPane_3.setBounds(12, 101, 223, 252);
-		panel_9.add(scrollPane_3);
+		JButton add_find_button = new JButton("Buscar");
+		add_find_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 
-		JList list = new JList();
-		scrollPane_3.setViewportView(list);
+				search(buy_textField, add_find, model);
 
-		JButton button = new JButton("Buscar");
-		button.setBounds(152, 58, 89, 23);
-		panel_9.add(button);
+			}
+		});
+		add_find_button.setBounds(152, 58, 89, 23);
+		panel_9.add(add_find_button);
 
-		JScrollPane scrollPane_4 = new JScrollPane();
-		scrollPane_4.setBounds(262, 205, 170, 148);
-		panel_9.add(scrollPane_4);
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(10, 89, 600, 286);
+		panel_9.add(scrollPane_2);
 
-		JTextArea textArea = new JTextArea();
-		scrollPane_4.setViewportView(textArea);
+		add_find = new JTable();
+		scrollPane_2.setViewportView(add_find);
 
-		JLabel label_12 = new JLabel("Descripcion");
-		label_12.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		label_12.setBounds(260, 32, 157, 18);
-		panel_9.add(label_12);
+		add_find.setModel(model);
 
 		JPanel panel_6 = new JPanel();
 		tabbedPane_1.addTab("Baja Logica", null, panel_6, null);
 		panel_6.setLayout(null);
 
 		JButton btnConfirmarBajaLogica = new JButton("Confirmar baja logica");
-		btnConfirmarBajaLogica.setBounds(439, 75, 160, 23);
+		btnConfirmarBajaLogica.setBounds(626, 59, 160, 23);
 		panel_6.add(btnConfirmarBajaLogica);
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(7, 60, 110, 20);
-		panel_6.add(textField_1);
+		logicDeletion_code = new JTextField();
+		logicDeletion_code.setColumns(10);
+		logicDeletion_code.setBounds(7, 60, 110, 20);
+		panel_6.add(logicDeletion_code);
 
 		JLabel label_13 = new JLabel("Codigo del producto");
 		label_13.setFont(new Font("DokChampa", Font.PLAIN, 14));
 		label_13.setBounds(7, 31, 157, 18);
 		panel_6.add(label_13);
 
-		JButton button_1 = new JButton("Buscar");
-		button_1.setBounds(149, 60, 89, 23);
-		panel_6.add(button_1);
+		JButton logicDeletion_button = new JButton("Buscar");
+		logicDeletion_button.setBounds(149, 60, 89, 23);
+		panel_6.add(logicDeletion_button);
 
-		JScrollPane scrollPane_5 = new JScrollPane();
-		scrollPane_5.setBounds(9, 103, 223, 252);
-		panel_6.add(scrollPane_5);
+		JScrollPane scrollPane_3 = new JScrollPane();
+		scrollPane_3.setBounds(7, 91, 596, 282);
+		panel_6.add(scrollPane_3);
 
-		JList list_1 = new JList();
-		scrollPane_5.setViewportView(list_1);
-
-		JScrollPane scrollPane_6 = new JScrollPane();
-		scrollPane_6.setBounds(259, 207, 170, 148);
-		panel_6.add(scrollPane_6);
-
-		JTextArea textArea_1 = new JTextArea();
-		scrollPane_6.setViewportView(textArea_1);
-
-		JLabel label_16 = new JLabel("Descripcion");
-		label_16.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		label_16.setBounds(257, 34, 157, 18);
-		panel_6.add(label_16);
+		logicDeletion_search = new JTable();
+		scrollPane_3.setViewportView(logicDeletion_search);
 
 		JPanel panel_4 = new JPanel();
 		panel_4.setLayout(null);
 		tabbedPane_1.addTab("Obtener montos", null, panel_4, null);
 
 		JTextArea textArea_10 = new JTextArea();
-		textArea_10.setBounds(460, 203, 139, 152);
+		textArea_10.setBounds(637, 203, 139, 152);
 		panel_4.add(textArea_10);
 
 		JButton btnConfirmarMontos = new JButton("Confirmar Montos");
-		btnConfirmarMontos.setBounds(460, 158, 139, 23);
+		btnConfirmarMontos.setBounds(637, 158, 139, 23);
 		panel_4.add(btnConfirmarMontos);
 
 		JLabel lblMontos = new JLabel("Montos");
 		lblMontos.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		lblMontos.setBounds(503, 29, 61, 18);
+		lblMontos.setBounds(680, 29, 61, 18);
 		panel_4.add(lblMontos);
 
 		JRadioButton radioButton = new JRadioButton("Por dia");
 		buttonGroup.add(radioButton);
-		radioButton.setBounds(479, 58, 109, 23);
+		radioButton.setBounds(656, 58, 109, 23);
 		panel_4.add(radioButton);
 
 		JRadioButton radioButton_1 = new JRadioButton("Por mes");
 		buttonGroup.add(radioButton_1);
-		radioButton_1.setBounds(479, 86, 109, 23);
+		radioButton_1.setBounds(656, 86, 109, 23);
 		panel_4.add(radioButton_1);
 
 		JRadioButton radioButton_2 = new JRadioButton("Por a\u00F1o");
 		buttonGroup.add(radioButton_2);
-		radioButton_2.setBounds(479, 118, 109, 23);
+		radioButton_2.setBounds(656, 118, 109, 23);
 		panel_4.add(radioButton_2);
 
 		textField_2 = new JTextField();
@@ -502,140 +485,131 @@ public class Root_Frame extends JFrame {
 		button_2.setBounds(152, 58, 89, 23);
 		panel_4.add(button_2);
 
-		JScrollPane scrollPane_7 = new JScrollPane();
-		scrollPane_7.setBounds(12, 101, 223, 252);
-		panel_4.add(scrollPane_7);
+		JScrollPane scrollPane_4 = new JScrollPane();
+		scrollPane_4.setBounds(10, 90, 596, 285);
+		panel_4.add(scrollPane_4);
 
-		JList list_2 = new JList();
-		scrollPane_7.setViewportView(list_2);
-
-		JScrollPane scrollPane_8 = new JScrollPane();
-		scrollPane_8.setBounds(262, 205, 170, 148);
-		panel_4.add(scrollPane_8);
-
-		JTextArea textArea_3 = new JTextArea();
-		scrollPane_8.setViewportView(textArea_3);
-
-		JLabel label_18 = new JLabel("Descripcion");
-		label_18.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		label_18.setBounds(260, 32, 157, 18);
-		panel_4.add(label_18);
+		table_3 = new JTable();
+		scrollPane_4.setViewportView(table_3);
 
 		JPanel panel_5 = new JPanel();
 		panel_5.setLayout(null);
 		tabbedPane_1.addTab("Actualizar", null, panel_5, null);
 
-		JButton btnConfirmarPrecio = new JButton("Confirmar precio");
-		btnConfirmarPrecio.setBounds(460, 203, 139, 23);
-		panel_5.add(btnConfirmarPrecio);
+		JButton update_price_button = new JButton("Confirmar precio");
+		update_price_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				update(update_search, update_price);
+
+			}
+		});
+		update_price_button.setBounds(637, 206, 139, 23);
+		panel_5.add(update_price_button);
 
 		JLabel lblActualizar = new JLabel("Actualizar");
 		lblActualizar.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		lblActualizar.setBounds(490, 29, 96, 18);
+		lblActualizar.setBounds(667, 32, 96, 18);
 		panel_5.add(lblActualizar);
 
 		JLabel lblNuevoPrecio = new JLabel("Nuevo Precio");
 		lblNuevoPrecio.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		lblNuevoPrecio.setBounds(477, 111, 96, 18);
+		lblNuevoPrecio.setBounds(654, 114, 96, 18);
 		panel_5.add(lblNuevoPrecio);
 
-		textField_16 = new JTextField();
-		textField_16.setBounds(462, 161, 126, 20);
-		panel_5.add(textField_16);
-		textField_16.setColumns(10);
+		update_price = new JTextField();
+		update_price.setBounds(639, 164, 126, 20);
+		panel_5.add(update_price);
+		update_price.setColumns(10);
 
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(10, 58, 110, 20);
-		panel_5.add(textField_3);
+		update_code = new JTextField();
+		update_code.setColumns(10);
+		update_code.setBounds(10, 58, 110, 20);
+		panel_5.add(update_code);
 
 		JLabel label_19 = new JLabel("Codigo del producto");
 		label_19.setFont(new Font("DokChampa", Font.PLAIN, 14));
 		label_19.setBounds(10, 29, 157, 18);
 		panel_5.add(label_19);
 
-		JButton button_3 = new JButton("Buscar");
-		button_3.setBounds(152, 58, 89, 23);
-		panel_5.add(button_3);
+		JButton update_button = new JButton("Buscar");
+		update_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
-		JScrollPane scrollPane_9 = new JScrollPane();
-		scrollPane_9.setBounds(12, 101, 223, 252);
-		panel_5.add(scrollPane_9);
+				search(update_code, update_search, model);
+			}
+		});
+		update_button.setBounds(152, 58, 89, 23);
+		panel_5.add(update_button);
 
-		JList list_3 = new JList();
-		scrollPane_9.setViewportView(list_3);
+		JScrollPane scrollPane_5 = new JScrollPane();
+		scrollPane_5.setBounds(10, 101, 596, 274);
+		panel_5.add(scrollPane_5);
 
-		JScrollPane scrollPane_10 = new JScrollPane();
-		scrollPane_10.setBounds(262, 205, 170, 148);
-		panel_5.add(scrollPane_10);
+		update_search = new JTable();
+		scrollPane_5.setViewportView(update_search);
 
-		JTextArea textArea_4 = new JTextArea();
-		scrollPane_10.setViewportView(textArea_4);
-
-		JLabel label_20 = new JLabel("Descripcion");
-		label_20.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		label_20.setBounds(260, 32, 157, 18);
-		panel_5.add(label_20);
+		update_search.setModel(model);
 
 		JPanel panel_7 = new JPanel();
 		panel_7.setLayout(null);
 		tabbedPane_1.addTab("Modificar IVA", null, panel_7, null);
 
-		JButton btnConfirmarPrecio_1 = new JButton("Confirmar precio");
-		btnConfirmarPrecio_1.setBounds(460, 203, 139, 23);
-		panel_7.add(btnConfirmarPrecio_1);
+		JButton vat_value_button = new JButton("Confirmar precio");
+		vat_value_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				vat(vat_search, vat_value);
+
+			}
+		});
+		vat_value_button.setBounds(637, 203, 139, 23);
+		panel_7.add(vat_value_button);
 
 		JLabel lblModificar = new JLabel("Modificar");
 		lblModificar.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		lblModificar.setBounds(490, 29, 96, 18);
+		lblModificar.setBounds(667, 29, 96, 18);
 		panel_7.add(lblModificar);
 
 		JLabel lblNuevoPorcentaje = new JLabel("Nuevo Porcentaje");
 		lblNuevoPorcentaje.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		lblNuevoPorcentaje.setBounds(460, 111, 139, 18);
+		lblNuevoPorcentaje.setBounds(637, 111, 139, 18);
 		panel_7.add(lblNuevoPorcentaje);
 
-		textField_18 = new JTextField();
-		textField_18.setColumns(10);
-		textField_18.setBounds(462, 161, 137, 20);
-		panel_7.add(textField_18);
+		vat_value = new JTextField();
+		vat_value.setColumns(10);
+		vat_value.setBounds(639, 161, 137, 20);
+		panel_7.add(vat_value);
 
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(10, 58, 110, 20);
-		panel_7.add(textField_4);
+		vat_code = new JTextField();
+		vat_code.setColumns(10);
+		vat_code.setBounds(10, 58, 110, 20);
+		panel_7.add(vat_code);
 
 		JLabel label_21 = new JLabel("Codigo del producto");
 		label_21.setFont(new Font("DokChampa", Font.PLAIN, 14));
 		label_21.setBounds(10, 29, 157, 18);
 		panel_7.add(label_21);
 
-		JButton button_4 = new JButton("Buscar");
-		button_4.addActionListener(new ActionListener() {
+		JButton vat_button = new JButton("Buscar");
+		vat_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				search(vat_code, vat_search, model);
+
 			}
 		});
-		button_4.setBounds(152, 58, 89, 23);
-		panel_7.add(button_4);
+		vat_button.setBounds(152, 58, 89, 23);
+		panel_7.add(vat_button);
 
-		JScrollPane scrollPane_11 = new JScrollPane();
-		scrollPane_11.setBounds(12, 101, 223, 252);
-		panel_7.add(scrollPane_11);
+		JScrollPane scrollPane_6 = new JScrollPane();
+		scrollPane_6.setBounds(10, 94, 596, 281);
+		panel_7.add(scrollPane_6);
 
-		JList list_4 = new JList();
-		scrollPane_11.setViewportView(list_4);
+		vat_search = new JTable();
+		scrollPane_6.setViewportView(vat_search);
 
-		JScrollPane scrollPane_12 = new JScrollPane();
-		scrollPane_12.setBounds(262, 205, 170, 148);
-		panel_7.add(scrollPane_12);
-
-		JTextArea textArea_6 = new JTextArea();
-		scrollPane_12.setViewportView(textArea_6);
-
-		JLabel label_22 = new JLabel("Descripcion");
-		label_22.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		label_22.setBounds(260, 32, 157, 18);
-		panel_7.add(label_22);
+		vat_search.setModel(model);
 
 		panel_1 = new JPanel();
 		tabbedPane.addTab("Control de usuarios", null, panel_1, null);
@@ -646,71 +620,86 @@ public class Root_Frame extends JFrame {
 		panel_1.add(label);
 
 		JLabel label_1 = new JLabel("Nombre");
-		label_1.setBounds(10, 142, 66, 14);
+		label_1.setBounds(10, 142, 113, 14);
 		panel_1.add(label_1);
 
 		JLabel label_2 = new JLabel("Contrase\u00F1a");
-		label_2.setBounds(10, 188, 66, 14);
+		label_2.setBounds(10, 188, 113, 14);
 		panel_1.add(label_2);
 
 		JLabel label_3 = new JLabel("Eliminar usuarios");
-		label_3.setBounds(429, 64, 100, 14);
+		label_3.setBounds(630, 52, 100, 14);
 		panel_1.add(label_3);
 
 		add_user = new JButton("Confirmar");
 		add_user.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				boolean typeOfUser;
 				if (vacio()) {
 
-					System.out.println("Conecto");
-					MySQL.AddUser(passToAdd.getText(), userToAdd.getText());
+					if (admin.isSelected()) {
+						typeOfUser = true;
+					} else {
+						typeOfUser = false;
+
+					}
+
+					MySQL.AddUser(passToAdd.getText(), userToAdd.getText(), typeOfUser);
 
 					JOptionPane.showMessageDialog(null, "Registrado nuevo usuario");
 
 					userToAdd.setText("");
 					passToAdd.setText("");
-
 				}
 
 			}
 		});
-		add_user.setBounds(10, 239, 182, 23);
+		add_user.setBounds(24, 341, 182, 23);
 		panel_1.add(add_user);
 
 		userToAdd = new JTextField();
 		userToAdd.setColumns(10);
-		userToAdd.setBounds(106, 142, 86, 20);
+		userToAdd.setBounds(133, 139, 86, 20);
 		panel_1.add(userToAdd);
 
 		JLabel label_4 = new JLabel("Nombre");
-		label_4.setBounds(385, 142, 66, 14);
+		label_4.setBounds(588, 142, 66, 14);
 		panel_1.add(label_4);
 
-		u2 = new JTextField();
-		u2.setColumns(10);
-		u2.setBounds(490, 139, 86, 20);
-		panel_1.add(u2);
+		removeUser = new JTextField();
+		removeUser.setColumns(10);
+		removeUser.setBounds(684, 139, 86, 20);
+		panel_1.add(removeUser);
 
 		remove_user = new JButton("Confirmar");
 		remove_user.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (vacio1()) {
+				if (empty(removeUser)) {
 
-					System.out.println("Conecto");
-					MySQL.RemoveUser(userToAdd.getText());
+					MySQL.RemoveUser(removeUser.getText());
 
+					removeUser.setText("");
 				}
 
 			}
 		});
-		remove_user.setBounds(385, 216, 182, 23);
+		remove_user.setBounds(588, 227, 182, 23);
 		panel_1.add(remove_user);
 
 		passToAdd = new JPasswordField();
-		passToAdd.setBounds(106, 185, 86, 17);
+		passToAdd.setBounds(133, 186, 86, 17);
 		panel_1.add(passToAdd);
+
+		admin = new JRadioButton("Es administrador");
+		buttonGroup_1.add(admin);
+		admin.setBounds(10, 227, 209, 23);
+		panel_1.add(admin);
+
+		seller = new JRadioButton("Es vendedor");
+		buttonGroup_1.add(seller);
+		seller.setBounds(10, 264, 209, 23);
+		panel_1.add(seller);
 	}
 
 	public static boolean vacio() {
@@ -760,6 +749,34 @@ public class Root_Frame extends JFrame {
 			JOptionPane.showMessageDialog(null, "Error No Ingreso la Precio de Venta... ingrese nuevamente");
 			return false;
 		}
+		if (add_description.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Error No Ingreso la Descripcion... ingrese nuevamente");
+			return false;
+		}
+		if (add_manufacturer.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Error No Ingreso el Fabricante... ingrese nuevamente");
+			return false;
+		}
+		int code, vat, Uprice, Sprice, stock;
+	try {
+			code = Integer.parseInt(add_code.getText());
+			vat = Integer.parseInt(add_VAT.getText());
+			Uprice = Integer.parseInt(add_unitaryPrice.getText());
+			Sprice = Integer.parseInt(add_sellPrice.getText());
+			stock = Integer.parseInt(add_initial.getText());
+
+			if (code < 0 || vat < 0 || Uprice < 0 || Sprice < 0 || stock < 0) {
+
+				JOptionPane.showMessageDialog(null, "No puede ingresar un valor negativo");
+				return false;
+			}
+
+			
+		} catch (java.lang.NumberFormatException ex2) {
+			JOptionPane.showMessageDialog(null,
+					"Error debe ingresar letras ni numeros mayores a 2147483647 en los campos codigo,iva,precio unitario,precio de venta,stock");
+			return false;
+		}
 
 		return true;
 	}
@@ -790,6 +807,194 @@ public class Root_Frame extends JFrame {
 
 			MySQL.Find_Description(cod, table, model);
 		}
+
+	}
+
+	public static void sell(JTable table, JTextField sell_sell_amount, JTextArea textArea_2) {
+
+		if (table.getSelectedRow() < 0) {
+			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
+		} else {
+
+			int Nrow = table.getSelectedRow();
+			if (MisMetodos.SN(sell_sell_amount.getText())) {
+				if (sell_sell_amount.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "La cantidad de venta no debe estar vacia");
+				} else {
+
+					Object ta = table.getValueAt(Nrow, 5);
+
+					int ta2 = Integer.parseInt(ta.toString());
+
+					textArea_2.setText(String.valueOf(Integer.parseInt(sell_sell_amount.getText()) * ta2));
+
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "La cantidad de venta debe ser un numero y menor a 2147483647");
+			}
+		}
+
+	}
+
+	public static void sell_confirm(JTable table, JTextField sell_sell_amount, JTextArea textArea) {
+
+		if (table.getSelectedRow() < 0) {
+			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
+		} else {
+			if (MisMetodos.SN(sell_sell_amount.getText())) {
+				if (sell_sell_amount.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "La cantidad de venta no debe estar vacia");
+				} else {
+
+					String tableS = (table.getValueAt(table.getSelectedRow(), 0).toString());
+
+					MySQL.sellMerch(tableS, Integer.parseInt(sell_sell_amount.getText()));
+
+					JOptionPane.showMessageDialog(null, "Se ha vendido " + sell_sell_amount.getText() + " del producto "
+							+ (String) table.getValueAt(table.getSelectedRow(), 0));
+					sell_sell_amount.setText("");
+					textArea.setText("");
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "La cantidad de venta debe ser un numero y 2147483647");
+			}
+		}
+
+	}
+
+	public static void buy(JTable table, JTextField amount, JTextArea textArea) {
+
+		if (table.getSelectedRow() < 0) {
+			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
+		} else {
+
+			int Nrow = table.getSelectedRow();
+			if (MisMetodos.SN(amount.getText())) {
+				if (amount.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "La cantidad de compra no debe estar vacia");
+				} else {
+					int am = Integer.parseInt(amount.getText());
+					if (am > 0) {
+						Object ta = table.getValueAt(Nrow, 5);
+
+						int ta2 = Integer.parseInt(ta.toString());
+
+						textArea.setText(String.valueOf(am * ta2));
+					} else {
+						JOptionPane.showMessageDialog(null, "No puede ingresar una cantidad menor a 0");
+					}
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "La cantidad de compra debe ser un numero y menor a 2147483647");
+			}
+		}
+
+	}
+
+	public static void buy_confirm(JTable table, JTextField amount, JTextArea textArea) {
+
+		if (table.getSelectedRow() < 0) {
+			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
+		} else {
+			if (MisMetodos.SN(amount.getText())) {
+				if (amount.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "La cantidad de compra no debe estar vacia");
+				} else {
+					int am = Integer.parseInt(amount.getText());
+					if (am > 0) {
+						String tableS = (table.getValueAt(table.getSelectedRow(), 0).toString());
+
+						MySQL.buyMerch(tableS, am);
+
+						JOptionPane.showMessageDialog(null, "Se ha comprado " + am + " del producto "
+								+ (String) table.getValueAt(table.getSelectedRow(), 0));
+					} else {
+
+						JOptionPane.showMessageDialog(null, "No puede ingresar una cantidad menor a 0");
+					}
+					amount.setText("");
+					textArea.setText("");
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "La cantidad de compra debe ser un numero");
+			}
+		}
+
+	}
+
+	public static void vat(JTable table, JTextField value) {
+
+		if (table.getSelectedRow() < 0) {
+			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
+		} else {
+			if (MisMetodos.SN(value.getText())) {
+				if (value.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "La cantidad a actualizar no debe estar vacia");
+				} else {
+
+					String tableS = (table.getValueAt(table.getSelectedRow(), 0).toString());
+					int values = Integer.parseInt(value.getText());
+					MySQL.changeVAT(tableS, values);
+					if (values > 0) {
+						JOptionPane.showMessageDialog(null, "El IVA se ha actualizado correctamente");
+					}
+					value.setText("");
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "La cantidad a actualizar debe ser un numero");
+			}
+		}
+
+	}
+
+	public static void update(JTable table, JTextField value) {
+
+		if (table.getSelectedRow() < 0) {
+			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
+		} else {
+			if (MisMetodos.SN(value.getText())) {
+				if (value.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "El nuevo prcio de venta no debe estar vacio");
+				} else {
+					int values = Integer.parseInt(value.getText());
+					String tableS = (table.getValueAt(table.getSelectedRow(), 0).toString());
+
+					MySQL.changeSellPrice(tableS, values);
+
+					if (values > 0) {
+						JOptionPane.showMessageDialog(null, "El precio se ha actualizado correctamente");
+					}
+
+					value.setText("");
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "El nuevo prcio de venta debe ser un numero");
+			}
+		}
+
+	}
+
+	public static void add_merchandise(JTextField code, JTextField name, JTextField manu, JTextField stock,
+			JTextField vat, JTextField Uprice, JTextField Sprice, JTextArea des) {
+
+		if (empty_add()) {
+
+			MySQL.AddMerchandise(code.getText(), name.getText(), manu.getText(), stock.getText(), vat.getText(),
+					Uprice.getText(), Sprice.getText(), des.getText());
+
+			JOptionPane.showMessageDialog(null, "Nuevo producto ingresado correctamente");
+
+		}
+		
+
+		code.setText("");
+		name.setText("");
+		manu.setText("");
+		stock.setText("");
+		vat.setText("");
+		Uprice.setText("");
+		Sprice.setText("");
+		des.setText("");
 
 	}
 }

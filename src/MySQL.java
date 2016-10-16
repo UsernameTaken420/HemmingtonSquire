@@ -71,7 +71,7 @@ public class MySQL {
 
 	}
 
-	public static boolean AddUser(String p, String u) {
+	public static boolean AddUser(String p, String u, Boolean t) {
 
 		boolean x = false;
 
@@ -88,8 +88,12 @@ public class MySQL {
 
 			cmd = con.createStatement();
 
-			rs = cmd.executeUpdate("INSERT INTO User VALUES ('" + u + "', '" + p + "')");
+			if (t=true) {
+				rs = cmd.executeUpdate("INSERT INTO User VALUES ('" + u + "', '" + p + "','Admin')");
+			} else {
+				rs = cmd.executeUpdate("INSERT INTO User VALUES ('" + u + "', '" + p + "','Seller')");
 
+			}
 			con.close();
 		} catch (SQLException ex) {
 
@@ -112,15 +116,32 @@ public class MySQL {
 			if (con != null) {
 
 			}
-
+			String user2 = "";
 			int rs = 0;
 			Statement cmd = null;
 
 			cmd = con.createStatement();
 
-			rs = cmd.executeUpdate("DELETE FROM User WHERE UserName='" + u + "'; ");
+			ResultSet rs1 = cmd.executeQuery("SELECT * FROM user WHERE username= '" + u + "';");
+
+			while (rs1.next()) {
+
+				user2 = rs1.getString("username");
+
+			}
+
+			if (user2.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "No se encuentra el usuario");
+
+			} else {
+
+				cmd = con.createStatement();
+				rs = cmd.executeUpdate("DELETE FROM User WHERE UserName='" + u + "'; ");
+				JOptionPane.showMessageDialog(null, "Usuario eliminado correctamente");
+			}
 
 			con.close();
+
 		} catch (SQLException ex) {
 
 			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
@@ -131,7 +152,7 @@ public class MySQL {
 
 	}
 
-	public static boolean AddMerchandise(String add_code, String add_name, String add_manufacturer, String add_initial,
+	public static boolean AddMerchandise(String code, String add_name, String add_manufacturer, String add_initial,
 			String add_VAT, String add_unitaryPrice, String add_sellPrice, String add_description) {
 
 		boolean x = false;
@@ -149,9 +170,9 @@ public class MySQL {
 
 			cmd = con.createStatement();
 
-			rs = cmd.executeUpdate("INSERT INTO item values ('" + add_code + "', '" + add_name + "', '"
-					+ add_manufacturer + "', '" + add_initial + "', '" + add_VAT + "', '" + add_unitaryPrice + "', '"
-					+ add_sellPrice + "', '" + add_description + "'); ");
+			rs = cmd.executeUpdate("INSERT INTO item values ('" + code + "', '" + add_name + "', '" + add_manufacturer
+					+ "', '" + add_initial + "', '" + add_VAT + "', '" + add_unitaryPrice + "', '" + add_sellPrice
+					+ "', '" + add_description + "'); ");
 
 			con.close();
 		} catch (SQLException ex) {
@@ -161,45 +182,6 @@ public class MySQL {
 		}
 
 		return x;
-
-	}
-
-	public static ArrayList Find(int cod) {
-
-		ArrayList<Integer> find = new ArrayList<Integer>();
-
-		boolean x = false;
-
-		try {
-
-			Connection con = conection();
-
-			if (con != null) {
-
-			}
-
-			ResultSet rs = null;
-			Statement cmd = null;
-
-			cmd = con.createStatement();
-
-			rs = cmd.executeQuery("SELECT * FROM Item WHERE Code like'" + cod + "%'; ");
-
-			while (rs.next()) {
-
-				int cod_array = rs.getInt("code");
-				find.add(cod_array);
-
-			}
-
-			con.close();
-		} catch (SQLException ex) {
-
-			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
-			x = false;
-		}
-
-		return find;
 
 	}
 
@@ -226,7 +208,7 @@ public class MySQL {
 			rs = cmd.executeQuery("SELECT * FROM User WHERE username = '" + user + "';");
 
 			while (rs.next()) {
-				
+
 				pass2 = rs.getString("passpword");
 				right = rs.getString("right");
 
@@ -264,7 +246,7 @@ public class MySQL {
 
 	}
 
-	public static boolean changeIVA(String code, int newPerc) {
+	public static boolean changeVAT(String code, int newPerc) {
 		boolean x = false;
 		try {
 			Connection con = conection();
@@ -402,7 +384,7 @@ public class MySQL {
 
 			cmd = con.createStatement();
 
-			cmd.executeUpdate("update item set Stock = (Stock + " + amount + ") where code = " + code + ");");
+			cmd.executeUpdate("update item set Stock = (Stock + " + amount + ") where code = '" + code + "';");
 
 			con.close();
 		} catch (SQLException ex) {
@@ -428,9 +410,10 @@ public class MySQL {
 			Statement cmd = null;
 
 			cmd = con.createStatement();
-			rs = cmd.executeQuery("select stock from item where code = " + code + ";");
+			rs = cmd.executeQuery("select stock from item where code = '" + code + "';");
 			while (rs.next()) {
-				stock = rs.getInt(1);
+				stock = rs.getInt("stock");
+
 			}
 			if (amount > stock) {
 				JOptionPane.showMessageDialog(null, "ERROR: no se puede vender más de lo que se tiene en stock");
@@ -438,7 +421,9 @@ public class MySQL {
 				if (stock == amount) {
 					JOptionPane.showMessageDialog(null, "ALERTA: el stock quedará en 0");
 				}
-				cmd.executeUpdate("update item set Stock = (Stock - " + amount + ") where code = " + code + ");");
+				cmd = con.createStatement();
+
+				cmd.executeUpdate("update item set Stock = ( Stock - " + amount + " ) where code = '" + code + "';");
 			}
 			con.close();
 		} catch (SQLException ex) {
@@ -453,6 +438,7 @@ public class MySQL {
 
 	public static boolean Find_Description(int code, JTable table, DefaultTableModel model) {
 
+		model.getDataVector().removeAllElements();
 		model.fireTableRowsInserted(0, model.getRowCount());
 
 		ArrayList<String> cod = new ArrayList<String>();
@@ -509,8 +495,8 @@ public class MySQL {
 			columnsName[2] = "Fabricante";
 			columnsName[3] = "Stock";
 			columnsName[4] = "Iva";
-			columnsName[5] = "Precio de venta";
-			columnsName[6] = "Precio unitario";
+			columnsName[5] = "Precio unitario";
+			columnsName[6] = "Precio de venta";
 			columnsName[7] = "Descripcion";
 
 			model.setColumnIdentifiers(columnsName);
@@ -519,11 +505,11 @@ public class MySQL {
 
 				rowData[0] = cod.get(i2);
 				rowData[1] = name.get(i2);
-				rowData[6] = stock.get(i2);
 				rowData[2] = manu.get(i2);
-				rowData[3] = vat.get(i2);
-				rowData[4] = uprice.get(i2);
-				rowData[5] = sprice.get(i2);
+				rowData[3] = stock.get(i2);
+				rowData[4] = vat.get(i2);
+				rowData[5] = uprice.get(i2);
+				rowData[6] = sprice.get(i2);
 				rowData[7] = des.get(i2);
 
 				model.addRow(rowData);
@@ -541,5 +527,4 @@ public class MySQL {
 		return x;
 	}
 
-	
 }
