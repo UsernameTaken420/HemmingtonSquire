@@ -37,8 +37,6 @@ public class Login_Frame extends JFrame {
 	private JPanel Contenedor;
 	private static JTextField name;
 	private JPasswordField Password;
-	private static ArrayList<String> user = new ArrayList<String>();
-	private static ArrayList<String> pass = new ArrayList<String>();
 
 	public static Login_Frame frame;
 	private static JPasswordField password;
@@ -108,7 +106,7 @@ public class Login_Frame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				if (empty()) {
-					MySQL.login(name.toString(), password.getText());
+					MySQL.login(name.getText(), password.getText());
 
 				}
 
