@@ -33,6 +33,7 @@ CREATE TABLE `item` (
   `UPrice` int(10) NOT NULL,
   `SPrice` int(10) NOT NULL,
   `Description` varchar(30),
+  `Status` bit(1) NOT NULL,
   PRIMARY KEY (`Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -136,16 +137,13 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
-ALTER TABLE `user` ADD CONSTRAINT 
-constraint_type CHECK (Type = 'Seller' OR Type = 'Admin')
-
 --
 -- Dumping data for table `user`
 --
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('Root','Rootlindo');
+INSERT INTO `user` VALUES ('Root','Rootlindo','Admin');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
