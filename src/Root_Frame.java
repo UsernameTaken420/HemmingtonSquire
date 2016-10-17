@@ -1,6 +1,4 @@
-
 import java.awt.BorderLayout;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
@@ -30,12 +28,14 @@ import javax.swing.table.TableModel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -45,7 +45,6 @@ public class Root_Frame extends JFrame {
 	private static JTextField userToAdd;
 	private JTextField removeUser;
 	private static JTextField add_code;
-	private static JTextField add_VAT;
 	private static JTextField add_name;
 	private static JTextField add_initial;
 	private static JTextField add_unitaryPrice;
@@ -77,9 +76,15 @@ public class Root_Frame extends JFrame {
 	private JTable update_search;
 	private JTable vat_search;
 	private static JTextArea add_description;
-	private JRadioButton seller;
-	private JRadioButton admin;
+	private JRadioButton seller_select;
+	private JRadioButton admin_select;
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
+	public static Root_Frame frame;
+	private final ButtonGroup buttonGroup_2 = new ButtonGroup();
+	private JRadioButton zero;
+	private JRadioButton fourteen;
+	private JRadioButton twenty2;
+	private static int vat;
 
 	/**
 	 * Launch the application.
@@ -88,7 +93,7 @@ public class Root_Frame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Root_Frame frame = new Root_Frame();
+					frame = new Root_Frame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -106,7 +111,9 @@ public class Root_Frame extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent arg0) {
-				System.exit(0);
+				Login_Frame.frame.setVisible(true);
+				frame.setVisible(false);
+
 			}
 		});
 
@@ -177,11 +184,6 @@ public class Root_Frame extends JFrame {
 		add_code.setBounds(143, 63, 111, 20);
 		panel_2.add(add_code);
 
-		add_VAT = new JTextField();
-		add_VAT.setColumns(10);
-		add_VAT.setBounds(143, 99, 111, 20);
-		panel_2.add(add_VAT);
-
 		add_name = new JTextField();
 		add_name.setColumns(10);
 		add_name.setBounds(143, 137, 111, 20);
@@ -228,13 +230,53 @@ public class Root_Frame extends JFrame {
 		add_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				add_merchandise(add_code, add_name, add_manufacturer, add_initial, add_VAT, add_unitaryPrice,
-						add_sellPrice, add_description);
+				if (zero.isSelected()) {
+					vat = 0;
+					add_merchandise(add_code, add_name, add_manufacturer,
+							add_initial, vat, add_unitaryPrice, add_sellPrice,
+							add_description);
+				} else {
+
+					if (fourteen.isSelected()) {
+						vat = 14;
+						add_merchandise(add_code, add_name, add_manufacturer,
+								add_initial, vat, add_unitaryPrice, add_sellPrice,
+								add_description);
+					} else {
+						if (twenty2.isSelected()) {
+							vat = 22;
+							add_merchandise(add_code, add_name, add_manufacturer,
+									add_initial, vat, add_unitaryPrice, add_sellPrice,
+									add_description);
+						} else {
+							JOptionPane
+									.showMessageDialog(null,
+											"Error tiene que seleccionar un porcentaje de IVA");
+						}
+					}
+				}
+
+				
 
 			}
 		});
 		add_button.setBounds(379, 257, 182, 23);
 		panel_2.add(add_button);
+
+		zero = new JRadioButton("0%");
+		buttonGroup_2.add(zero);
+		zero.setBounds(145, 99, 48, 23);
+		panel_2.add(zero);
+
+		fourteen = new JRadioButton("14%");
+		buttonGroup_2.add(fourteen);
+		fourteen.setBounds(195, 99, 48, 23);
+		panel_2.add(fourteen);
+
+		twenty2 = new JRadioButton("22%");
+		buttonGroup_2.add(twenty2);
+		twenty2.setBounds(245, 99, 48, 23);
+		panel_2.add(twenty2);
 
 		JPanel panel_3 = new JPanel();
 		tabbedPane_1.addTab("Vender", null, panel_3, null);
@@ -255,9 +297,10 @@ public class Root_Frame extends JFrame {
 		panel_3.add(scrollPane_1);
 		table = new JTable();
 		scrollPane_1.setViewportView(table);
-
+	
 		DefaultTableModel model = new DefaultTableModel();
 
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		Object[] columnsName = new Object[8];
 
 		columnsName[0] = "Codigo";
@@ -265,8 +308,8 @@ public class Root_Frame extends JFrame {
 		columnsName[2] = "Fabricante";
 		columnsName[3] = "Stock";
 		columnsName[4] = "Iva";
-		columnsName[5] = "Precio de venta";
-		columnsName[6] = "Precio unitario";
+		columnsName[5] = "Precio unitario";
+		columnsName[6] = "Precio de venta";
 		columnsName[7] = "Descripcion";
 
 		model.setColumnIdentifiers(columnsName);
@@ -407,7 +450,7 @@ public class Root_Frame extends JFrame {
 
 		add_find = new JTable();
 		scrollPane_2.setViewportView(add_find);
-
+		add_find.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		add_find.setModel(model);
 
 		JPanel panel_6 = new JPanel();
@@ -548,7 +591,7 @@ public class Root_Frame extends JFrame {
 
 		update_search = new JTable();
 		scrollPane_5.setViewportView(update_search);
-
+		update_search.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		update_search.setModel(model);
 
 		JPanel panel_7 = new JPanel();
@@ -608,7 +651,7 @@ public class Root_Frame extends JFrame {
 
 		vat_search = new JTable();
 		scrollPane_6.setViewportView(vat_search);
-
+		vat_search.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		vat_search.setModel(model);
 
 		panel_1 = new JPanel();
@@ -637,16 +680,17 @@ public class Root_Frame extends JFrame {
 				boolean typeOfUser;
 				if (vacio()) {
 
-					if (admin.isSelected()) {
+					if (admin_select.isSelected()) {
 						typeOfUser = true;
 					} else {
 						typeOfUser = false;
 
 					}
+					MySQL.AddUser(passToAdd.getText(), userToAdd.getText(),
+							typeOfUser);
 
-					MySQL.AddUser(passToAdd.getText(), userToAdd.getText(), typeOfUser);
-
-					JOptionPane.showMessageDialog(null, "Registrado nuevo usuario");
+					JOptionPane.showMessageDialog(null,
+							"Registrado nuevo usuario");
 
 					userToAdd.setText("");
 					passToAdd.setText("");
@@ -691,24 +735,26 @@ public class Root_Frame extends JFrame {
 		passToAdd.setBounds(133, 186, 86, 17);
 		panel_1.add(passToAdd);
 
-		admin = new JRadioButton("Es administrador");
-		buttonGroup_1.add(admin);
-		admin.setBounds(10, 227, 209, 23);
-		panel_1.add(admin);
+		admin_select = new JRadioButton("Es administrador");
+		buttonGroup_1.add(admin_select);
+		admin_select.setBounds(10, 227, 209, 23);
+		panel_1.add(admin_select);
 
-		seller = new JRadioButton("Es vendedor");
-		buttonGroup_1.add(seller);
-		seller.setBounds(10, 264, 209, 23);
-		panel_1.add(seller);
+		seller_select = new JRadioButton("Es vendedor");
+		buttonGroup_1.add(seller_select);
+		seller_select.setBounds(10, 264, 209, 23);
+		panel_1.add(seller_select);
 	}
 
 	public static boolean vacio() {
 		if (userToAdd.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso el Usuario... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null,
+					"Error No Ingreso el Usuario... ingrese nuevamente");
 			return false;
 		}
 		if (passToAdd.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso la Contraseña... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null,
+					"Error No Ingreso la Contraseña... ingrese nuevamente");
 			return false;
 		}
 
@@ -717,7 +763,8 @@ public class Root_Frame extends JFrame {
 
 	public static boolean vacio1() {
 		if (userToAdd.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso el Usuario... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null,
+					"Error No Ingreso el Usuario... ingrese nuevamente");
 			return false;
 		}
 
@@ -726,55 +773,62 @@ public class Root_Frame extends JFrame {
 
 	public static boolean empty_add() {
 		if (add_code.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso el Codigo... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null,
+					"Error No Ingreso el Codigo... ingrese nuevamente");
 			return false;
 		}
-		if (add_VAT.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso el IVA... ingrese nuevamente");
-			return false;
-		}
+
 		if (add_name.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso el Nombre... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null,
+					"Error No Ingreso el Nombre... ingrese nuevamente");
 			return false;
 		}
 		if (add_initial.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso el Stock Inicial... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null,
+					"Error No Ingreso el Stock Inicial... ingrese nuevamente");
 			return false;
 		}
 		if (add_unitaryPrice.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso el Precio Unitario... ingrese nuevamente");
+			JOptionPane
+					.showMessageDialog(null,
+							"Error No Ingreso el Precio Unitario... ingrese nuevamente");
 			return false;
 		}
 		if (add_sellPrice.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso la Precio de Venta... ingrese nuevamente");
+			JOptionPane
+					.showMessageDialog(null,
+							"Error No Ingreso la Precio de Venta... ingrese nuevamente");
 			return false;
 		}
 		if (add_description.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso la Descripcion... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null,
+					"Error No Ingreso la Descripcion... ingrese nuevamente");
 			return false;
 		}
 		if (add_manufacturer.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso el Fabricante... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null,
+					"Error No Ingreso el Fabricante... ingrese nuevamente");
 			return false;
 		}
-		int code, vat, Uprice, Sprice, stock;
-	try {
+		int code, Uprice, Sprice, stock;
+		try {
 			code = Integer.parseInt(add_code.getText());
-			vat = Integer.parseInt(add_VAT.getText());
 			Uprice = Integer.parseInt(add_unitaryPrice.getText());
 			Sprice = Integer.parseInt(add_sellPrice.getText());
 			stock = Integer.parseInt(add_initial.getText());
 
 			if (code < 0 || vat < 0 || Uprice < 0 || Sprice < 0 || stock < 0) {
 
-				JOptionPane.showMessageDialog(null, "No puede ingresar un valor negativo");
+				JOptionPane.showMessageDialog(null,
+						"No puede ingresar un valor negativo");
 				return false;
 			}
 
-			
 		} catch (java.lang.NumberFormatException ex2) {
-			JOptionPane.showMessageDialog(null,
-					"Error debe ingresar letras ni numeros mayores a 2147483647 en los campos codigo,iva,precio unitario,precio de venta,stock");
+			JOptionPane
+					.showMessageDialog(
+							null,
+							"Error debe ingresar letras ni numeros mayores a 2147483647 en los campos codigo,iva,precio unitario,precio de venta,stock");
 			return false;
 		}
 
@@ -783,14 +837,16 @@ public class Root_Frame extends JFrame {
 
 	public static boolean empty(JTextField empty_Jtext) {
 		if (empty_Jtext.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso el Codigo... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null,
+					"Error No Ingreso el Codigo... ingrese nuevamente");
 			return false;
 		}
 
 		return true;
 	}
 
-	public static void search(JTextField searching, JTable table, DefaultTableModel model) {
+	public static void search(JTextField searching, JTable table,
+			DefaultTableModel model) {
 
 		int cod = 0;
 
@@ -800,7 +856,8 @@ public class Root_Frame extends JFrame {
 				cod = Integer.parseInt(searching.getText().trim());
 
 			} catch (java.lang.NumberFormatException e23) {
-				JOptionPane.showMessageDialog(null, "Error debe ingresar numeros en el campo codigo");
+				JOptionPane.showMessageDialog(null,
+						"Error debe ingresar numeros en el campo codigo");
 				searching.setText("");
 
 			}
@@ -810,53 +867,79 @@ public class Root_Frame extends JFrame {
 
 	}
 
-	public static void sell(JTable table, JTextField sell_sell_amount, JTextArea textArea_2) {
+	public static void sell(JTable table, JTextField sell_sell_amount,
+			JTextArea textArea_2) {
 
 		if (table.getSelectedRow() < 0) {
-			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
+			JOptionPane.showMessageDialog(null,
+					"Se debe seleccionar un producto en la tabla");
 		} else {
 
 			int Nrow = table.getSelectedRow();
 			if (MisMetodos.SN(sell_sell_amount.getText())) {
 				if (sell_sell_amount.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "La cantidad de venta no debe estar vacia");
+					JOptionPane.showMessageDialog(null,
+							"La cantidad de venta no debe estar vacia");
 				} else {
 
-					Object ta = table.getValueAt(Nrow, 5);
+					Object ta = table.getValueAt(Nrow, 7);
 
-					int ta2 = Integer.parseInt(ta.toString());
+					double ta2 = Integer.parseInt(ta.toString());
 
-					textArea_2.setText(String.valueOf(Integer.parseInt(sell_sell_amount.getText()) * ta2));
+					Object iva = table.getValueAt(Nrow, 4);
+
+					double iva2 = Integer.parseInt(iva.toString());
+
+					textArea_2.setText(String.valueOf(Double
+							.parseDouble(sell_sell_amount.getText())
+							* (ta2 + ((ta2 * iva2) / 100))));
 
 				}
 			} else {
-				JOptionPane.showMessageDialog(null, "La cantidad de venta debe ser un numero y menor a 2147483647");
+				JOptionPane
+						.showMessageDialog(null,
+								"La cantidad de venta debe ser un numero y menor a 2147483647");
 			}
 		}
 
 	}
 
-	public static void sell_confirm(JTable table, JTextField sell_sell_amount, JTextArea textArea) {
+	public static void sell_confirm(JTable table, JTextField sell_sell_amount,
+			JTextArea textArea) {
 
 		if (table.getSelectedRow() < 0) {
-			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
+			JOptionPane.showMessageDialog(null,
+					"Se debe seleccionar un producto en la tabla");
 		} else {
 			if (MisMetodos.SN(sell_sell_amount.getText())) {
 				if (sell_sell_amount.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "La cantidad de venta no debe estar vacia");
+					JOptionPane.showMessageDialog(null,
+							"La cantidad de venta no debe estar vacia");
 				} else {
 
-					String tableS = (table.getValueAt(table.getSelectedRow(), 0).toString());
+					String tableS = (table
+							.getValueAt(table.getSelectedRow(), 0).toString());
 
-					MySQL.sellMerch(tableS, Integer.parseInt(sell_sell_amount.getText()));
+					if(MySQL.sellMerch(tableS,
+							Integer.parseInt(sell_sell_amount.getText()))){
+						
+						JOptionPane.showMessageDialog(
+								null,
+								"Se ha vendido "
+										+ sell_sell_amount.getText()
+										+ " del producto "
+										+ (String) table.getValueAt(
+												table.getSelectedRow(), 0));
+					}
 
-					JOptionPane.showMessageDialog(null, "Se ha vendido " + sell_sell_amount.getText() + " del producto "
-							+ (String) table.getValueAt(table.getSelectedRow(), 0));
+	
 					sell_sell_amount.setText("");
 					textArea.setText("");
 				}
 			} else {
-				JOptionPane.showMessageDialog(null, "La cantidad de venta debe ser un numero y 2147483647");
+				JOptionPane
+						.showMessageDialog(null,
+								"La cantidad de venta debe ser un numero y menor a 2147483647");
 			}
 		}
 
@@ -865,13 +948,15 @@ public class Root_Frame extends JFrame {
 	public static void buy(JTable table, JTextField amount, JTextArea textArea) {
 
 		if (table.getSelectedRow() < 0) {
-			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
+			JOptionPane.showMessageDialog(null,
+					"Se debe seleccionar un producto en la tabla");
 		} else {
 
 			int Nrow = table.getSelectedRow();
 			if (MisMetodos.SN(amount.getText())) {
 				if (amount.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "La cantidad de compra no debe estar vacia");
+					JOptionPane.showMessageDialog(null,
+							"La cantidad de compra no debe estar vacia");
 				} else {
 					int am = Integer.parseInt(amount.getText());
 					if (am > 0) {
@@ -881,42 +966,56 @@ public class Root_Frame extends JFrame {
 
 						textArea.setText(String.valueOf(am * ta2));
 					} else {
-						JOptionPane.showMessageDialog(null, "No puede ingresar una cantidad menor a 0");
+						JOptionPane.showMessageDialog(null,
+								"No puede ingresar una cantidad menor a 0");
 					}
 				}
 			} else {
-				JOptionPane.showMessageDialog(null, "La cantidad de compra debe ser un numero y menor a 2147483647");
+				JOptionPane
+						.showMessageDialog(null,
+								"La cantidad de compra debe ser un numero y menor a 2147483647");
 			}
 		}
 
 	}
 
-	public static void buy_confirm(JTable table, JTextField amount, JTextArea textArea) {
+	public static void buy_confirm(JTable table, JTextField amount,
+			JTextArea textArea) {
 
 		if (table.getSelectedRow() < 0) {
-			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
+			JOptionPane.showMessageDialog(null,
+					"Se debe seleccionar un producto en la tabla");
 		} else {
 			if (MisMetodos.SN(amount.getText())) {
 				if (amount.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "La cantidad de compra no debe estar vacia");
+					JOptionPane.showMessageDialog(null,
+							"La cantidad de compra no debe estar vacia");
 				} else {
 					int am = Integer.parseInt(amount.getText());
 					if (am > 0) {
-						String tableS = (table.getValueAt(table.getSelectedRow(), 0).toString());
+						String tableS = (table.getValueAt(
+								table.getSelectedRow(), 0).toString());
 
 						MySQL.buyMerch(tableS, am);
 
-						JOptionPane.showMessageDialog(null, "Se ha comprado " + am + " del producto "
-								+ (String) table.getValueAt(table.getSelectedRow(), 0));
+						JOptionPane.showMessageDialog(
+								null,
+								"Se ha comprado "
+										+ am
+										+ " del producto "
+										+ (String) table.getValueAt(
+												table.getSelectedRow(), 0));
 					} else {
 
-						JOptionPane.showMessageDialog(null, "No puede ingresar una cantidad menor a 0");
+						JOptionPane.showMessageDialog(null,
+								"No puede ingresar una cantidad menor a 0");
 					}
 					amount.setText("");
 					textArea.setText("");
 				}
 			} else {
-				JOptionPane.showMessageDialog(null, "La cantidad de compra debe ser un numero");
+				JOptionPane.showMessageDialog(null,
+						"La cantidad de compra debe ser un numero");
 			}
 		}
 
@@ -925,23 +1024,28 @@ public class Root_Frame extends JFrame {
 	public static void vat(JTable table, JTextField value) {
 
 		if (table.getSelectedRow() < 0) {
-			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
+			JOptionPane.showMessageDialog(null,
+					"Se debe seleccionar un producto en la tabla");
 		} else {
 			if (MisMetodos.SN(value.getText())) {
 				if (value.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "La cantidad a actualizar no debe estar vacia");
+					JOptionPane.showMessageDialog(null,
+							"La cantidad a actualizar no debe estar vacia");
 				} else {
 
-					String tableS = (table.getValueAt(table.getSelectedRow(), 0).toString());
+					String tableS = (table
+							.getValueAt(table.getSelectedRow(), 0).toString());
 					int values = Integer.parseInt(value.getText());
 					MySQL.changeVAT(tableS, values);
 					if (values > 0) {
-						JOptionPane.showMessageDialog(null, "El IVA se ha actualizado correctamente");
+						JOptionPane.showMessageDialog(null,
+								"El IVA se ha actualizado correctamente");
 					}
 					value.setText("");
 				}
 			} else {
-				JOptionPane.showMessageDialog(null, "La cantidad a actualizar debe ser un numero");
+				JOptionPane.showMessageDialog(null,
+						"La cantidad a actualizar debe ser un numero");
 			}
 		}
 
@@ -950,48 +1054,54 @@ public class Root_Frame extends JFrame {
 	public static void update(JTable table, JTextField value) {
 
 		if (table.getSelectedRow() < 0) {
-			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
+			JOptionPane.showMessageDialog(null,
+					"Se debe seleccionar un producto en la tabla");
 		} else {
 			if (MisMetodos.SN(value.getText())) {
 				if (value.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "El nuevo prcio de venta no debe estar vacio");
+					JOptionPane.showMessageDialog(null,
+							"El nuevo prcio de venta no debe estar vacio");
 				} else {
 					int values = Integer.parseInt(value.getText());
-					String tableS = (table.getValueAt(table.getSelectedRow(), 0).toString());
+					String tableS = (table
+							.getValueAt(table.getSelectedRow(), 0).toString());
 
 					MySQL.changeSellPrice(tableS, values);
 
 					if (values > 0) {
-						JOptionPane.showMessageDialog(null, "El precio se ha actualizado correctamente");
+						JOptionPane.showMessageDialog(null,
+								"El precio se ha actualizado correctamente");
 					}
 
 					value.setText("");
 				}
 			} else {
-				JOptionPane.showMessageDialog(null, "El nuevo prcio de venta debe ser un numero");
+				JOptionPane.showMessageDialog(null,
+						"El nuevo prcio de venta debe ser un numero");
 			}
 		}
 
 	}
 
-	public static void add_merchandise(JTextField code, JTextField name, JTextField manu, JTextField stock,
-			JTextField vat, JTextField Uprice, JTextField Sprice, JTextArea des) {
+	public static void add_merchandise(JTextField code, JTextField name,
+			JTextField manu, JTextField stock, int vat, JTextField Uprice,
+			JTextField Sprice, JTextArea des) {
 
 		if (empty_add()) {
 
-			MySQL.AddMerchandise(code.getText(), name.getText(), manu.getText(), stock.getText(), vat.getText(),
-					Uprice.getText(), Sprice.getText(), des.getText());
+			MySQL.AddMerchandise(code.getText(), name.getText(),
+					manu.getText(), stock.getText(), vat, Uprice.getText(),
+					Sprice.getText(), des.getText());
 
-			JOptionPane.showMessageDialog(null, "Nuevo producto ingresado correctamente");
+			JOptionPane.showMessageDialog(null,
+					"Nuevo producto ingresado correctamente");
 
 		}
-		
 
 		code.setText("");
 		name.setText("");
 		manu.setText("");
 		stock.setText("");
-		vat.setText("");
 		Uprice.setText("");
 		Sprice.setText("");
 		des.setText("");
