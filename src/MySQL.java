@@ -561,5 +561,51 @@ public class MySQL {
 		}
 		return x;
 	}
+	
+	public static boolean bajaMerch (int code) {
+		boolean x = true;
+		try {
+			Connection con = conection();
+			if (con != null) {
+
+			}
+
+			Statement cmd = null;
+
+			cmd = con.createStatement();
+			cmd.executeUpdate("update item set status = 0 where code = '"
+					+ code + "';");
+			con.close();
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null,
+					"SQLException: " + ex.getMessage());
+			x = false;
+		}
+
+		return x;
+	}
+	
+	public static boolean altaMerch (int code) {
+		boolean x = true;
+		try {
+			Connection con = conection();
+			if (con != null) {
+
+			}
+
+			Statement cmd = null;
+
+			cmd = con.createStatement();
+			cmd.executeUpdate("update item set status = 1 where code = '"
+					+ code + "';");
+			con.close();
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null,
+					"SQLException: " + ex.getMessage());
+			x = false;
+		}
+
+		return x;
+	}
 
 }
