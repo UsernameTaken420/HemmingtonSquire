@@ -1,11 +1,16 @@
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
@@ -64,7 +69,7 @@ public class Root_Frame extends JFrame {
 	private JButton sell_search_button;
 	private static ArrayList<Integer> find = new ArrayList<Integer>();
 	private JTextField logicDeletion_code;
-	private JTextField textField_2;
+	private JTextField get_code;
 	private JTextField update_code;
 	private JTextField vat_code;
 	private JTextField buy_textField;
@@ -72,7 +77,7 @@ public class Root_Frame extends JFrame {
 	private JTable table_1;
 	private JTable add_find;
 	private JTable logicDeletion_search;
-	private JTable table_3;
+	private JTable get_search;
 	private JTable update_search;
 	private JTable vat_search;
 	private static JTextArea add_description;
@@ -85,6 +90,10 @@ public class Root_Frame extends JFrame {
 	private JRadioButton fourteen;
 	private JRadioButton twenty2;
 	private static int vat;
+	private JTextField up_search;
+	private JTable up_table;
+	private JRadioButton get_year;
+	private JTextField get_amount;
 
 	/**
 	 * Launch the application.
@@ -118,7 +127,7 @@ public class Root_Frame extends JFrame {
 		});
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 844, 528);
+		setBounds(100, 100, 902, 550);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -134,7 +143,7 @@ public class Root_Frame extends JFrame {
 		contentPane.setLayout(null);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 11, 816, 458);
+		tabbedPane.setBounds(10, 11, 874, 480);
 		contentPane.add(tabbedPane);
 
 		JPanel panel = new JPanel();
@@ -142,7 +151,7 @@ public class Root_Frame extends JFrame {
 		panel.setLayout(null);
 
 		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane_1.setBounds(10, 11, 791, 411);
+		tabbedPane_1.setBounds(10, 11, 849, 433);
 		panel.add(tabbedPane_1);
 
 		JPanel panel_2 = new JPanel();
@@ -232,31 +241,24 @@ public class Root_Frame extends JFrame {
 
 				if (zero.isSelected()) {
 					vat = 0;
-					add_merchandise(add_code, add_name, add_manufacturer,
-							add_initial, vat, add_unitaryPrice, add_sellPrice,
-							add_description);
+					add_merchandise(add_code, add_name, add_manufacturer, add_initial, vat, add_unitaryPrice,
+							add_sellPrice, add_description);
 				} else {
 
 					if (fourteen.isSelected()) {
 						vat = 14;
-						add_merchandise(add_code, add_name, add_manufacturer,
-								add_initial, vat, add_unitaryPrice, add_sellPrice,
-								add_description);
+						add_merchandise(add_code, add_name, add_manufacturer, add_initial, vat, add_unitaryPrice,
+								add_sellPrice, add_description);
 					} else {
 						if (twenty2.isSelected()) {
 							vat = 22;
-							add_merchandise(add_code, add_name, add_manufacturer,
-									add_initial, vat, add_unitaryPrice, add_sellPrice,
-									add_description);
+							add_merchandise(add_code, add_name, add_manufacturer, add_initial, vat, add_unitaryPrice,
+									add_sellPrice, add_description);
 						} else {
-							JOptionPane
-									.showMessageDialog(null,
-											"Error tiene que seleccionar un porcentaje de IVA");
+							JOptionPane.showMessageDialog(null, "Error tiene que seleccionar un porcentaje de IVA");
 						}
 					}
 				}
-
-				
 
 			}
 		});
@@ -297,7 +299,7 @@ public class Root_Frame extends JFrame {
 		panel_3.add(scrollPane_1);
 		table = new JTable();
 		scrollPane_1.setViewportView(table);
-	
+
 		DefaultTableModel model = new DefaultTableModel();
 
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -319,8 +321,9 @@ public class Root_Frame extends JFrame {
 		sell_search_button = new JButton("Buscar");
 		sell_search_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				boolean up = false;
 
-				search(sell_search_search, table, model);
+				search(sell_search_search, table, model, up);
 
 			}
 		});
@@ -436,8 +439,9 @@ public class Root_Frame extends JFrame {
 		JButton add_find_button = new JButton("Buscar");
 		add_find_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				boolean up = false;
 
-				search(buy_textField, add_find, model);
+				search(buy_textField, add_find, model, up);
 
 			}
 		});
@@ -453,13 +457,96 @@ public class Root_Frame extends JFrame {
 		add_find.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		add_find.setModel(model);
 
+		JPanel panel_4 = new JPanel();
+		panel_4.setLayout(null);
+		tabbedPane_1.addTab("Obtener montos", null, panel_4, null);
+
+		JTextArea get_textArea = new JTextArea();
+		get_textArea.setBounds(637, 223, 139, 152);
+		panel_4.add(get_textArea);
+
+		JButton get_amount_buttton = new JButton("Buscar Montos");
+		get_amount_buttton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+			}
+		});
+		get_amount_buttton.setBounds(637, 176, 139, 23);
+		panel_4.add(get_amount_buttton);
+
+		JLabel lblMontos = new JLabel("Montos");
+		lblMontos.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblMontos.setBounds(680, 29, 61, 18);
+		panel_4.add(lblMontos);
+
+		JRadioButton get_day = new JRadioButton("Por dia");
+		buttonGroup.add(get_day);
+		get_day.setBounds(637, 60, 74, 23);
+		panel_4.add(get_day);
+
+		JRadioButton get_month = new JRadioButton("Por mes");
+		buttonGroup.add(get_month);
+		get_month.setBounds(637, 86, 74, 23);
+		panel_4.add(get_month);
+
+		get_year = new JRadioButton("Por a\u00F1o");
+		buttonGroup.add(get_year);
+		get_year.setBounds(637, 115, 74, 23);
+		panel_4.add(get_year);
+
+		get_code = new JTextField();
+		get_code.setColumns(10);
+		get_code.setBounds(10, 58, 110, 20);
+		panel_4.add(get_code);
+
+		JLabel label_17 = new JLabel("Codigo del producto");
+		label_17.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_17.setBounds(10, 29, 157, 18);
+		panel_4.add(label_17);
+
+		JButton get_find = new JButton("Buscar");
+		get_find.setBounds(152, 58, 89, 23);
+		panel_4.add(get_find);
+
+		JScrollPane scrollPane_4 = new JScrollPane();
+		scrollPane_4.setBounds(10, 90, 596, 285);
+		panel_4.add(scrollPane_4);
+
+		get_search = new JTable();
+		scrollPane_4.setViewportView(get_search);
+
+		get_search.setModel(model);
+
+		get_amount = new JTextField();
+		get_amount.setBounds(669, 145, 86, 20);
+		panel_4.add(get_amount);
+		get_amount.setColumns(10);
+		
+		JLabel lblFormatoAomesdia = new JLabel("Formato a\u00F1o/mes/dia");
+		lblFormatoAomesdia.setBounds(717, 64, 117, 14);
+		panel_4.add(lblFormatoAomesdia);
+		
+		JLabel lblFormatoMesdia = new JLabel("Formato a\u00F1o/mes\r\n");
+		lblFormatoMesdia.setBounds(717, 95, 117, 14);
+		panel_4.add(lblFormatoMesdia);
+		
+		JLabel lblFormatoAo = new JLabel("Formato a\u00F1o");
+		lblFormatoAo.setBounds(717, 119, 117, 14);
+		panel_4.add(lblFormatoAo);
+
 		JPanel panel_6 = new JPanel();
 		tabbedPane_1.addTab("Baja Logica", null, panel_6, null);
 		panel_6.setLayout(null);
 
-		JButton btnConfirmarBajaLogica = new JButton("Confirmar baja logica");
-		btnConfirmarBajaLogica.setBounds(626, 59, 160, 23);
-		panel_6.add(btnConfirmarBajaLogica);
+		JButton down_button = new JButton("Confirmar baja logica");
+		down_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean u = false;
+				logic_deletion(logicDeletion_search, u);
+			}
+		});
+		down_button.setBounds(626, 59, 160, 23);
+		panel_6.add(down_button);
 
 		logicDeletion_code = new JTextField();
 		logicDeletion_code.setColumns(10);
@@ -471,9 +558,18 @@ public class Root_Frame extends JFrame {
 		label_13.setBounds(7, 31, 157, 18);
 		panel_6.add(label_13);
 
-		JButton logicDeletion_button = new JButton("Buscar");
-		logicDeletion_button.setBounds(149, 60, 89, 23);
-		panel_6.add(logicDeletion_button);
+		JButton down_search = new JButton("Buscar");
+		down_search.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (empty(logicDeletion_code)) {
+					boolean up = false;
+
+					search(logicDeletion_code, logicDeletion_search, model, up);
+				}
+			}
+		});
+		down_search.setBounds(149, 60, 89, 23);
+		panel_6.add(down_search);
 
 		JScrollPane scrollPane_3 = new JScrollPane();
 		scrollPane_3.setBounds(7, 91, 596, 282);
@@ -482,58 +578,60 @@ public class Root_Frame extends JFrame {
 		logicDeletion_search = new JTable();
 		scrollPane_3.setViewportView(logicDeletion_search);
 
-		JPanel panel_4 = new JPanel();
-		panel_4.setLayout(null);
-		tabbedPane_1.addTab("Obtener montos", null, panel_4, null);
+		logicDeletion_search.setModel(model);
 
-		JTextArea textArea_10 = new JTextArea();
-		textArea_10.setBounds(637, 203, 139, 152);
-		panel_4.add(textArea_10);
+		DefaultTableModel model2 = new DefaultTableModel();
 
-		JButton btnConfirmarMontos = new JButton("Confirmar Montos");
-		btnConfirmarMontos.setBounds(637, 158, 139, 23);
-		panel_4.add(btnConfirmarMontos);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		JLabel lblMontos = new JLabel("Montos");
-		lblMontos.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		lblMontos.setBounds(680, 29, 61, 18);
-		panel_4.add(lblMontos);
+		model2.setColumnIdentifiers(columnsName);
 
-		JRadioButton radioButton = new JRadioButton("Por dia");
-		buttonGroup.add(radioButton);
-		radioButton.setBounds(656, 58, 109, 23);
-		panel_4.add(radioButton);
+		JPanel panel_8 = new JPanel();
+		tabbedPane_1.addTab("Alta Logica", null, panel_8, null);
+		panel_8.setLayout(null);
 
-		JRadioButton radioButton_1 = new JRadioButton("Por mes");
-		buttonGroup.add(radioButton_1);
-		radioButton_1.setBounds(656, 86, 109, 23);
-		panel_4.add(radioButton_1);
+		JScrollPane scrollPane_7 = new JScrollPane();
+		scrollPane_7.setBounds(10, 75, 592, 300);
+		panel_8.add(scrollPane_7);
 
-		JRadioButton radioButton_2 = new JRadioButton("Por a\u00F1o");
-		buttonGroup.add(radioButton_2);
-		radioButton_2.setBounds(656, 118, 109, 23);
-		panel_4.add(radioButton_2);
+		up_table = new JTable();
+		scrollPane_7.setViewportView(up_table);
 
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(10, 58, 110, 20);
-		panel_4.add(textField_2);
+		JButton up_buttton2 = new JButton("Confirmar alta logica");
+		up_buttton2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				boolean u = true;
 
-		JLabel label_17 = new JLabel("Codigo del producto");
-		label_17.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		label_17.setBounds(10, 29, 157, 18);
-		panel_4.add(label_17);
+				logic_validation(up_table, u);
+			}
+		});
+		up_buttton2.setBounds(619, 39, 160, 23);
+		panel_8.add(up_buttton2);
 
-		JButton button_2 = new JButton("Buscar");
-		button_2.setBounds(152, 58, 89, 23);
-		panel_4.add(button_2);
+		up_search = new JTextField();
+		up_search.setColumns(10);
+		up_search.setBounds(10, 40, 110, 20);
+		panel_8.add(up_search);
 
-		JScrollPane scrollPane_4 = new JScrollPane();
-		scrollPane_4.setBounds(10, 90, 596, 285);
-		panel_4.add(scrollPane_4);
+		up_table.setModel(model2);
 
-		table_3 = new JTable();
-		scrollPane_4.setViewportView(table_3);
+		JLabel label_12 = new JLabel("Codigo del producto");
+		label_12.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_12.setBounds(10, 11, 157, 18);
+		panel_8.add(label_12);
+
+		JButton up_button = new JButton("Buscar");
+		up_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				boolean up = true;
+				if (empty(up_search)) {
+					search(up_search, up_table, model2, up);
+				}
+			}
+		});
+
+		up_button.setBounds(142, 40, 89, 23);
+		panel_8.add(up_button);
 
 		JPanel panel_5 = new JPanel();
 		panel_5.setLayout(null);
@@ -578,8 +676,9 @@ public class Root_Frame extends JFrame {
 		JButton update_button = new JButton("Buscar");
 		update_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				boolean up = false;
 
-				search(update_code, update_search, model);
+				search(update_code, update_search, model, up);
 			}
 		});
 		update_button.setBounds(152, 58, 89, 23);
@@ -637,8 +736,8 @@ public class Root_Frame extends JFrame {
 		JButton vat_button = new JButton("Buscar");
 		vat_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				search(vat_code, vat_search, model);
+				boolean up = false;
+				search(vat_code, vat_search, model, up);
 
 			}
 		});
@@ -686,11 +785,9 @@ public class Root_Frame extends JFrame {
 						typeOfUser = false;
 
 					}
-					MySQL.AddUser(passToAdd.getText(), userToAdd.getText(),
-							typeOfUser);
+					MySQL.AddUser(passToAdd.getText(), userToAdd.getText(), typeOfUser);
 
-					JOptionPane.showMessageDialog(null,
-							"Registrado nuevo usuario");
+					JOptionPane.showMessageDialog(null, "Registrado nuevo usuario");
 
 					userToAdd.setText("");
 					passToAdd.setText("");
@@ -748,13 +845,11 @@ public class Root_Frame extends JFrame {
 
 	public static boolean vacio() {
 		if (userToAdd.getText().equals("")) {
-			JOptionPane.showMessageDialog(null,
-					"Error No Ingreso el Usuario... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null, "Error No Ingreso el Usuario... ingrese nuevamente");
 			return false;
 		}
 		if (passToAdd.getText().equals("")) {
-			JOptionPane.showMessageDialog(null,
-					"Error No Ingreso la Contraseña... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null, "Error No Ingreso la Contraseña... ingrese nuevamente");
 			return false;
 		}
 
@@ -763,8 +858,7 @@ public class Root_Frame extends JFrame {
 
 	public static boolean vacio1() {
 		if (userToAdd.getText().equals("")) {
-			JOptionPane.showMessageDialog(null,
-					"Error No Ingreso el Usuario... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null, "Error No Ingreso el Usuario... ingrese nuevamente");
 			return false;
 		}
 
@@ -773,41 +867,32 @@ public class Root_Frame extends JFrame {
 
 	public static boolean empty_add() {
 		if (add_code.getText().equals("")) {
-			JOptionPane.showMessageDialog(null,
-					"Error No Ingreso el Codigo... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null, "Error No Ingreso el Codigo... ingrese nuevamente");
 			return false;
 		}
 
 		if (add_name.getText().equals("")) {
-			JOptionPane.showMessageDialog(null,
-					"Error No Ingreso el Nombre... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null, "Error No Ingreso el Nombre... ingrese nuevamente");
 			return false;
 		}
 		if (add_initial.getText().equals("")) {
-			JOptionPane.showMessageDialog(null,
-					"Error No Ingreso el Stock Inicial... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null, "Error No Ingreso el Stock Inicial... ingrese nuevamente");
 			return false;
 		}
 		if (add_unitaryPrice.getText().equals("")) {
-			JOptionPane
-					.showMessageDialog(null,
-							"Error No Ingreso el Precio Unitario... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null, "Error No Ingreso el Precio Unitario... ingrese nuevamente");
 			return false;
 		}
 		if (add_sellPrice.getText().equals("")) {
-			JOptionPane
-					.showMessageDialog(null,
-							"Error No Ingreso la Precio de Venta... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null, "Error No Ingreso la Precio de Venta... ingrese nuevamente");
 			return false;
 		}
 		if (add_description.getText().equals("")) {
-			JOptionPane.showMessageDialog(null,
-					"Error No Ingreso la Descripcion... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null, "Error No Ingreso la Descripcion... ingrese nuevamente");
 			return false;
 		}
 		if (add_manufacturer.getText().equals("")) {
-			JOptionPane.showMessageDialog(null,
-					"Error No Ingreso el Fabricante... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null, "Error No Ingreso el Fabricante... ingrese nuevamente");
 			return false;
 		}
 		int code, Uprice, Sprice, stock;
@@ -819,16 +904,13 @@ public class Root_Frame extends JFrame {
 
 			if (code < 0 || vat < 0 || Uprice < 0 || Sprice < 0 || stock < 0) {
 
-				JOptionPane.showMessageDialog(null,
-						"No puede ingresar un valor negativo");
+				JOptionPane.showMessageDialog(null, "No puede ingresar un valor negativo");
 				return false;
 			}
 
 		} catch (java.lang.NumberFormatException ex2) {
-			JOptionPane
-					.showMessageDialog(
-							null,
-							"Error debe ingresar letras ni numeros mayores a 2147483647 en los campos codigo,iva,precio unitario,precio de venta,stock");
+			JOptionPane.showMessageDialog(null,
+					"Error debe ingresar letras ni numeros mayores a 2147483647 en los campos codigo,iva,precio unitario,precio de venta,stock");
 			return false;
 		}
 
@@ -837,16 +919,14 @@ public class Root_Frame extends JFrame {
 
 	public static boolean empty(JTextField empty_Jtext) {
 		if (empty_Jtext.getText().equals("")) {
-			JOptionPane.showMessageDialog(null,
-					"Error No Ingreso el Codigo... ingrese nuevamente");
+			JOptionPane.showMessageDialog(null, "Error No Ingreso el Codigo... ingrese nuevamente");
 			return false;
 		}
 
 		return true;
 	}
 
-	public static void search(JTextField searching, JTable table,
-			DefaultTableModel model) {
+	public static void search(JTextField searching, JTable table, DefaultTableModel model, boolean up) {
 
 		int cod = 0;
 
@@ -856,90 +936,78 @@ public class Root_Frame extends JFrame {
 				cod = Integer.parseInt(searching.getText().trim());
 
 			} catch (java.lang.NumberFormatException e23) {
-				JOptionPane.showMessageDialog(null,
-						"Error debe ingresar numeros en el campo codigo");
+				JOptionPane.showMessageDialog(null, "Error debe ingresar numeros en el campo codigo");
 				searching.setText("");
 
 			}
 
-			MySQL.Find_Description(cod, table, model);
+			MySQL.Find_Description(cod, table, model, up);
+
 		}
 
 	}
 
-	public static void sell(JTable table, JTextField sell_sell_amount,
-			JTextArea textArea_2) {
+	public static void sell(JTable table, JTextField sell_sell_amount, JTextArea textArea) {
 
 		if (table.getSelectedRow() < 0) {
-			JOptionPane.showMessageDialog(null,
-					"Se debe seleccionar un producto en la tabla");
+			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
 		} else {
 
 			int Nrow = table.getSelectedRow();
-			if (MisMetodos.SN(sell_sell_amount.getText())) {
+			if (MySQL.SN(sell_sell_amount.getText())) {
 				if (sell_sell_amount.getText().equals("")) {
-					JOptionPane.showMessageDialog(null,
-							"La cantidad de venta no debe estar vacia");
+					JOptionPane.showMessageDialog(null, "La cantidad de venta no debe estar vacia");
 				} else {
 
-					Object ta = table.getValueAt(Nrow, 7);
+					double price = Integer.parseInt(table.getValueAt(Nrow, 6).toString());
+					double iva = Integer.parseInt(table.getValueAt(Nrow, 4).toString());
 
-					double ta2 = Integer.parseInt(ta.toString());
-
-					Object iva = table.getValueAt(Nrow, 4);
-
-					double iva2 = Integer.parseInt(iva.toString());
-
-					textArea_2.setText(String.valueOf(Double
-							.parseDouble(sell_sell_amount.getText())
-							* (ta2 + ((ta2 * iva2) / 100))));
+					textArea.setText(total(sell_sell_amount, iva, price));
 
 				}
 			} else {
-				JOptionPane
-						.showMessageDialog(null,
-								"La cantidad de venta debe ser un numero y menor a 2147483647");
+				JOptionPane.showMessageDialog(null, "La cantidad de venta debe ser un numero y menor a 2147483647");
 			}
 		}
 
 	}
 
-	public static void sell_confirm(JTable table, JTextField sell_sell_amount,
-			JTextArea textArea) {
+	public static String total(JTextField amount, double iva, double price) {
+
+		String value = String.valueOf((Double.parseDouble(amount.getText())) * (price + (price * (iva / 100))));
+
+		return value;
+	}
+
+	public static void sell_confirm(JTable table, JTextField sell_sell_amount, JTextArea textArea) {
 
 		if (table.getSelectedRow() < 0) {
-			JOptionPane.showMessageDialog(null,
-					"Se debe seleccionar un producto en la tabla");
+			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
 		} else {
-			if (MisMetodos.SN(sell_sell_amount.getText())) {
+			if (MySQL.SN(sell_sell_amount.getText())) {
 				if (sell_sell_amount.getText().equals("")) {
-					JOptionPane.showMessageDialog(null,
-							"La cantidad de venta no debe estar vacia");
+					JOptionPane.showMessageDialog(null, "La cantidad de venta no debe estar vacia");
 				} else {
 
-					String tableS = (table
-							.getValueAt(table.getSelectedRow(), 0).toString());
+					String tableS = (table.getValueAt(table.getSelectedRow(), 0).toString());
 
-					if(MySQL.sellMerch(tableS,
-							Integer.parseInt(sell_sell_amount.getText()))){
-						
-						JOptionPane.showMessageDialog(
-								null,
-								"Se ha vendido "
-										+ sell_sell_amount.getText()
-										+ " del producto "
-										+ (String) table.getValueAt(
-												table.getSelectedRow(), 0));
+					int Nrow = table.getSelectedRow();
+					double price = Integer.parseInt(table.getValueAt(Nrow, 6).toString());
+					double iva = Integer.parseInt(table.getValueAt(Nrow, 4).toString());
+					String total_amount = total(sell_sell_amount, iva, price);
+					if (MySQL.sellMerch(tableS, Integer.parseInt(sell_sell_amount.getText()), total_amount)) {
+
+						JOptionPane.showMessageDialog(null,
+								"Se ha vendido " + sell_sell_amount.getText() + " del producto "
+										+ (String) table.getValueAt(table.getSelectedRow(), 0) + " Total: $"
+										+ total_amount);
 					}
 
-	
 					sell_sell_amount.setText("");
 					textArea.setText("");
 				}
 			} else {
-				JOptionPane
-						.showMessageDialog(null,
-								"La cantidad de venta debe ser un numero y menor a 2147483647");
+				JOptionPane.showMessageDialog(null, "La cantidad de venta debe ser un numero y menor a 2147483647");
 			}
 		}
 
@@ -948,74 +1016,70 @@ public class Root_Frame extends JFrame {
 	public static void buy(JTable table, JTextField amount, JTextArea textArea) {
 
 		if (table.getSelectedRow() < 0) {
-			JOptionPane.showMessageDialog(null,
-					"Se debe seleccionar un producto en la tabla");
+			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
 		} else {
 
 			int Nrow = table.getSelectedRow();
-			if (MisMetodos.SN(amount.getText())) {
+			if (MySQL.SN(amount.getText())) {
 				if (amount.getText().equals("")) {
-					JOptionPane.showMessageDialog(null,
-							"La cantidad de compra no debe estar vacia");
+					JOptionPane.showMessageDialog(null, "La cantidad de compra no debe estar vacia");
 				} else {
 					int am = Integer.parseInt(amount.getText());
 					if (am > 0) {
-						Object ta = table.getValueAt(Nrow, 5);
 
-						int ta2 = Integer.parseInt(ta.toString());
+						double price = Integer.parseInt(table.getValueAt(Nrow, 6).toString());
+						double iva = Integer.parseInt(table.getValueAt(Nrow, 4).toString());
 
-						textArea.setText(String.valueOf(am * ta2));
+						textArea.setText(total(amount, iva, price));
+
 					} else {
-						JOptionPane.showMessageDialog(null,
-								"No puede ingresar una cantidad menor a 0");
+						JOptionPane.showMessageDialog(null, "No puede ingresar una cantidad menor a 0");
 					}
 				}
 			} else {
-				JOptionPane
-						.showMessageDialog(null,
-								"La cantidad de compra debe ser un numero y menor a 2147483647");
+				JOptionPane.showMessageDialog(null, "La cantidad de compra debe ser un numero y menor a 2147483647");
 			}
 		}
 
 	}
 
-	public static void buy_confirm(JTable table, JTextField amount,
-			JTextArea textArea) {
+	public static void buy_confirm(JTable table, JTextField amount, JTextArea textArea) {
 
 		if (table.getSelectedRow() < 0) {
-			JOptionPane.showMessageDialog(null,
-					"Se debe seleccionar un producto en la tabla");
+			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
 		} else {
-			if (MisMetodos.SN(amount.getText())) {
+			if (MySQL.SN(amount.getText())) {
 				if (amount.getText().equals("")) {
-					JOptionPane.showMessageDialog(null,
-							"La cantidad de compra no debe estar vacia");
+					JOptionPane.showMessageDialog(null, "La cantidad de compra no debe estar vacia");
 				} else {
 					int am = Integer.parseInt(amount.getText());
 					if (am > 0) {
-						String tableS = (table.getValueAt(
-								table.getSelectedRow(), 0).toString());
 
-						MySQL.buyMerch(tableS, am);
+						String tableS = (table.getValueAt(table.getSelectedRow(), 0).toString());
 
-						JOptionPane.showMessageDialog(
-								null,
-								"Se ha comprado "
-										+ am
-										+ " del producto "
-										+ (String) table.getValueAt(
-												table.getSelectedRow(), 0));
+						int Nrow = table.getSelectedRow();
+						double price = Integer.parseInt(table.getValueAt(Nrow, 6).toString());
+						double iva = Integer.parseInt(table.getValueAt(Nrow, 4).toString());
+
+						String total_amount = total(amount, iva, price);
+
+						if (MySQL.buyMerch(tableS, Integer.parseInt(amount.getText()), total_amount)) {
+
+							JOptionPane.showMessageDialog(null,
+									"Se ha comprado " + amount.getText() + " del producto "
+											+ (String) table.getValueAt(table.getSelectedRow(), 0) + " Total: $"
+											+ total_amount);
+						}
+
 					} else {
 
-						JOptionPane.showMessageDialog(null,
-								"No puede ingresar una cantidad menor a 0");
+						JOptionPane.showMessageDialog(null, "No puede ingresar una cantidad menor a 0");
 					}
 					amount.setText("");
 					textArea.setText("");
 				}
 			} else {
-				JOptionPane.showMessageDialog(null,
-						"La cantidad de compra debe ser un numero");
+				JOptionPane.showMessageDialog(null, "La cantidad de compra debe ser un numero");
 			}
 		}
 
@@ -1024,28 +1088,23 @@ public class Root_Frame extends JFrame {
 	public static void vat(JTable table, JTextField value) {
 
 		if (table.getSelectedRow() < 0) {
-			JOptionPane.showMessageDialog(null,
-					"Se debe seleccionar un producto en la tabla");
+			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
 		} else {
-			if (MisMetodos.SN(value.getText())) {
+			if (MySQL.SN(value.getText())) {
 				if (value.getText().equals("")) {
-					JOptionPane.showMessageDialog(null,
-							"La cantidad a actualizar no debe estar vacia");
+					JOptionPane.showMessageDialog(null, "La cantidad a actualizar no debe estar vacia");
 				} else {
 
-					String tableS = (table
-							.getValueAt(table.getSelectedRow(), 0).toString());
+					String tableS = (table.getValueAt(table.getSelectedRow(), 0).toString());
 					int values = Integer.parseInt(value.getText());
 					MySQL.changeVAT(tableS, values);
 					if (values > 0) {
-						JOptionPane.showMessageDialog(null,
-								"El IVA se ha actualizado correctamente");
+						JOptionPane.showMessageDialog(null, "El IVA se ha actualizado correctamente");
 					}
 					value.setText("");
 				}
 			} else {
-				JOptionPane.showMessageDialog(null,
-						"La cantidad a actualizar debe ser un numero");
+				JOptionPane.showMessageDialog(null, "La cantidad a actualizar debe ser un numero");
 			}
 		}
 
@@ -1054,47 +1113,39 @@ public class Root_Frame extends JFrame {
 	public static void update(JTable table, JTextField value) {
 
 		if (table.getSelectedRow() < 0) {
-			JOptionPane.showMessageDialog(null,
-					"Se debe seleccionar un producto en la tabla");
+			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
 		} else {
-			if (MisMetodos.SN(value.getText())) {
+			if (MySQL.SN(value.getText())) {
 				if (value.getText().equals("")) {
-					JOptionPane.showMessageDialog(null,
-							"El nuevo prcio de venta no debe estar vacio");
+					JOptionPane.showMessageDialog(null, "El nuevo prcio de venta no debe estar vacio");
 				} else {
 					int values = Integer.parseInt(value.getText());
-					String tableS = (table
-							.getValueAt(table.getSelectedRow(), 0).toString());
+					String tableS = (table.getValueAt(table.getSelectedRow(), 0).toString());
 
 					MySQL.changeSellPrice(tableS, values);
 
 					if (values > 0) {
-						JOptionPane.showMessageDialog(null,
-								"El precio se ha actualizado correctamente");
+						JOptionPane.showMessageDialog(null, "El precio se ha actualizado correctamente");
 					}
 
 					value.setText("");
 				}
 			} else {
-				JOptionPane.showMessageDialog(null,
-						"El nuevo prcio de venta debe ser un numero");
+				JOptionPane.showMessageDialog(null, "El nuevo prcio de venta debe ser un numero");
 			}
 		}
 
 	}
 
-	public static void add_merchandise(JTextField code, JTextField name,
-			JTextField manu, JTextField stock, int vat, JTextField Uprice,
-			JTextField Sprice, JTextArea des) {
+	public static void add_merchandise(JTextField code, JTextField name, JTextField manu, JTextField stock, int vat,
+			JTextField Uprice, JTextField Sprice, JTextArea des) {
 
 		if (empty_add()) {
 
-			MySQL.AddMerchandise(code.getText(), name.getText(),
-					manu.getText(), stock.getText(), vat, Uprice.getText(),
+			MySQL.AddMerchandise(code.getText(), name.getText(), manu.getText(), stock.getText(), vat, Uprice.getText(),
 					Sprice.getText(), des.getText());
 
-			JOptionPane.showMessageDialog(null,
-					"Nuevo producto ingresado correctamente");
+			JOptionPane.showMessageDialog(null, "Nuevo producto ingresado correctamente");
 
 		}
 
@@ -1105,6 +1156,54 @@ public class Root_Frame extends JFrame {
 		Uprice.setText("");
 		Sprice.setText("");
 		des.setText("");
+
+	}
+
+	public static void logic_deletion(JTable table, boolean u) {
+
+		if (table.getSelectedRow() < 0) {
+			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
+		} else {
+
+			String tableS = (table.getValueAt(table.getSelectedRow(), 0).toString());
+
+			MySQL.Merch(tableS, u);
+
+			JOptionPane.showMessageDialog(null, "Producto dado de baja correctamente");
+
+		}
+
+	}
+
+	public static void logic_validation(JTable table, boolean u) {
+
+		if (table.getSelectedRow() < 0) {
+			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
+		} else {
+
+			String tableS = (table.getValueAt(table.getSelectedRow(), 0).toString());
+
+			MySQL.Merch(tableS, u);
+
+			JOptionPane.showMessageDialog(null, "Producto dado de alta correctamente");
+
+		}
+
+	}
+
+	public static void logs(int date, JTextArea display, JTextField amount) {
+
+		String displayS = display.getText();
+
+		int displaySize = displayS.length();
+		if (date == 1) {
+
+		} else {
+
+			if (date == 2) {
+
+			}
+		}
 
 	}
 }

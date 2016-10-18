@@ -33,19 +33,5 @@ public class MisMetodos {
 		return respuesta;
 		
 	}
-public static boolean SN (String S) {
-		
-		try {
-			Integer.parseInt(S);
-			if(S.equals("")){
-				return false;
-			}else{
-				return true;
-			}
-		} catch (NumberFormatException e){
-			return false;
-		}
-		
-		
-	}
+
 }
