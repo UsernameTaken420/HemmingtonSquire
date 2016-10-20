@@ -69,7 +69,7 @@ public class Root_Frame extends JFrame {
 	private JButton sell_search_button;
 	private static ArrayList<Integer> find = new ArrayList<Integer>();
 	private JTextField logicDeletion_code;
-	private JTextField get_code;
+	private JTextField get_year;
 	private JTextField update_code;
 	private JTextField vat_code;
 	private JTextField buy_textField;
@@ -92,8 +92,8 @@ public class Root_Frame extends JFrame {
 	private static int vat;
 	private JTextField up_search;
 	private JTable up_table;
-	private JRadioButton get_year;
-	private JTextField get_amount;
+	private JTextField get_month;
+	private JTextField get_day;
 
 	/**
 	 * Launch the application.
@@ -457,82 +457,104 @@ public class Root_Frame extends JFrame {
 		add_find.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		add_find.setModel(model);
 
+		add_find.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
 		JPanel panel_4 = new JPanel();
 		panel_4.setLayout(null);
 		tabbedPane_1.addTab("Obtener montos", null, panel_4, null);
 
-		JTextArea get_textArea = new JTextArea();
-		get_textArea.setBounds(637, 223, 139, 152);
-		panel_4.add(get_textArea);
-
-		JButton get_amount_buttton = new JButton("Buscar Montos");
-		get_amount_buttton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-			}
-		});
-		get_amount_buttton.setBounds(637, 176, 139, 23);
-		panel_4.add(get_amount_buttton);
-
-		JLabel lblMontos = new JLabel("Montos");
-		lblMontos.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		lblMontos.setBounds(680, 29, 61, 18);
-		panel_4.add(lblMontos);
-
-		JRadioButton get_day = new JRadioButton("Por dia");
-		buttonGroup.add(get_day);
-		get_day.setBounds(637, 60, 74, 23);
-		panel_4.add(get_day);
-
-		JRadioButton get_month = new JRadioButton("Por mes");
-		buttonGroup.add(get_month);
-		get_month.setBounds(637, 86, 74, 23);
-		panel_4.add(get_month);
-
-		get_year = new JRadioButton("Por a\u00F1o");
-		buttonGroup.add(get_year);
-		get_year.setBounds(637, 115, 74, 23);
+		get_year = new JTextField();
+		get_year.setColumns(10);
+		get_year.setBounds(10, 59, 110, 20);
 		panel_4.add(get_year);
 
-		get_code = new JTextField();
-		get_code.setColumns(10);
-		get_code.setBounds(10, 58, 110, 20);
-		panel_4.add(get_code);
-
-		JLabel label_17 = new JLabel("Codigo del producto");
-		label_17.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		label_17.setBounds(10, 29, 157, 18);
-		panel_4.add(label_17);
-
-		JButton get_find = new JButton("Buscar");
-		get_find.setBounds(152, 58, 89, 23);
-		panel_4.add(get_find);
+		JLabel lblFechaABuscar = new JLabel("Fecha a buscar");
+		lblFechaABuscar.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblFechaABuscar.setBounds(353, 11, 157, 18);
+		panel_4.add(lblFechaABuscar);
 
 		JScrollPane scrollPane_4 = new JScrollPane();
-		scrollPane_4.setBounds(10, 90, 596, 285);
+		scrollPane_4.setBounds(10, 90, 693, 285);
 		panel_4.add(scrollPane_4);
 
 		get_search = new JTable();
+		get_search.setRowSelectionAllowed(false);
 		scrollPane_4.setViewportView(get_search);
+		get_search.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		get_search.setModel(model);
+		DefaultTableModel model_date = new DefaultTableModel() {
+		    @Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
 
-		get_amount = new JTextField();
-		get_amount.setBounds(669, 145, 86, 20);
-		panel_4.add(get_amount);
-		get_amount.setColumns(10);
-		
-		JLabel lblFormatoAomesdia = new JLabel("Formato a\u00F1o/mes/dia");
-		lblFormatoAomesdia.setBounds(717, 64, 117, 14);
-		panel_4.add(lblFormatoAomesdia);
-		
-		JLabel lblFormatoMesdia = new JLabel("Formato a\u00F1o/mes\r\n");
-		lblFormatoMesdia.setBounds(717, 95, 117, 14);
-		panel_4.add(lblFormatoMesdia);
-		
-		JLabel lblFormatoAo = new JLabel("Formato a\u00F1o");
-		lblFormatoAo.setBounds(717, 119, 117, 14);
-		panel_4.add(lblFormatoAo);
+		get_search.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+		Object[] columnsNameLog = new Object[6];
+
+		columnsNameLog[0] = "Codigo";
+		columnsNameLog[1] = "Usuario";
+		columnsNameLog[2] = "Fecha del movimiento";
+		columnsNameLog[3] = "Movimiento del producto";
+		columnsNameLog[4] = "Codigo del producto";
+		columnsNameLog[5] = "Monto";
+
+		model_date.setColumnIdentifiers(columnsNameLog);
+		get_search.setModel(model_date);
+
+		get_month = new JTextField();
+		get_month.setColumns(10);
+		get_month.setBounds(140, 59, 110, 20);
+		panel_4.add(get_month);
+
+		get_day = new JTextField();
+		get_day.setColumns(10);
+		get_day.setBounds(260, 59, 110, 20);
+		panel_4.add(get_day);
+
+		JLabel lblAo = new JLabel("A\u00F1o");
+		lblAo.setBounds(10, 33, 110, 14);
+		panel_4.add(lblAo);
+
+		JLabel lblMes = new JLabel("Mes");
+		lblMes.setBounds(140, 33, 110, 14);
+		panel_4.add(lblMes);
+
+		JLabel lblDia = new JLabel("Dia");
+		lblDia.setBounds(260, 33, 110, 14);
+		panel_4.add(lblDia);
+
+		JTextArea get_total = new JTextArea();
+		get_total.setBounds(713, 278, 121, 116);
+		panel_4.add(get_total);
+
+		JButton get_find = new JButton("Buscar");
+		get_find.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				logs(get_year, get_month, get_day, get_total, get_search, model_date);
+
+			}
+		});
+		get_find.setBounds(408, 57, 89, 23);
+		panel_4.add(get_find);
+
+		JButton get_button = new JButton("Desplegar ");
+		get_button.setBounds(713, 244, 121, 23);
+		panel_4.add(get_button);
+
+		JLabel lblTotal = new JLabel("Total:");
+		lblTotal.setBounds(713, 219, 46, 14);
+		panel_4.add(lblTotal);
+
+		JLabel label_16 = new JLabel("/");
+		label_16.setBounds(130, 62, 14, 14);
+		panel_4.add(label_16);
+
+		JLabel label_17 = new JLabel("/");
+		label_17.setBounds(252, 62, 14, 14);
+		panel_4.add(label_17);
 
 		JPanel panel_6 = new JPanel();
 		tabbedPane_1.addTab("Baja Logica", null, panel_6, null);
@@ -577,12 +599,14 @@ public class Root_Frame extends JFrame {
 
 		logicDeletion_search = new JTable();
 		scrollPane_3.setViewportView(logicDeletion_search);
+		logicDeletion_search.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		logicDeletion_search.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		logicDeletion_search.setModel(model);
 
 		DefaultTableModel model2 = new DefaultTableModel();
 
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		logicDeletion_search.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		model2.setColumnIdentifiers(columnsName);
 
@@ -596,6 +620,7 @@ public class Root_Frame extends JFrame {
 
 		up_table = new JTable();
 		scrollPane_7.setViewportView(up_table);
+		up_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		JButton up_buttton2 = new JButton("Confirmar alta logica");
 		up_buttton2.addActionListener(new ActionListener() {
@@ -692,6 +717,7 @@ public class Root_Frame extends JFrame {
 		scrollPane_5.setViewportView(update_search);
 		update_search.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		update_search.setModel(model);
+		update_search.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		JPanel panel_7 = new JPanel();
 		panel_7.setLayout(null);
@@ -753,6 +779,7 @@ public class Root_Frame extends JFrame {
 		vat_search.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		vat_search.setModel(model);
 
+		
 		panel_1 = new JPanel();
 		tabbedPane.addTab("Control de usuarios", null, panel_1, null);
 		panel_1.setLayout(null);
@@ -1191,19 +1218,91 @@ public class Root_Frame extends JFrame {
 
 	}
 
-	public static void logs(int date, JTextArea display, JTextField amount) {
+	public static void logs(JTextField year, JTextField month, JTextField day, JTextArea display, JTable table,
+			DefaultTableModel model) {
 
-		String displayS = display.getText();
+		String month3 = "", year3, day3 = "";
+		boolean x = true;
 
-		int displaySize = displayS.length();
-		if (date == 1) {
+		if (MySQL.SN(year.getText().trim())) {
 
-		} else {
+			year3 = year.getText();
 
-			if (date == 2) {
+			if (month.getText().isEmpty()) {
+
+				month3 = "01";
+				day3 = "01";
+
+				if (day.getText().isEmpty() == false) {
+
+					JOptionPane.showMessageDialog(null, "Error tiene que ingresar un mes para buscar por dia");
+					x = false;
+
+				}
+
+			} else {
+
+				if (MySQL.SN2(month.getText().trim())) {
+
+					int month2 = Integer.parseInt(month.getText());
+
+					if (month2 > 12 || month2 <= 0) {
+						JOptionPane.showMessageDialog(null,
+								"Error no puede ingresar meses mayores a 12 ni meses negativos");
+						x = false;
+					} else {
+
+						month3 = month.getText();
+
+						if (day.getText().isEmpty()) {
+
+							day3 = "01";
+
+						} else {
+
+							if (MySQL.SN2(day.getText().trim())) {
+
+								int day2 = Integer.parseInt(day.getText());
+
+								if (day2 > 31 || day2 <= 0) {
+									JOptionPane.showMessageDialog(null,
+											"Error no puede ingresar dias mayores a 31 ni dias negativos");
+									x = false;
+
+								} else {
+									day3 = day.getText();
+								}
+
+							} else {
+
+								JOptionPane.showMessageDialog(null, "Error solo puede ingresar numeros en dia");
+								x = false;
+
+							}
+						}
+					}
+				} else {
+
+					JOptionPane.showMessageDialog(null, "Error solo puede ingresar numeros en mes ");
+					x = false;
+
+				}
+			}
+
+			if (x == true) {
+				System.out.println("el coso logs");
+				MySQL.Find_Logs(year3, month3, day3, table, model);
 
 			}
+		} else {
+
+			JOptionPane.showMessageDialog(null, "El campo año no pude estar vacio y tiene que ser un numero");
+
 		}
 
+	}
+
+	public boolean isCellEditable(int row, int column) {
+		return false;
 	}
 }
