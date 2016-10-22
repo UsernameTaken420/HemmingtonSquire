@@ -33,6 +33,7 @@ CREATE TABLE `item` (
   `UPrice` int(10) NOT NULL,
   `SPrice` int(10) NOT NULL,
   `Description` varchar(30),
+  `Status` bit(1) NOT NULL,
   PRIMARY KEY (`Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -131,6 +132,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `Username` varchar(15) NOT NULL,
   `Password` varchar(15) NOT NULL,
+  `Type` varchar (10) NOT NULL,
   PRIMARY KEY (`Username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -141,7 +143,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('Root','Rootlindo');
+INSERT INTO `user` VALUES ('Root','Rootlindo','Admin');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

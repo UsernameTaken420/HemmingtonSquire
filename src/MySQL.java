@@ -1,7 +1,6 @@
 import java.awt.TextArea;
 
 import java.sql.Connection;
-
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,7 +47,7 @@ public class MySQL {
 		register();
 
 		String user = "root";
-		String pw = "rootlindo";
+		String pw = "Abece12tres";
 		String db = "hemmingtonsquire";
 
 		String parche = "?autoReconnect=true&useSSL=false";
@@ -63,7 +62,8 @@ public class MySQL {
 
 		} catch (SQLException ex) {
 
-			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			JOptionPane.showMessageDialog(null,
+					"SQLException: " + ex.getMessage());
 			return con = null;
 		}
 
@@ -71,7 +71,8 @@ public class MySQL {
 
 	}
 
-	public static boolean AddUser(String p, String u) {
+	
+	public static boolean AddUser(String p, String u, Boolean t) {
 
 		boolean x = false;
 
@@ -87,13 +88,21 @@ public class MySQL {
 			Statement cmd = null;
 
 			cmd = con.createStatement();
+			System.out.println("tipo: " + t);
 
-			rs = cmd.executeUpdate("INSERT INTO User VALUES ('" + u + "', '" + p + "')");
+			if (t == true) {
+				rs = cmd.executeUpdate("INSERT INTO User VALUES ('" + u
+						+ "', '" + p + "','Admin')");
+			} else {
+				rs = cmd.executeUpdate("INSERT INTO User VALUES ('" + u
+						+ "', '" + p + "','Seller')");
 
+			}
 			con.close();
 		} catch (SQLException ex) {
 
-			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			JOptionPane.showMessageDialog(null,
+					"SQLException: " + ex.getMessage());
 			x = false;
 		}
 
@@ -112,18 +121,41 @@ public class MySQL {
 			if (con != null) {
 
 			}
-
+			String user2 = "";
 			int rs = 0;
 			Statement cmd = null;
 
 			cmd = con.createStatement();
 
-			rs = cmd.executeUpdate("DELETE FROM User WHERE UserName='" + u + "'; ");
+			ResultSet rs1 = cmd
+					.executeQuery("SELECT * FROM user WHERE username= '" + u
+							+ "';");
+
+			while (rs1.next()) {
+
+				user2 = rs1.getString("username");
+
+			}
+
+			if (user2.isEmpty()) {
+				JOptionPane.showMessageDialog(null,
+						"No se encuentra el usuario");
+
+			} else {
+
+				cmd = con.createStatement();
+				rs = cmd.executeUpdate("DELETE FROM User WHERE UserName='" + u
+						+ "'; ");
+				JOptionPane.showMessageDialog(null,
+						"Usuario eliminado correctamente");
+			}
 
 			con.close();
+
 		} catch (SQLException ex) {
 
-			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			JOptionPane.showMessageDialog(null,
+					"SQLException: " + ex.getMessage());
 			x = false;
 		}
 
@@ -131,8 +163,10 @@ public class MySQL {
 
 	}
 
-	public static boolean AddMerchandise(String add_code, String add_name, String add_manufacturer, String add_initial,
-			String add_VAT, String add_unitaryPrice, String add_sellPrice, String add_description) {
+	public static boolean AddMerchandise(String code, String add_name,
+			String add_manufacturer, String add_initial, int vat,
+			String add_unitaryPrice, String add_sellPrice,
+			String add_description) {
 
 		boolean x = false;
 
@@ -148,66 +182,29 @@ public class MySQL {
 			Statement cmd = null;
 
 			cmd = con.createStatement();
-
-			rs = cmd.executeUpdate("INSERT INTO item values ('" + add_code + "', '" + add_name + "', '"
-					+ add_manufacturer + "', '" + add_initial + "', '" + add_VAT + "', '" + add_unitaryPrice + "', '"
-					+ add_sellPrice + "', '" + add_description + "'); ");
+			System.out.println("IVA: " + vat);
+			rs = cmd.executeUpdate("INSERT INTO item values (" + code + ", '"
+					+ add_name + "', '" + add_manufacturer + "', '"
+					+ add_initial + "', " + vat + ", '"
+					+ add_unitaryPrice + "', '" + add_sellPrice + "', '"
+					+ add_description + "',1); ");
 
 			con.close();
 		} catch (SQLException ex) {
 
-			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			JOptionPane.showMessageDialog(null,
+					"SQLException: " + ex.getMessage());
 			x = false;
 		}
 
 		return x;
-
-	}
-
-	public static ArrayList Find(int cod) {
-
-		ArrayList<Integer> find = new ArrayList<Integer>();
-
-		boolean x = false;
-
-		try {
-
-			Connection con = conection();
-
-			if (con != null) {
-
-			}
-
-			ResultSet rs = null;
-			Statement cmd = null;
-
-			cmd = con.createStatement();
-
-			rs = cmd.executeQuery("SELECT * FROM Item WHERE Code like'" + cod + "%'; ");
-
-			while (rs.next()) {
-
-				int cod_array = rs.getInt("code");
-				find.add(cod_array);
-
-			}
-
-			con.close();
-		} catch (SQLException ex) {
-
-			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
-			x = false;
-		}
-
-		return find;
 
 	}
 
 	public static void login(String user, String pass) {
 
-		ArrayList<Integer> find = new ArrayList<Integer>();
 
-		String right = "";
+		String type = "";
 		String pass2 = null;
 		boolean x = false;
 
@@ -223,48 +220,48 @@ public class MySQL {
 
 			cmd = con.createStatement();
 
-			rs = cmd.executeQuery("SELECT * FROM User WHERE username = '" + user + "';");
+			rs = cmd.executeQuery("SELECT * FROM User WHERE username = '"
+					+ user + "';");
 
 			while (rs.next()) {
-				
-				pass2 = rs.getString("passpword");
-				right = rs.getString("right");
+
+				pass2 = rs.getString("password");
+				type = rs.getString("type");
 
 			}
-			if (right == "") {
-				JOptionPane.showMessageDialog(null, "Error al ingresar el usuario");
+			if (type.equals("")) {
+				JOptionPane.showMessageDialog(null,
+						"Error al ingresar el usuario");
 			} else {
-				if (pass == pass2) {
-					if (right == "Root") {
+				if (pass.equals(pass2)) {
+					if (type.equals("Admin")) {
 						Root_Frame kys = new Root_Frame();
-						Login_Frame frame = new Login_Frame();
+						Login_Frame.frame.setVisible(false);
 						kys.setVisible(true);
-						frame.setEnabled(false);
-						frame.setAlwaysOnTop(false);
-						kys.setAlwaysOnTop(true);
+
 					} else {
 						User_Frame kys = new User_Frame();
-						Login_Frame frame = new Login_Frame();
+						Login_Frame.frame.setVisible(false);
 						kys.setVisible(true);
-						frame.setEnabled(false);
-						frame.setAlwaysOnTop(false);
-						kys.setAlwaysOnTop(true);
+
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "Error al ingresar la contraseña");
+					JOptionPane.showMessageDialog(null,
+							"Error al ingresar la contraseña");
 				}
 			}
 
 			con.close();
 		} catch (SQLException ex) {
 
-			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			JOptionPane.showMessageDialog(null,
+					"SQLException: " + ex.getMessage());
 			x = false;
 		}
 
 	}
 
-	public static boolean changeIVA(String code, int newPerc) {
+	public static boolean changeVAT(String code, int newPerc) {
 		boolean x = false;
 		try {
 			Connection con = conection();
@@ -275,18 +272,22 @@ public class MySQL {
 			}
 
 			if (newPerc < 0) {
-				JOptionPane.showMessageDialog(null, "ERROR: el porcentaje ingresado no puede ser menor a 0");
+				JOptionPane
+						.showMessageDialog(null,
+								"ERROR: el porcentaje ingresado no puede ser menor a 0");
 				con.close();
 			} else {
 				cmd = con.createStatement();
 
-				cmd.executeUpdate("UPDATE item set VAT = " + newPerc + " WHERE Code = " + code + ";");
+				cmd.executeUpdate("UPDATE item set VAT = " + newPerc
+						+ " WHERE Code = " + code + ";");
 
 			}
 			con.close();
 		} catch (SQLException ex) {
 
-			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			JOptionPane.showMessageDialog(null,
+					"SQLException: " + ex.getMessage());
 			x = false;
 		}
 
@@ -306,16 +307,19 @@ public class MySQL {
 
 			Statement cmd = null;
 			if (newPrice < 0) {
-				JOptionPane.showMessageDialog(null, "ERROR: el precio no puede ser menor a 0");
+				JOptionPane.showMessageDialog(null,
+						"ERROR: el precio no puede ser menor a 0");
 			} else {
 				cmd = con.createStatement();
 
-				cmd.executeUpdate("UPDATE item set Sprice = " + newPrice + " WHERE Code = " + code + ";");
+				cmd.executeUpdate("UPDATE item set Sprice = " + newPrice
+						+ " WHERE Code = " + code + ";");
 			}
 			con.close();
 		} catch (SQLException ex) {
 
-			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			JOptionPane.showMessageDialog(null,
+					"SQLException: " + ex.getMessage());
 			x = false;
 		}
 
@@ -335,16 +339,19 @@ public class MySQL {
 
 			Statement cmd = null;
 			if (newPrice < 0) {
-				JOptionPane.showMessageDialog(null, "ERROR: el precio no puede ser menor a 0");
+				JOptionPane.showMessageDialog(null,
+						"ERROR: el precio no puede ser menor a 0");
 			} else {
 				cmd = con.createStatement();
 
-				cmd.executeUpdate("UPDATE item set Uprice = " + newPrice + " WHERE Code = " + code + ";");
+				cmd.executeUpdate("UPDATE item set Uprice = " + newPrice
+						+ " WHERE Code = " + code + ";");
 			}
 			con.close();
 		} catch (SQLException ex) {
 
-			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			JOptionPane.showMessageDialog(null,
+					"SQLException: " + ex.getMessage());
 			x = false;
 		}
 
@@ -368,7 +375,8 @@ public class MySQL {
 
 			cmd = con.createStatement();
 			if (by == 1) {
-				rs = cmd.executeQuery("SELECT * FROM log WHERE code= '" + code + "';");
+				rs = cmd.executeQuery("SELECT * FROM log WHERE code= '" + code
+						+ "';");
 			} else {
 
 				if (by == 2) {
@@ -380,7 +388,8 @@ public class MySQL {
 			con.close();
 		} catch (SQLException ex) {
 
-			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			JOptionPane.showMessageDialog(null,
+					"SQLException: " + ex.getMessage());
 			x = false;
 		}
 
@@ -402,12 +411,14 @@ public class MySQL {
 
 			cmd = con.createStatement();
 
-			cmd.executeUpdate("update item set Stock = (Stock + " + amount + ") where code = " + code + ");");
+			cmd.executeUpdate("update item set Stock = (Stock + " + amount
+					+ ") where code = '" + code + "';");
 
 			con.close();
 		} catch (SQLException ex) {
 
-			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			JOptionPane.showMessageDialog(null,
+					"SQLException: " + ex.getMessage());
 			x = false;
 		}
 
@@ -416,7 +427,7 @@ public class MySQL {
 	}
 
 	public static boolean sellMerch(String code, int amount) {
-		boolean x = false;
+		boolean x = true;
 		try {
 			int stock = 0;
 			Connection con = conection();
@@ -428,22 +439,32 @@ public class MySQL {
 			Statement cmd = null;
 
 			cmd = con.createStatement();
-			rs = cmd.executeQuery("select stock from item where code = " + code + ";");
+			rs = cmd.executeQuery("select stock from item where code = '"
+					+ code + "';");
 			while (rs.next()) {
-				stock = rs.getInt(1);
+				stock = rs.getInt("stock");
+
 			}
 			if (amount > stock) {
-				JOptionPane.showMessageDialog(null, "ERROR: no se puede vender más de lo que se tiene en stock");
+				JOptionPane
+						.showMessageDialog(null,
+								"ERROR: no se puede vender más de lo que se tiene en stock");
+				x=false;
 			} else {
 				if (stock == amount) {
-					JOptionPane.showMessageDialog(null, "ALERTA: el stock quedará en 0");
+					JOptionPane.showMessageDialog(null,
+							"ALERTA: el stock quedará en 0");
 				}
-				cmd.executeUpdate("update item set Stock = (Stock - " + amount + ") where code = " + code + ");");
+				cmd = con.createStatement();
+
+				cmd.executeUpdate("update item set Stock = ( Stock - " + amount
+						+ " ) where code = '" + code + "';");
 			}
 			con.close();
 		} catch (SQLException ex) {
 
-			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			JOptionPane.showMessageDialog(null,
+					"SQLException: " + ex.getMessage());
 			x = false;
 		}
 
@@ -451,8 +472,10 @@ public class MySQL {
 
 	}
 
-	public static boolean Find_Description(int code, JTable table, DefaultTableModel model) {
+	public static boolean Find_Description(int code, JTable table,
+			DefaultTableModel model) {
 
+		model.getDataVector().removeAllElements();
 		model.fireTableRowsInserted(0, model.getRowCount());
 
 		ArrayList<String> cod = new ArrayList<String>();
@@ -466,7 +489,7 @@ public class MySQL {
 
 		int count = 0;
 		boolean x = false;
-
+		
 		try {
 
 			Connection con = conection();
@@ -478,7 +501,9 @@ public class MySQL {
 			Statement cmd = null;
 			cmd = con.createStatement();
 
-			rs1 = cmd.executeQuery("SELECT count(*) FROM item WHERE code like '" + code + "%';");
+			rs1 = cmd
+					.executeQuery("SELECT count(*) FROM item WHERE code like '"
+							+ code + "%';");
 			while (rs1.next()) {
 
 				count = rs1.getInt("count(*)");
@@ -486,17 +511,23 @@ public class MySQL {
 			}
 			cmd = con.createStatement();
 
-			rs = cmd.executeQuery("SELECT * FROM item WHERE code like '" + code + "%';");
+			rs = cmd.executeQuery("SELECT * FROM item WHERE code like '" + code
+					+ "%';");
 			int i = 0;
+			int type;
 			while (rs.next()) {
-				cod.add(rs.getString("code"));
-				name.add(rs.getString("name"));
-				manu.add(rs.getString("manufacturer"));
-				vat.add(rs.getString("vat"));
-				uprice.add(rs.getString("uprice"));
-				sprice.add(rs.getString("sprice"));
-				des.add(rs.getString("description"));
-				stock.add(rs.getString("stock"));
+			
+				
+					
+					cod.add(rs.getString("code"));
+					name.add(rs.getString("name"));
+					manu.add(rs.getString("manufacturer"));
+					vat.add(rs.getString("vat"));
+					uprice.add(rs.getString("uprice"));
+					sprice.add(rs.getString("sprice"));
+					des.add(rs.getString("description"));
+					stock.add(rs.getString("stock"));
+				
 
 			}
 
@@ -504,26 +535,15 @@ public class MySQL {
 
 			Object[] columnsName = new Object[8];
 
-			columnsName[0] = "Codigo";
-			columnsName[1] = "Nombre";
-			columnsName[2] = "Fabricante";
-			columnsName[3] = "Stock";
-			columnsName[4] = "Iva";
-			columnsName[5] = "Precio de venta";
-			columnsName[6] = "Precio unitario";
-			columnsName[7] = "Descripcion";
-
-			model.setColumnIdentifiers(columnsName);
-
 			for (int i2 = 0; i2 < count; i2++) {
 
 				rowData[0] = cod.get(i2);
 				rowData[1] = name.get(i2);
-				rowData[6] = stock.get(i2);
 				rowData[2] = manu.get(i2);
-				rowData[3] = vat.get(i2);
-				rowData[4] = uprice.get(i2);
-				rowData[5] = sprice.get(i2);
+				rowData[3] = stock.get(i2);
+				rowData[4] = vat.get(i2);
+				rowData[5] = uprice.get(i2);
+				rowData[6] = sprice.get(i2);
 				rowData[7] = des.get(i2);
 
 				model.addRow(rowData);
@@ -535,11 +555,11 @@ public class MySQL {
 			con.close();
 		} catch (SQLException ex) {
 
-			JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+			JOptionPane.showMessageDialog(null,
+					"SQLException: " + ex.getMessage());
 			x = false;
 		}
 		return x;
 	}
 
-	
 }
