@@ -43,6 +43,8 @@ import javax.swing.AbstractListModel;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import java.awt.SystemColor;
 
 public class User_Frame extends JFrame {
 
@@ -60,7 +62,7 @@ public class User_Frame extends JFrame {
 	private JTable add_find;
 	private JTable get_search;
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
-	public static Root_Frame frame;
+	public static User_Frame frame;
 	private final ButtonGroup buttonGroup_2 = new ButtonGroup();
 	private static int vat;
 	private JTextField get_month;
@@ -77,10 +79,11 @@ public class User_Frame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frame = new Root_Frame();
+					frame = new User_Frame();
 					frame.setVisible(true);
 					frame.setResizable(false);
 				} catch (Exception e) {
+					
 					e.printStackTrace();
 				}
 			}
@@ -111,6 +114,7 @@ public class User_Frame extends JFrame {
 		contentPane.setLayout(null);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBackground(SystemColor.activeCaption);
 		tabbedPane.setBounds(10, 11, 874, 501);
 		contentPane.add(tabbedPane);
 
@@ -222,6 +226,11 @@ public class User_Frame extends JFrame {
 		});
 		sell_search_see.setBounds(692, 120, 91, 23);
 		panel_3.add(sell_search_see);
+		
+		JLabel label_2 = new JLabel("");
+		label_2.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
+		label_2.setBounds(0, -19, 844, 424);
+		panel_3.add(label_2);
 
 		JPanel panel_9 = new JPanel();
 		panel_9.setLayout(null);
@@ -305,6 +314,11 @@ public class User_Frame extends JFrame {
 		add_find.setModel(model);
 
 		add_find.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		JLabel label_3 = new JLabel("");
+		label_3.setBounds(0, 0, 848, 411);
+		panel_9.add(label_3);
+		label_3.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
 
 		DefaultTableModel model_date = new DefaultTableModel() {
 			@Override
@@ -413,6 +427,21 @@ public class User_Frame extends JFrame {
 		get_total = new JTextArea();
 		get_total.setBounds(713, 349, 117, 26);
 		panel_4.add(get_total);
+		
+		JLabel label_4 = new JLabel("");
+		label_4.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
+		label_4.setBounds(0, 0, 844, 405);
+		panel_4.add(label_4);
+		
+		JLabel label_1 = new JLabel("");
+		label_1.setBounds(-15, -31, 895, 515);
+		panel.add(label_1);
+		label_1.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_2.jpg"));
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_1.jpg"));
+		label.setBounds(0, 0, 896, 522);
+		contentPane.add(label);
 	}
 
 	public static boolean empty(JTextField empty_Jtext) {
