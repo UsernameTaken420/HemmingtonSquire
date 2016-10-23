@@ -292,7 +292,7 @@ public class Root_Frame extends JFrame {
 		panel_3.setLayout(null);
 
 		JLabel lblCodigoDelProducto = new JLabel("Codigo del producto");
-		lblCodigoDelProducto.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblCodigoDelProducto.setFont(new Font("DokChampa", Font.BOLD, 14));
 		lblCodigoDelProducto.setBounds(10, 29, 157, 18);
 		panel_3.add(lblCodigoDelProducto);
 
@@ -363,7 +363,7 @@ public class Root_Frame extends JFrame {
 		panel_3.add(sell_search_confirm);
 
 		JLabel lblVenta = new JLabel("Venta");
-		lblVenta.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblVenta.setFont(new Font("DokChampa", Font.BOLD, 14));
 		lblVenta.setBounds(711, 29, 61, 18);
 		panel_3.add(lblVenta);
 
@@ -373,7 +373,7 @@ public class Root_Frame extends JFrame {
 		panel_3.add(lblCantidad);
 
 		JLabel label_14 = new JLabel("Precio Final");
-		label_14.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_14.setFont(new Font("DokChampa", Font.BOLD, 14));
 		label_14.setBounds(694, 164, 89, 18);
 		panel_3.add(label_14);
 
@@ -418,7 +418,7 @@ public class Root_Frame extends JFrame {
 		panel_9.add(buy_confirm);
 
 		JLabel lblCompra = new JLabel("Compra");
-		lblCompra.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblCompra.setFont(new Font("DokChampa", Font.BOLD, 14));
 		lblCompra.setBounds(711, 29, 61, 18);
 		panel_9.add(lblCompra);
 
@@ -428,8 +428,8 @@ public class Root_Frame extends JFrame {
 		panel_9.add(label_15);
 
 		JLabel lblPrecioFnal = new JLabel("Precio Final");
-		lblPrecioFnal.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		lblPrecioFnal.setBounds(694, 146, 89, 18);
+		lblPrecioFnal.setFont(new Font("DokChampa", Font.BOLD, 14));
+		lblPrecioFnal.setBounds(683, 180, 89, 18);
 		panel_9.add(lblPrecioFnal);
 
 		JButton buy_preview = new JButton("Visualizar");
@@ -440,11 +440,11 @@ public class Root_Frame extends JFrame {
 
 			}
 		});
-		buy_preview.setBounds(692, 120, 91, 23);
+		buy_preview.setBounds(683, 118, 91, 23);
 		panel_9.add(buy_preview);
 
 		JLabel label_11 = new JLabel("Codigo del producto");
-		label_11.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_11.setFont(new Font("DokChampa", Font.BOLD, 14));
 		label_11.setBounds(10, 29, 157, 18);
 		panel_9.add(label_11);
 
@@ -519,7 +519,7 @@ public class Root_Frame extends JFrame {
 		panel_6.add(logicDeletion_code);
 
 		JLabel label_13 = new JLabel("Codigo del producto");
-		label_13.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_13.setFont(new Font("DokChampa", Font.BOLD, 14));
 		label_13.setBounds(10, 11, 157, 18);
 		panel_6.add(label_13);
 
@@ -595,7 +595,7 @@ public class Root_Frame extends JFrame {
 		up_table.setModel(model2);
 
 		JLabel label_12 = new JLabel("Codigo del producto");
-		label_12.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_12.setFont(new Font("DokChampa", Font.BOLD, 14));
 		label_12.setBounds(10, 11, 157, 18);
 		panel_8.add(label_12);
 
@@ -633,8 +633,8 @@ public class Root_Frame extends JFrame {
 		panel_5.add(update_price_button);
 
 		JLabel lblNuevoPrecio = new JLabel("Nuevo Precio");
-		lblNuevoPrecio.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		lblNuevoPrecio.setBounds(545, 29, 96, 18);
+		lblNuevoPrecio.setFont(new Font("DokChampa", Font.BOLD, 14));
+		lblNuevoPrecio.setBounds(545, 29, 140, 18);
 		panel_5.add(lblNuevoPrecio);
 
 		update_price = new JTextField();
@@ -648,7 +648,7 @@ public class Root_Frame extends JFrame {
 		panel_5.add(update_code);
 
 		JLabel label_19 = new JLabel("Codigo del producto");
-		label_19.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_19.setFont(new Font("DokChampa", Font.BOLD, 14));
 		label_19.setBounds(10, 29, 157, 18);
 		panel_5.add(label_19);
 
@@ -854,22 +854,27 @@ public class Root_Frame extends JFrame {
 		panel_1.setLayout(null);
 
 		JLabel label = new JLabel("Agregar usuarios");
-		label.setBounds(119, 52, 129, 14);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		label.setBounds(89, 52, 269, 37);
 		panel_1.add(label);
 
 		JLabel lblNombreDeUsuario = new JLabel("Nombre de usuario");
-		lblNombreDeUsuario.setBounds(89, 142, 113, 14);
+		lblNombreDeUsuario.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNombreDeUsuario.setBounds(31, 135, 209, 21);
 		panel_1.add(lblNombreDeUsuario);
 
 		JLabel label_2 = new JLabel("Contrase\u00F1a");
-		label_2.setBounds(89, 188, 113, 14);
+		label_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		label_2.setBounds(31, 186, 171, 16);
 		panel_1.add(label_2);
 
 		JLabel label_3 = new JLabel("Eliminar usuarios");
-		label_3.setBounds(630, 52, 100, 14);
+		label_3.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		label_3.setBounds(542, 52, 238, 37);
 		panel_1.add(label_3);
 
 		add_user = new JButton("Confirmar");
+		add_user.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		add_user.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -877,52 +882,57 @@ public class Root_Frame extends JFrame {
 
 			}
 		});
-		add_user.setBounds(89, 377, 209, 23);
+		add_user.setBounds(119, 373, 209, 23);
 		panel_1.add(add_user);
 
 		userToAdd = new JTextField();
 		userToAdd.setColumns(10);
-		userToAdd.setBounds(212, 139, 86, 20);
+		userToAdd.setBounds(250, 139, 175, 20);
 		panel_1.add(userToAdd);
 
 		JLabel lblNombreDeUsuario_1 = new JLabel("Nombre de usuario");
-		lblNombreDeUsuario_1.setBounds(542, 142, 132, 14);
+		lblNombreDeUsuario_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNombreDeUsuario_1.setBounds(471, 137, 175, 17);
 		panel_1.add(lblNombreDeUsuario_1);
 
 		removeUser = new JTextField();
 		removeUser.setColumns(10);
-		removeUser.setBounds(684, 139, 86, 20);
+		removeUser.setBounds(656, 139, 175, 20);
 		panel_1.add(removeUser);
 
 		remove_user = new JButton("Confirmar");
+		remove_user.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		remove_user.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				remove_user();
 			}
 		});
-		remove_user.setBounds(542, 188, 228, 23);
+		remove_user.setBounds(552, 179, 228, 23);
 		panel_1.add(remove_user);
 
 		passToAdd = new JPasswordField();
-		passToAdd.setBounds(212, 186, 86, 17);
+		passToAdd.setBounds(250, 189, 175, 17);
 		panel_1.add(passToAdd);
 
 		admin_select = new JRadioButton("Es administrador");
+		admin_select.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		buttonGroup_1.add(admin_select);
-		admin_select.setBounds(89, 293, 209, 23);
+		admin_select.setBounds(31, 293, 394, 23);
 		panel_1.add(admin_select);
 
 		seller_select = new JRadioButton("Es vendedor");
+		seller_select.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		buttonGroup_1.add(seller_select);
-		seller_select.setBounds(89, 330, 209, 23);
+		seller_select.setBounds(31, 330, 394, 23);
 		panel_1.add(seller_select);
 
 		passCToAdd = new JPasswordField();
-		passCToAdd.setBounds(212, 233, 86, 17);
+		passCToAdd.setBounds(250, 236, 175, 17);
 		panel_1.add(passCToAdd);
 
 		JLabel lblConfirmarContrasea = new JLabel("Confirmar contrase\u00F1a");
-		lblConfirmarContrasea.setBounds(89, 235, 113, 14);
+		lblConfirmarContrasea.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblConfirmarContrasea.setBounds(31, 233, 209, 16);
 		panel_1.add(lblConfirmarContrasea);
 		
 		JLabel label_18 = new JLabel("");
