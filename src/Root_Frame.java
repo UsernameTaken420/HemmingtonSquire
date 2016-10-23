@@ -96,6 +96,8 @@ public class Root_Frame extends JFrame {
 	private JTextField get_day;
 	private static JPasswordField passCToAdd;
 	private JTextArea get_total;
+	private static DefaultTableModel model;
+	private static int history;
 
 	/**
 	 * Launch the application.
@@ -295,7 +297,7 @@ public class Root_Frame extends JFrame {
 		table = new JTable();
 		scrollPane_1.setViewportView(table);
 
-		DefaultTableModel model = new DefaultTableModel();
+		model = new DefaultTableModel();
 
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		Object[] columnsName = new Object[8];
@@ -936,7 +938,7 @@ public class Root_Frame extends JFrame {
 
 			}
 			if (x == true) {
-
+				history = cod;
 				MySQL.Find_Description(cod, table, model, up);
 
 			}
@@ -1010,9 +1012,11 @@ public class Root_Frame extends JFrame {
 									"Se ha vendido " + sell_sell_amount.getText() + " del producto "
 											+ (String) table.getValueAt(table.getSelectedRow(), 0) + " Total: $"
 											+ total_amount);
+							MySQL.Find_Description(history, table, model, false);
+
 						}
 					} else {
-						
+
 						JOptionPane.showMessageDialog(null, "No puede ingresar una cantidad menor a 0");
 
 					}
@@ -1083,6 +1087,8 @@ public class Root_Frame extends JFrame {
 									"Se ha comprado " + amount.getText() + " del producto "
 											+ (String) table.getValueAt(table.getSelectedRow(), 0) + " Total: $"
 											+ total_amount);
+
+							MySQL.Find_Description(history, table, model, false);
 						}
 
 					} else {
@@ -1116,6 +1122,8 @@ public class Root_Frame extends JFrame {
 					if (values > 0) {
 						JOptionPane.showMessageDialog(null, "El IVA se ha actualizado correctamente");
 					}
+					MySQL.Find_Description(history, table, model, false);
+
 				}
 			} else {
 				JOptionPane.showMessageDialog(null, "La cantidad a actualizar debe ser un numero y menor a 10 digitos");
@@ -1138,10 +1146,10 @@ public class Root_Frame extends JFrame {
 					String tableS = (table.getValueAt(table.getSelectedRow(), 0).toString());
 
 					MySQL.changeSellPrice(tableS, values);
-
 					if (values > 0) {
 						JOptionPane.showMessageDialog(null, "El precio se ha actualizado correctamente");
 					}
+					MySQL.Find_Description(history, table, model, false);
 
 				}
 			} else {
@@ -1186,6 +1194,8 @@ public class Root_Frame extends JFrame {
 
 			JOptionPane.showMessageDialog(null, "Producto dado de baja correctamente");
 
+			MySQL.Find_Description(history, table, model, false);
+
 		}
 
 	}
@@ -1201,6 +1211,9 @@ public class Root_Frame extends JFrame {
 			MySQL.Merch(tableS, u);
 
 			JOptionPane.showMessageDialog(null, "Producto dado de alta correctamente");
+			
+			MySQL.Find_Description(history, table, model, true);
+
 
 		}
 
