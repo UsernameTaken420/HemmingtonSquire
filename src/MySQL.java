@@ -1,17 +1,16 @@
-import java.awt.TextArea;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class MySQL {
@@ -20,6 +19,11 @@ public class MySQL {
 		// TODO Auto-generated method stub
 
 	}
+
+	private static String userS = "pruebas";
+
+	private static DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+	private static Date date = new Date();
 
 	public static boolean register() {
 
@@ -43,11 +47,10 @@ public class MySQL {
 	}
 
 	public static Connection conection() {
-
 		register();
 
 		String user = "root";
-		String pw = "Abece12tres";
+		String pw = "rootlindo";
 		String db = "hemmingtonsquire";
 
 		String parche = "?autoReconnect=true&useSSL=false";
@@ -71,7 +74,6 @@ public class MySQL {
 
 	}
 
-	
 	public static boolean AddUser(String p, String u, Boolean t) {
 
 		boolean x = false;
@@ -88,7 +90,6 @@ public class MySQL {
 			Statement cmd = null;
 
 			cmd = con.createStatement();
-			System.out.println("tipo: " + t);
 
 			if (t == true) {
 				rs = cmd.executeUpdate("INSERT INTO User VALUES ('" + u
@@ -182,12 +183,11 @@ public class MySQL {
 			Statement cmd = null;
 
 			cmd = con.createStatement();
-			System.out.println("IVA: " + vat);
 			rs = cmd.executeUpdate("INSERT INTO item values (" + code + ", '"
 					+ add_name + "', '" + add_manufacturer + "', '"
-					+ add_initial + "', " + vat + ", '"
-					+ add_unitaryPrice + "', '" + add_sellPrice + "', '"
-					+ add_description + "',1); ");
+					+ add_initial + "', " + vat + ", '" + add_unitaryPrice
+					+ "', '" + add_sellPrice + "', '" + add_description
+					+ "',1); ");
 
 			con.close();
 		} catch (SQLException ex) {
@@ -202,7 +202,6 @@ public class MySQL {
 	}
 
 	public static void login(String user, String pass) {
-
 
 		String type = "";
 		String pass2 = null;
@@ -245,6 +244,7 @@ public class MySQL {
 						kys.setVisible(true);
 
 					}
+					userS = user;
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Error al ingresar la contraseña");
@@ -359,46 +359,8 @@ public class MySQL {
 
 	}
 
-	public static boolean Logs(String code, int newPerc, int by) {
-
-		boolean x = false;
-		try {
-
-			Connection con = conection();
-
-			if (con != null) {
-
-			}
-
-			ResultSet rs = null;
-			Statement cmd = null;
-
-			cmd = con.createStatement();
-			if (by == 1) {
-				rs = cmd.executeQuery("SELECT * FROM log WHERE code= '" + code
-						+ "';");
-			} else {
-
-				if (by == 2) {
-
-				} else {
-
-				}
-			}
-			con.close();
-		} catch (SQLException ex) {
-
-			JOptionPane.showMessageDialog(null,
-					"SQLException: " + ex.getMessage());
-			x = false;
-		}
-
-		return x;
-
-	}
-
-	public static boolean buyMerch(String code, int amount) {
-		boolean x = false;
+	public static boolean buyMerch(String code, int amount, String price) {
+		boolean x = true;
 		try {
 
 			Connection con = conection();
@@ -414,6 +376,14 @@ public class MySQL {
 			cmd.executeUpdate("update item set Stock = (Stock + " + amount
 					+ ") where code = '" + code + "';");
 
+			ResultSet rs = null;
+
+			cmd = con.createStatement();
+
+			cmd.executeUpdate("insert into log values(0,'" + userS + "','"
+					+ dateFormat.format(date) + "', " + amount + ", " + code
+					+ ", -" + price + ")");
+
 			con.close();
 		} catch (SQLException ex) {
 
@@ -426,7 +396,7 @@ public class MySQL {
 
 	}
 
-	public static boolean sellMerch(String code, int amount) {
+	public static boolean sellMerch(String code, int amount, String price) {
 		boolean x = true;
 		try {
 			int stock = 0;
@@ -449,7 +419,7 @@ public class MySQL {
 				JOptionPane
 						.showMessageDialog(null,
 								"ERROR: no se puede vender más de lo que se tiene en stock");
-				x=false;
+				x = false;
 			} else {
 				if (stock == amount) {
 					JOptionPane.showMessageDialog(null,
@@ -460,6 +430,13 @@ public class MySQL {
 				cmd.executeUpdate("update item set Stock = ( Stock - " + amount
 						+ " ) where code = '" + code + "';");
 			}
+
+			cmd = con.createStatement();
+
+			cmd.executeUpdate("insert into log values(0,'" + userS + "','"
+					+ dateFormat.format(date) + "', " + -amount + ", " + code
+					+ ", " + price + ")");
+
 			con.close();
 		} catch (SQLException ex) {
 
@@ -473,7 +450,7 @@ public class MySQL {
 	}
 
 	public static boolean Find_Description(int code, JTable table,
-			DefaultTableModel model) {
+			DefaultTableModel model, boolean up) {
 
 		model.getDataVector().removeAllElements();
 		model.fireTableRowsInserted(0, model.getRowCount());
@@ -489,7 +466,7 @@ public class MySQL {
 
 		int count = 0;
 		boolean x = false;
-		
+
 		try {
 
 			Connection con = conection();
@@ -500,40 +477,51 @@ public class MySQL {
 			ResultSet rs = null, rs1 = null;
 			Statement cmd = null;
 			cmd = con.createStatement();
-
-			rs1 = cmd
-					.executeQuery("SELECT count(*) FROM item WHERE code like '"
-							+ code + "%';");
+			if (up == false) {
+				rs1 = cmd
+						.executeQuery("SELECT count(*) FROM item WHERE code like '"
+								+ code + "%' and status=1;");
+			} else {
+				rs1 = cmd
+						.executeQuery("SELECT count(*) FROM item WHERE code like '"
+								+ code + "%' and status=0;");
+			}
 			while (rs1.next()) {
 
 				count = rs1.getInt("count(*)");
 
 			}
-			cmd = con.createStatement();
-
-			rs = cmd.executeQuery("SELECT * FROM item WHERE code like '" + code
-					+ "%';");
-			int i = 0;
-			int type;
-			while (rs.next()) {
 			
+			if(count==0){
 				
-					
-					cod.add(rs.getString("code"));
-					name.add(rs.getString("name"));
-					manu.add(rs.getString("manufacturer"));
-					vat.add(rs.getString("vat"));
-					uprice.add(rs.getString("uprice"));
-					sprice.add(rs.getString("sprice"));
-					des.add(rs.getString("description"));
-					stock.add(rs.getString("stock"));
-				
+				JOptionPane.showMessageDialog(null, "No se ha encontrado similitudes");
+			}else{
+				JOptionPane.showMessageDialog(null, "Busqueda finalizada");
+			}
+			cmd = con.createStatement();
+			if (up == false) {
+				rs = cmd.executeQuery("SELECT * FROM item WHERE code like '"
+						+ code + "%' and status=1;");
+			} else {
+				rs = cmd.executeQuery("SELECT * FROM item WHERE code like '"
+						+ code + "%' and status=0;");
+
+			}
+
+			while (rs.next()) {
+
+				cod.add(rs.getString("code"));
+				name.add(rs.getString("name"));
+				manu.add(rs.getString("manufacturer"));
+				vat.add(rs.getString("vat"));
+				uprice.add(rs.getString("uprice"));
+				sprice.add(rs.getString("sprice"));
+				des.add(rs.getString("description"));
+				stock.add(rs.getString("stock"));
 
 			}
 
 			Object[] rowData = new Object[8];
-
-			Object[] columnsName = new Object[8];
 
 			for (int i2 = 0; i2 < count; i2++) {
 
@@ -561,5 +549,204 @@ public class MySQL {
 		}
 		return x;
 	}
+
+	public static void Merch(String tableS, boolean up) {
+		try {
+			Connection con = conection();
+			if (con != null) {
+
+			}
+
+			Statement cmd = null;
+			cmd = con.createStatement();
+
+			if (up == false) {
+				cmd.executeUpdate("update item set status = 0 where code = '"
+						+ tableS + "';");
+			} else {
+				cmd.executeUpdate("update item set status = 1 where code = '"
+						+ tableS + "';");
+			}
+			con.close();
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null,
+					"SQLException: " + ex.getMessage());
+		}
+
+	}
+
+	public static boolean SN(String S) {
+
+		try {
+			Integer.parseInt(S);
+			if (S.equals("")) {
+				return false;
+			} else {
+				return true;
+			}
+		} catch (NumberFormatException e) {
+			return false;
+		}
+
+	}
+
+	public static boolean SN2(String S) {
+
+		try {
+			Integer.parseInt(S);
+			return true;
+
+		} catch (NumberFormatException e) {
+
+			return false;
+		}
+
+	}
+
+	public static void Find_Logs(String year, String month, String day,
+			JTable table, DefaultTableModel model,JTextArea text) {
+
+		model.getDataVector().removeAllElements();
+		model.fireTableRowsInserted(0, model.getRowCount());
+
+		ArrayList<String> code = new ArrayList<String>();
+		ArrayList<String> user = new ArrayList<String>();
+		ArrayList<String> date = new ArrayList<String>();
+		ArrayList<String> movement = new ArrayList<String>();
+		ArrayList<String> item = new ArrayList<String>();
+		ArrayList<String> price = new ArrayList<String>();
+
+		int count = 0;
+
+		try {
+
+			Connection con = conection();
+
+			if (con != null) {
+			}
+
+			ResultSet rs = null, rs1 = null,rs2 = null;
+			Statement cmd = null;
+
+			if (month.equals("01")) {
+				cmd = con.createStatement();
+
+				rs1 = cmd
+						.executeQuery("SELECT count(*) FROM log WHERE date >= '"
+								+ year
+								+ "/01/01' and date  <='"
+								+ year
+								+ "/12/31';");
+
+				cmd = con.createStatement();
+
+				rs = cmd.executeQuery("SELECT * FROM log WHERE date >= '"
+						+ year + "/01/01' and date  <='" + year + "/12/31';");
+				
+				cmd = con.createStatement();
+
+				rs2 = cmd.executeQuery("SELECT SUM(price) FROM log WHERE date >= '"
+						+ year + "/01/01' and date  <='" + year + "/12/31';");
+
+			} else {
+
+				if (day.equals("01")) {
+					cmd = con.createStatement();
+
+					rs1 = cmd
+							.executeQuery("SELECT count(*) FROM log WHERE date >= '"
+									+ year
+									+ "/"
+									+ month
+									+ "/01' and date  <= '"
+									+ year
+									+ "/"
+									+ month + "/31' ;");
+
+					cmd = con.createStatement();
+
+					rs = cmd.executeQuery("SELECT * FROM log WHERE date >= '"
+							+ year + "/" + month + "/01' and date  <= '" + year
+							+ "/" + month + "/31';");
+					
+					cmd = con.createStatement();
+
+					rs2 = cmd.executeQuery("SELECT sum(price) FROM log WHERE date >= '"
+							+ year + "/" + month + "/01' and date  <= '" + year
+							+ "/" + month + "/31';");
+				} else {
+					cmd = con.createStatement();
+
+					rs1 = cmd
+							.executeQuery("SELECT count(*) FROM log WHERE date = '"
+									+ year + "/" + month + "/" + day + "';");
+
+					cmd = con.createStatement();
+
+					rs = cmd.executeQuery("SELECT * FROM log WHERE date = '"
+							+ year + "/" + month + "/" + day + "';");
+					
+					cmd = con.createStatement();
+
+					rs2 = cmd.executeQuery("SELECT sum(price) FROM log WHERE date = '"
+							+ year + "/" + month + "/" + day + "';");
+				}
+
+			}
+			while (rs1.next()) {
+
+				count = rs1.getInt("count(*)");
+
+			}
+
+			if (count == 0) {
+				JOptionPane
+						.showMessageDialog(null,
+								"No se ha encontrado movimientos realizados en ese periodo");
+			}else{
+				JOptionPane.showMessageDialog(null, "Busqueda finalizada");
+
+			}
+			
+			while (rs.next()) {
+
+				code.add(rs.getString("code"));
+				user.add(rs.getString("user"));
+				date.add(rs.getString("date"));
+				movement.add(rs.getString("movement"));
+				item.add(rs.getString("item"));
+				price.add(rs.getString("price"));
+
+			}
+			
+			while (rs2.next()){
+				text.setText(rs2.getString("sum(price)"));
+			}
+
+			Object[] rowData = new Object[6];
+
+			for (int i2 = 0; i2 < count; i2++) {
+
+				rowData[0] = code.get(i2);
+				rowData[1] = user.get(i2);
+				rowData[2] = date.get(i2);
+				rowData[3] = movement.get(i2);
+				rowData[4] = item.get(i2);
+				rowData[5] = price.get(i2);
+
+				model.addRow(rowData);
+
+			}
+
+			table.setModel(model);
+
+			con.close();
+		} catch (SQLException ex) {
+
+			JOptionPane.showMessageDialog(null,
+					"SQLException: " + ex.getMessage());
+		}
+	}
+	
 
 }
