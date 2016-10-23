@@ -45,6 +45,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 
 public class User_Frame extends JFrame {
 
@@ -86,6 +87,7 @@ public class User_Frame extends JFrame {
 	 * Create the frame.
 	 */
 	public User_Frame() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\Icono.png"));
 		setResizable(false);
 		setTitle("Usuario");
 
@@ -123,7 +125,7 @@ public class User_Frame extends JFrame {
 		panel_3.setLayout(null);
 
 		JLabel lblCodigoDelProducto = new JLabel("Codigo del producto");
-		lblCodigoDelProducto.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblCodigoDelProducto.setFont(new Font("DokChampa", Font.BOLD, 14));
 		lblCodigoDelProducto.setBounds(10, 29, 157, 18);
 		panel_3.add(lblCodigoDelProducto);
 
@@ -194,7 +196,7 @@ public class User_Frame extends JFrame {
 		panel_3.add(sell_search_confirm);
 
 		JLabel lblVenta = new JLabel("Venta");
-		lblVenta.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblVenta.setFont(new Font("DokChampa", Font.BOLD, 14));
 		lblVenta.setBounds(711, 29, 61, 18);
 		panel_3.add(lblVenta);
 
@@ -204,7 +206,7 @@ public class User_Frame extends JFrame {
 		panel_3.add(lblCantidad);
 
 		JLabel label_14 = new JLabel("Precio Final");
-		label_14.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_14.setFont(new Font("DokChampa", Font.BOLD, 14));
 		label_14.setBounds(694, 164, 89, 18);
 		panel_3.add(label_14);
 
