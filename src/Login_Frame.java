@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -61,9 +62,9 @@ public class Login_Frame extends JFrame {
 	 * Create the frame.
 	 */
 	public Login_Frame() {
+		setResizable(false);
 
-		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage("C:\\Users\\Usuario\\Documents\\GitHub\\HemmingtonSquire\\Imagenes\\Ferreteria.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Usuario\\Documents\\GitHub\\HemmingtonSquire\\Imagenes\\Ferreteria.png"));
 		setTitle("Login Ferreteria");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 427, 232);
