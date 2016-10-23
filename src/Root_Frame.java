@@ -43,6 +43,7 @@ import javax.swing.AbstractListModel;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 
 public class Root_Frame extends JFrame {
 
@@ -266,6 +267,7 @@ public class Root_Frame extends JFrame {
 		panel_2.add(add_button);
 
 		zero = new JRadioButton("0%");
+		zero.setBackground(new Color(240, 240, 240));
 		buttonGroup_2.add(zero);
 		zero.setBounds(233, 118, 48, 23);
 		panel_2.add(zero);
@@ -279,6 +281,11 @@ public class Root_Frame extends JFrame {
 		buttonGroup_2.add(twenty2);
 		twenty2.setBounds(333, 118, 48, 23);
 		panel_2.add(twenty2);
+		
+		JLabel label_20 = new JLabel("");
+		label_20.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
+		label_20.setBounds(0, 0, 844, 405);
+		panel_2.add(label_20);
 
 		JPanel panel_3 = new JPanel();
 		tabbedPane_1.addTab("Vender", null, panel_3, null);
@@ -380,6 +387,11 @@ public class Root_Frame extends JFrame {
 		});
 		sell_search_see.setBounds(692, 120, 91, 23);
 		panel_3.add(sell_search_see);
+		
+		JLabel label_22 = new JLabel("");
+		label_22.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
+		label_22.setBounds(0, 0, 844, 405);
+		panel_3.add(label_22);
 
 		JPanel panel_9 = new JPanel();
 		panel_9.setLayout(null);
@@ -463,6 +475,11 @@ public class Root_Frame extends JFrame {
 		add_find.setModel(model);
 
 		add_find.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
+		lblNewLabel.setBounds(0, 0, 844, 405);
+		panel_9.add(lblNewLabel);
 
 		DefaultTableModel model_date = new DefaultTableModel() {
 			@Override
@@ -493,17 +510,17 @@ public class Root_Frame extends JFrame {
 				logic_deletion(logicDeletion_search, u);
 			}
 		});
-		down_button.setBounds(298, 59, 160, 23);
+		down_button.setBounds(342, 371, 160, 23);
 		panel_6.add(down_button);
 
 		logicDeletion_code = new JTextField();
 		logicDeletion_code.setColumns(10);
-		logicDeletion_code.setBounds(7, 60, 110, 20);
+		logicDeletion_code.setBounds(10, 40, 110, 20);
 		panel_6.add(logicDeletion_code);
 
 		JLabel label_13 = new JLabel("Codigo del producto");
 		label_13.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		label_13.setBounds(7, 31, 157, 18);
+		label_13.setBounds(10, 11, 157, 18);
 		panel_6.add(label_13);
 
 		JButton down_search = new JButton("Buscar");
@@ -516,11 +533,11 @@ public class Root_Frame extends JFrame {
 				}
 			}
 		});
-		down_search.setBounds(149, 60, 89, 23);
+		down_search.setBounds(130, 39, 89, 23);
 		panel_6.add(down_search);
 
 		JScrollPane scrollPane_3 = new JScrollPane();
-		scrollPane_3.setBounds(7, 91, 596, 282);
+		scrollPane_3.setBounds(10, 75, 824, 285);
 		panel_6.add(scrollPane_3);
 
 		logicDeletion_search = new JTable();
@@ -539,6 +556,11 @@ public class Root_Frame extends JFrame {
 		;
 
 		logicDeletion_search.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
+		lblNewLabel_1.setBounds(0, 0, 844, 405);
+		panel_6.add(lblNewLabel_1);
 
 		model2.setColumnIdentifiers(columnsName);
 
@@ -587,8 +609,13 @@ public class Root_Frame extends JFrame {
 			}
 		});
 
-		up_button.setBounds(142, 40, 89, 23);
+		up_button.setBounds(130, 39, 89, 23);
 		panel_8.add(up_button);
+		
+		JLabel label_23 = new JLabel("");
+		label_23.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
+		label_23.setBounds(0, 0, 844, 405);
+		panel_8.add(label_23);
 
 		JPanel panel_5 = new JPanel();
 		panel_5.setLayout(null);
@@ -645,6 +672,11 @@ public class Root_Frame extends JFrame {
 		update_search.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		update_search.setModel(model);
 		update_search.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
+		lblNewLabel_2.setBounds(0, 0, 844, 405);
+		panel_5.add(lblNewLabel_2);
 
 		JPanel panel_4 = new JPanel();
 		panel_4.setLayout(null);
@@ -725,6 +757,11 @@ public class Root_Frame extends JFrame {
 		get_total = new JTextArea();
 		get_total.setBounds(713, 349, 117, 26);
 		panel_4.add(get_total);
+		
+		JLabel lblNewLabel_3 = new JLabel("New label");
+		lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
+		lblNewLabel_3.setBounds(0, 0, 857, 405);
+		panel_4.add(lblNewLabel_3);
 
 		JPanel panel_7 = new JPanel();
 		panel_7.setLayout(null);
@@ -801,6 +838,16 @@ public class Root_Frame extends JFrame {
 		buttonGroup_3.add(Twenty2);
 		Twenty2.setBounds(558, 55, 48, 23);
 		panel_7.add(Twenty2);
+		
+		JLabel lblNewLabel_4 = new JLabel("New label");
+		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
+		lblNewLabel_4.setBounds(0, 0, 844, 405);
+		panel_7.add(lblNewLabel_4);
+		
+		JLabel label_4 = new JLabel("");
+		label_4.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_2.jpg"));
+		label_4.setBounds(0, 0, 869, 473);
+		panel.add(label_4);
 
 		panel_1 = new JPanel();
 		tabbedPane.addTab("Control de usuarios", null, panel_1, null);
@@ -877,6 +924,16 @@ public class Root_Frame extends JFrame {
 		JLabel lblConfirmarContrasea = new JLabel("Confirmar contrase\u00F1a");
 		lblConfirmarContrasea.setBounds(89, 235, 113, 14);
 		panel_1.add(lblConfirmarContrasea);
+		
+		JLabel label_18 = new JLabel("");
+		label_18.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_2.jpg"));
+		label_18.setBounds(0, 0, 869, 473);
+		panel_1.add(label_18);
+		
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_1.jpg"));
+		label_1.setBounds(0, 0, 896, 522);
+		contentPane.add(label_1);
 	}
 
 	public static boolean empty_users() {
