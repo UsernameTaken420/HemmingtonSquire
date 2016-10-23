@@ -297,7 +297,12 @@ public class Root_Frame extends JFrame {
 		table = new JTable();
 		scrollPane_1.setViewportView(table);
 
-		model = new DefaultTableModel();
+		model = new DefaultTableModel() {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		Object[] columnsName = new Object[8];
@@ -522,7 +527,13 @@ public class Root_Frame extends JFrame {
 
 		logicDeletion_search.setModel(model);
 
-		DefaultTableModel model2 = new DefaultTableModel();
+		DefaultTableModel model2 = new DefaultTableModel() {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		;
 
 		logicDeletion_search.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -905,10 +916,17 @@ public class Root_Frame extends JFrame {
 
 		} catch (java.lang.NumberFormatException ex2) {
 			JOptionPane.showMessageDialog(null,
-					"Error debe ingresar letras ni numeros mayores a 2147483647 en los campos codigo,iva,precio unitario,precio de venta,stock");
+					"Error debe ingresar letras ni numeros mayores a 10 cifras en los campos codigo,iva,precio unitario,precio de venta,stock");
 			return false;
 		}
 
+		if (add_name.getText().length() > 10 || add_manufacturer.getText().length() > 10
+				|| add_description.getText().length() > 10) {
+
+			JOptionPane.showMessageDialog(null,
+					"Error no puede ingresar mas de 10 digitos en los campos nombre,fabricante y descripcion");
+			return false;
+		}
 		return true;
 	}
 
@@ -1015,6 +1033,7 @@ public class Root_Frame extends JFrame {
 							MySQL.Find_Description(history, table, model, false);
 
 						}
+
 					} else {
 
 						JOptionPane.showMessageDialog(null, "No puede ingresar una cantidad menor a 0");
@@ -1089,6 +1108,7 @@ public class Root_Frame extends JFrame {
 											+ total_amount);
 
 							MySQL.Find_Description(history, table, model, false);
+
 						}
 
 					} else {
@@ -1211,9 +1231,8 @@ public class Root_Frame extends JFrame {
 			MySQL.Merch(tableS, u);
 
 			JOptionPane.showMessageDialog(null, "Producto dado de alta correctamente");
-			
-			MySQL.Find_Description(history, table, model, true);
 
+			MySQL.Find_Description(history, table, model, true);
 
 		}
 
