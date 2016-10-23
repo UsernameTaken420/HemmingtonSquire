@@ -415,82 +415,6 @@ public class User_Frame extends JFrame {
 		panel_4.add(get_total);
 	}
 
-	public static boolean empty_users() {
-		if (userToAdd.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso el Usuario... ingrese nuevamente");
-			return false;
-		}
-		if (passToAdd.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso la Contraseña... ingrese nuevamente");
-			return false;
-		}
-		if (passCToAdd.getText().equals("")) {
-			JOptionPane.showMessageDialog(null,
-					"Error No Ingreso la confirmacion de la Contraseña... ingrese nuevamente");
-			return false;
-		}
-		return true;
-	}
-
-	public static boolean empty_add() {
-		if (add_code.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso el Codigo... ingrese nuevamente");
-			return false;
-		}
-
-		if (add_name.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso el Nombre... ingrese nuevamente");
-			return false;
-		}
-		if (add_initial.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso el Stock Inicial... ingrese nuevamente");
-			return false;
-		}
-		if (add_unitaryPrice.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso el Precio Unitario... ingrese nuevamente");
-			return false;
-		}
-		if (add_sellPrice.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso la Precio de Venta... ingrese nuevamente");
-			return false;
-		}
-		if (add_description.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso la Descripcion... ingrese nuevamente");
-			return false;
-		}
-		if (add_manufacturer.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Error No Ingreso el Fabricante... ingrese nuevamente");
-			return false;
-		}
-		int code, Uprice, Sprice, stock;
-		try {
-			code = Integer.parseInt(add_code.getText());
-			Uprice = Integer.parseInt(add_unitaryPrice.getText());
-			Sprice = Integer.parseInt(add_sellPrice.getText());
-			stock = Integer.parseInt(add_initial.getText());
-
-			if (code < 0 || vat < 0 || Uprice < 0 || Sprice < 0 || stock < 0) {
-
-				JOptionPane.showMessageDialog(null, "No puede ingresar un valor negativo");
-				return false;
-			}
-
-		} catch (java.lang.NumberFormatException ex2) {
-			JOptionPane.showMessageDialog(null,
-					"Error debe ingresar letras ni numeros mayores a 10 cifras en los campos codigo,iva,precio unitario,precio de venta,stock");
-			return false;
-		}
-
-		if (add_name.getText().length() > 10 || add_manufacturer.getText().length() > 10
-				|| add_description.getText().length() > 10) {
-
-			JOptionPane.showMessageDialog(null,
-					"Error no puede ingresar mas de 10 digitos en los campos nombre,fabricante y descripcion");
-			return false;
-		}
-		return true;
-	}
-
 	public static boolean empty(JTextField empty_Jtext) {
 		if (empty_Jtext.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "Error No Ingreso el Codigo... ingrese nuevamente");
@@ -705,27 +629,7 @@ public class User_Frame extends JFrame {
 			
 		}
 
-	public static void add_merchandise(JTextField code, JTextField name, JTextField manu, JTextField stock, int vat,
-			JTextField Uprice, JTextField Sprice, JTextArea des) {
-
-		if (empty_add()) {
-
-			MySQL.AddMerchandise(code.getText(), name.getText(), manu.getText(), stock.getText(), vat, Uprice.getText(),
-					Sprice.getText(), des.getText());
-
-			JOptionPane.showMessageDialog(null, "Nuevo producto ingresado correctamente");
-
-		}
-
-		code.setText("");
-		name.setText("");
-		manu.setText("");
-		stock.setText("");
-		Uprice.setText("");
-		Sprice.setText("");
-		des.setText("");
-
-	}
+	
 
 	public static void logic_deletion(JTable table, boolean u) {
 
