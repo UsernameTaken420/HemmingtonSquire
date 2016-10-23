@@ -44,6 +44,7 @@ import javax.swing.AbstractListModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class Root_Frame extends JFrame {
 
@@ -124,6 +125,7 @@ public class Root_Frame extends JFrame {
 	 * Create the frame.
 	 */
 	public Root_Frame() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\Icono.png"));
 		setResizable(false);
 		setTitle("Administrador");
 
