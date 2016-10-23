@@ -59,7 +59,6 @@ public class Root_Frame extends JFrame {
 	private JTextField buy_quantity;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JTextField update_price;
-	private JTextField vat_value;
 	private JButton add_user;
 	private JButton remove_user;
 	private JPanel panel_1;
@@ -98,6 +97,10 @@ public class Root_Frame extends JFrame {
 	private JTextArea get_total;
 	private static DefaultTableModel model;
 	private static int history;
+	private final ButtonGroup buttonGroup_3 = new ButtonGroup();
+	private JRadioButton Zero;
+	private JRadioButton Fourteen;
+	private JRadioButton Twenty2;
 
 	/**
 	 * Launch the application.
@@ -187,32 +190,32 @@ public class Root_Frame extends JFrame {
 
 		add_code = new JTextField();
 		add_code.setColumns(10);
-		add_code.setBounds(231, 82, 111, 20);
+		add_code.setBounds(231, 82, 150, 20);
 		panel_2.add(add_code);
 
 		add_name = new JTextField();
 		add_name.setColumns(10);
-		add_name.setBounds(231, 156, 111, 20);
+		add_name.setBounds(231, 156, 150, 20);
 		panel_2.add(add_name);
 
 		add_initial = new JTextField();
 		add_initial.setColumns(10);
-		add_initial.setBounds(231, 197, 111, 20);
+		add_initial.setBounds(231, 197, 150, 20);
 		panel_2.add(add_initial);
 
 		add_unitaryPrice = new JTextField();
 		add_unitaryPrice.setColumns(10);
-		add_unitaryPrice.setBounds(231, 237, 111, 20);
+		add_unitaryPrice.setBounds(231, 237, 150, 20);
 		panel_2.add(add_unitaryPrice);
 
 		add_sellPrice = new JTextField();
 		add_sellPrice.setColumns(10);
-		add_sellPrice.setBounds(231, 277, 111, 20);
+		add_sellPrice.setBounds(231, 277, 150, 20);
 		panel_2.add(add_sellPrice);
 
 		add_manufacturer = new JTextField();
 		add_manufacturer.setColumns(10);
-		add_manufacturer.setBounds(231, 319, 111, 20);
+		add_manufacturer.setBounds(231, 319, 150, 20);
 		panel_2.add(add_manufacturer);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -229,7 +232,7 @@ public class Root_Frame extends JFrame {
 
 		JLabel lblDescripcion_1 = new JLabel("Descripcion");
 		lblDescripcion_1.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		lblDescripcion_1.setBounds(586, 35, 123, 27);
+		lblDescripcion_1.setBounds(588, 35, 140, 27);
 		panel_2.add(lblDescripcion_1);
 
 		add_button = new JButton("Confirmar");
@@ -384,11 +387,11 @@ public class Root_Frame extends JFrame {
 
 		buy_quantity = new JTextField();
 		buy_quantity.setColumns(10);
-		buy_quantity.setBounds(749, 78, 61, 20);
+		buy_quantity.setBounds(749, 58, 61, 20);
 		panel_9.add(buy_quantity);
 
 		JTextArea buy_textArea = new JTextArea();
-		buy_textArea.setBounds(671, 223, 139, 115);
+		buy_textArea.setBounds(667, 209, 139, 115);
 		panel_9.add(buy_textArea);
 
 		JButton buy_confirm = new JButton("Confirmar compra");
@@ -404,17 +407,17 @@ public class Root_Frame extends JFrame {
 
 		JLabel lblCompra = new JLabel("Compra");
 		lblCompra.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		lblCompra.setBounds(714, 49, 61, 18);
+		lblCompra.setBounds(711, 29, 61, 18);
 		panel_9.add(lblCompra);
 
 		JLabel label_15 = new JLabel("Cantidad");
 		label_15.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		label_15.setBounds(671, 78, 68, 18);
+		label_15.setBounds(660, 58, 68, 18);
 		panel_9.add(label_15);
 
 		JLabel lblPrecioFnal = new JLabel("Precio Final");
 		lblPrecioFnal.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		lblPrecioFnal.setBounds(698, 183, 89, 18);
+		lblPrecioFnal.setBounds(694, 146, 89, 18);
 		panel_9.add(lblPrecioFnal);
 
 		JButton buy_preview = new JButton("Visualizar");
@@ -425,7 +428,7 @@ public class Root_Frame extends JFrame {
 
 			}
 		});
-		buy_preview.setBounds(698, 130, 91, 23);
+		buy_preview.setBounds(692, 120, 91, 23);
 		panel_9.add(buy_preview);
 
 		JLabel label_11 = new JLabel("Codigo del producto");
@@ -544,7 +547,7 @@ public class Root_Frame extends JFrame {
 		panel_8.setLayout(null);
 
 		JScrollPane scrollPane_7 = new JScrollPane();
-		scrollPane_7.setBounds(10, 75, 592, 300);
+		scrollPane_7.setBounds(10, 75, 824, 285);
 		panel_8.add(scrollPane_7);
 
 		up_table = new JTable();
@@ -559,7 +562,7 @@ public class Root_Frame extends JFrame {
 				logic_validation(up_table, u);
 			}
 		});
-		up_buttton2.setBounds(295, 39, 160, 23);
+		up_buttton2.setBounds(313, 371, 222, 23);
 		panel_8.add(up_buttton2);
 
 		up_search = new JTextField();
@@ -599,22 +602,22 @@ public class Root_Frame extends JFrame {
 
 			}
 		});
-		update_price_button.setBounds(665, 259, 139, 23);
+		update_price_button.setBounds(695, 57, 139, 23);
 		panel_5.add(update_price_button);
 
 		JLabel lblNuevoPrecio = new JLabel("Nuevo Precio");
 		lblNuevoPrecio.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		lblNuevoPrecio.setBounds(689, 167, 96, 18);
+		lblNuevoPrecio.setBounds(545, 29, 96, 18);
 		panel_5.add(lblNuevoPrecio);
 
 		update_price = new JTextField();
-		update_price.setBounds(665, 228, 139, 20);
+		update_price.setBounds(545, 58, 140, 20);
 		panel_5.add(update_price);
 		update_price.setColumns(10);
 
 		update_code = new JTextField();
 		update_code.setColumns(10);
-		update_code.setBounds(10, 58, 110, 20);
+		update_code.setBounds(10, 58, 140, 20);
 		panel_5.add(update_code);
 
 		JLabel label_19 = new JLabel("Codigo del producto");
@@ -630,11 +633,11 @@ public class Root_Frame extends JFrame {
 				search(update_code, update_search, model, up);
 			}
 		});
-		update_button.setBounds(152, 58, 89, 23);
+		update_button.setBounds(160, 57, 139, 23);
 		panel_5.add(update_button);
 
 		JScrollPane scrollPane_5 = new JScrollPane();
-		scrollPane_5.setBounds(10, 101, 596, 274);
+		scrollPane_5.setBounds(10, 101, 824, 274);
 		panel_5.add(scrollPane_5);
 
 		update_search = new JTable();
@@ -654,7 +657,7 @@ public class Root_Frame extends JFrame {
 
 		JLabel lblFechaABuscar = new JLabel("Fecha a buscar");
 		lblFechaABuscar.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		lblFechaABuscar.setBounds(353, 11, 157, 18);
+		lblFechaABuscar.setBounds(140, 11, 157, 18);
 		panel_4.add(lblFechaABuscar);
 
 		JScrollPane scrollPane_4 = new JScrollPane();
@@ -712,15 +715,16 @@ public class Root_Frame extends JFrame {
 
 		JLabel lblGanancia = new JLabel("Ganancia");
 		lblGanancia.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		lblGanancia.setBounds(734, 59, 89, 18);
+		lblGanancia.setBounds(741, 276, 89, 18);
 		panel_4.add(lblGanancia);
 
 		JScrollPane scrollPane_8 = new JScrollPane();
-		scrollPane_8.setBounds(713, 90, 119, 28);
+		scrollPane_8.setBounds(713, 306, 119, 69);
 		panel_4.add(scrollPane_8);
 
 		get_total = new JTextArea();
-		scrollPane_8.setViewportView(get_total);
+		get_total.setBounds(713, 349, 117, 26);
+		panel_4.add(get_total);
 
 		JPanel panel_7 = new JPanel();
 		panel_7.setLayout(null);
@@ -729,27 +733,33 @@ public class Root_Frame extends JFrame {
 		JButton vat_value_button = new JButton("Confirmar precio");
 		vat_value_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				int vat_value = 0;
+				if(Zero.isSelected()){
+					
+				}else{
+					if(Fourteen.isSelected()){
+						vat_value = 14;
+					}else{
+						if(Twenty2.isSelected()){
+							vat_value = 22;
+						}
+					}
+				}
 				vat(vat_search, vat_value);
 
 			}
 		});
-		vat_value_button.setBounds(637, 203, 139, 23);
+		vat_value_button.setBounds(612, 57, 139, 23);
 		panel_7.add(vat_value_button);
 
 		JLabel lblNuevoPorcentaje = new JLabel("Nuevo Porcentaje");
 		lblNuevoPorcentaje.setFont(new Font("DokChampa", Font.PLAIN, 14));
-		lblNuevoPorcentaje.setBounds(645, 132, 120, 18);
+		lblNuevoPorcentaje.setBounds(458, 29, 120, 18);
 		panel_7.add(lblNuevoPorcentaje);
-
-		vat_value = new JTextField();
-		vat_value.setColumns(10);
-		vat_value.setBounds(639, 161, 137, 20);
-		panel_7.add(vat_value);
 
 		vat_code = new JTextField();
 		vat_code.setColumns(10);
-		vat_code.setBounds(10, 58, 110, 20);
+		vat_code.setBounds(10, 58, 132, 20);
 		panel_7.add(vat_code);
 
 		JLabel label_21 = new JLabel("Codigo del producto");
@@ -769,13 +779,28 @@ public class Root_Frame extends JFrame {
 		panel_7.add(vat_button);
 
 		JScrollPane scrollPane_6 = new JScrollPane();
-		scrollPane_6.setBounds(10, 94, 596, 281);
+		scrollPane_6.setBounds(10, 94, 824, 281);
 		panel_7.add(scrollPane_6);
 
 		vat_search = new JTable();
 		scrollPane_6.setViewportView(vat_search);
 		vat_search.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		vat_search.setModel(model);
+		
+		Zero = new JRadioButton("0%");
+		buttonGroup_3.add(Zero);
+		Zero.setBounds(458, 55, 48, 23);
+		panel_7.add(Zero);
+		
+		Fourteen = new JRadioButton("14%");
+		buttonGroup_3.add(Fourteen);
+		Fourteen.setBounds(508, 55, 48, 23);
+		panel_7.add(Fourteen);
+		
+		Twenty2 = new JRadioButton("22%");
+		buttonGroup_3.add(Twenty2);
+		Twenty2.setBounds(558, 55, 48, 23);
+		panel_7.add(Twenty2);
 
 		panel_1 = new JPanel();
 		tabbedPane.addTab("Control de usuarios", null, panel_1, null);
@@ -1126,32 +1151,24 @@ public class Root_Frame extends JFrame {
 		textArea.setText("");
 	}
 
-	public static void vat(JTable table, JTextField value) {
+	public static void vat(JTable table, int value) {
 
 		if (table.getSelectedRow() < 0) {
 			JOptionPane.showMessageDialog(null, "Se debe seleccionar un producto en la tabla");
 		} else {
-			if (MySQL.SN(value.getText())) {
-				if (value.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "La cantidad a actualizar no debe estar vacia");
-				} else {
-
+			
+					
 					String tableS = (table.getValueAt(table.getSelectedRow(), 0).toString());
-					int values = Integer.parseInt(value.getText());
-					MySQL.changeVAT(tableS, values);
-					if (values > 0) {
+					MySQL.changeVAT(tableS, value);
+					if (value > 0) {
 						JOptionPane.showMessageDialog(null, "El IVA se ha actualizado correctamente");
 					}
 					MySQL.Find_Description(history, table, model, false);
 
 				}
-			} else {
-				JOptionPane.showMessageDialog(null, "La cantidad a actualizar debe ser un numero y menor a 10 digitos");
-			}
+			
 		}
-		value.setText("");
 
-	}
 
 	public static void update(JTable table, JTextField value) {
 
