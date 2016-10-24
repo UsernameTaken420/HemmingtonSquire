@@ -1,9 +1,12 @@
-/* creen que alcohol haría que lidiar con esto fuese más fácil? */
+Manual de variables
 
-NombreT: Campo en donde se ingresa el usuario en la ventana de login
-PasswordT: Campo en donde se ingresa la password en la ventana de login
-l
-contador : variable de contador para estructuras repetitivas
-contador 2: variable de contador para estructuras repetitivas cuando ya existe contador
-contador 3: variable de contador para estructuras repetitivas cuando ya existe contador 2 y contador
-contador 4: variable de contador para estructuras repetitivas cuando ya existe contador , contador 2 y contador 3
+vat : variable que guarda el valor del iva
+add_code : variable en la que se guarda el código del producto para agregarlo luego en la base de datos
+add_name : variable en la que se guarda el nombre del producto para agregarlo luego en la base de datos 
+add_manufacturer : : variable en la que se guarda el fabricante del producto para luego agregarlo en la base de datos 
+add_initial : variable en la que se guarda el stok inicial del producto para agregarlo en la base de datos
+add_unitaryPrice : variable en la que se guarda el precio unitario del producto para agregarlo en la base de datos
+add_sellPrice : variable en la que se guarda el precio de venta del producto para agregarlo en la base de datos 
+add_description : variable en la que se guarda la descripción del producto para agregarlo en la base de datos
+sell_search_search : variable que se encarga de guardar el valor de un codigo para luego ser buscado
+table : variable que hace referencia a la tabla en la que se despliegan los datos de los productos buscados
