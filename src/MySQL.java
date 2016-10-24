@@ -50,7 +50,7 @@ public class MySQL {
 		register();
 
 		String user = "root";
-		String pw = "rootlindo";
+		String pw = "Abece12tres";
 		String db = "hemmingtonsquire";
 
 		String parche = "?autoReconnect=true&useSSL=false";

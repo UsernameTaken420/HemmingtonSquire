@@ -1014,11 +1014,11 @@ public class Root_Frame extends JFrame {
 			return false;
 		}
 
-		if (add_name.getText().length() > 10 || add_manufacturer.getText().length() > 10
-				|| add_description.getText().length() > 10) {
+		if (add_name.getText().length() > 15 || add_manufacturer.getText().length() > 15
+				|| add_description.getText().length() > 30) {
 
 			JOptionPane.showMessageDialog(null,
-					"Error no puede ingresar mas de 10 digitos en los campos nombre,fabricante y descripcion");
+					"Error no puede ingresar mas de 15 digitos en los campos nombre y fabricante y mas de 30 en descripcion");
 			return false;
 		}
 		return true;
