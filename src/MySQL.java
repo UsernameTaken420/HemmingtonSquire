@@ -167,13 +167,31 @@ public class MySQL {
 
 			}
 
-			int rs = 0;
+			int rs;
 			Statement cmd = null;
-
+			ResultSet rs1 = null;
+			String cod_r = "";
+			
 			cmd = con.createStatement();
-			rs = cmd.executeUpdate("INSERT INTO item values (" + code + ", '" + add_name + "', '" + add_manufacturer
-					+ "', '" + add_initial + "', " + vat + ", '" + add_unitaryPrice + "', '" + add_sellPrice + "', '"
-					+ add_description + "',1); ");
+
+			rs1 = cmd.executeQuery("SELECT * FROM Item WHERE code = '" + code + "';");
+
+			while (rs1.next()) {
+
+				cod_r = rs1.getString("code");
+
+			}
+
+			if (cod_r.equals(code)) {
+				JOptionPane.showMessageDialog(null, "Ese codigo ya esta en uso eliga otro");
+			} else {
+
+				cmd = con.createStatement();
+				rs = cmd.executeUpdate("INSERT INTO item values (" + code + ", '" + add_name + "', '" + add_manufacturer
+						+ "', '" + add_initial + "', " + vat + ", '" + add_unitaryPrice + "', '" + add_sellPrice
+						+ "', '" + add_description + "',1); ");
+
+			}
 
 			con.close();
 		} catch (SQLException ex) {
@@ -347,7 +365,7 @@ public class MySQL {
 			cmd.executeUpdate("update item set Stock = (Stock + " + amount + ") where code = '" + code + "';");
 
 			if (price.length() > 10) {
-				
+
 				JOptionPane.showMessageDialog(null, "No se puede guardar un precio mayor a 10 cifras");
 
 				cmd = con.createStatement();
