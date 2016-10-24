@@ -1271,11 +1271,12 @@ public class Root_Frame extends JFrame {
 
 		if (empty_add()) {
 
-			MySQL.AddMerchandise(code.getText(), name.getText(), manu.getText(), stock.getText(), vat, Uprice.getText(),
-					Sprice.getText(), des.getText());
+			if(MySQL.AddMerchandise(code.getText(), name.getText(), manu.getText(), stock.getText(), vat, Uprice.getText(),
+					Sprice.getText(), des.getText())){
 
 			JOptionPane.showMessageDialog(null, "Nuevo producto ingresado correctamente");
 
+			}
 		}
 
 		code.setText("");
