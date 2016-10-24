@@ -87,7 +87,7 @@ public class User_Frame extends JFrame {
 	 * Create the frame.
 	 */
 	public User_Frame() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\Icono.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(User_Frame.class.getResource("/Imagenes/Icono.png")));
 		setResizable(false);
 		setTitle("Usuario");
 
@@ -222,7 +222,7 @@ public class User_Frame extends JFrame {
 		panel_3.add(sell_search_see);
 		
 		JLabel label_2 = new JLabel("");
-		label_2.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
+		label_2.setIcon(new ImageIcon(User_Frame.class.getResource("/Imagenes/wood_3.jpg")));
 		label_2.setBounds(0, -19, 844, 424);
 		panel_3.add(label_2);
 
@@ -257,10 +257,10 @@ public class User_Frame extends JFrame {
 		JLabel label_1 = new JLabel("");
 		label_1.setBounds(-15, -31, 895, 515);
 		panel.add(label_1);
-		label_1.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_2.jpg"));
+		label_1.setIcon(new ImageIcon(User_Frame.class.getResource("/Imagenes/wood_2.jpg")));
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_1.jpg"));
+		label.setIcon(new ImageIcon(User_Frame.class.getResource("/Imagenes/wood_1.jpg")));
 		label.setBounds(0, 0, 896, 522);
 		contentPane.add(label);
 	}

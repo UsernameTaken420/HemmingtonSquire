@@ -64,7 +64,7 @@ public class Login_Frame extends JFrame {
 	public Login_Frame() {
 		setResizable(false);
 
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\Icono.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login_Frame.class.getResource("/Imagenes/Icono.png")));
 		setTitle("Login Ferreteria");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 427, 232);
@@ -117,12 +117,12 @@ public class Login_Frame extends JFrame {
 		Contenedor.add(LoginBoton);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\Icono2.png"));
-		lblNewLabel.setBounds(23, 45, 100, 100);
+		lblNewLabel.setIcon(new ImageIcon(Login_Frame.class.getResource("/Imagenes/Icono2.png")));
+		lblNewLabel.setBounds(22, 45, 100, 100);
 		Contenedor.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_1.jpg"));
+		lblNewLabel_1.setIcon(new ImageIcon(Login_Frame.class.getResource("/Imagenes/wood_1.jpg")));
 		lblNewLabel_1.setBounds(0, 0, 421, 204);
 		Contenedor.add(lblNewLabel_1);
 	}
