@@ -118,7 +118,7 @@ public class Login_Frame extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(Login_Frame.class.getResource("/Imagenes/Icono2.png")));
-		lblNewLabel.setBounds(22, 45, 100, 100);
+		lblNewLabel.setBounds(25, 45, 100, 100);
 		Contenedor.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
