@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `hemmingtonsquire` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `hemmingtonsquire`;
--- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
--- Host: localhost    Database: hemmingtonsquire
+-- Host: 127.0.0.1    Database: hemmingtonsquire
 -- ------------------------------------------------------
--- Server version	5.7.11-enterprise-commercial-advanced-log
+-- Server version	5.7.15-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -32,7 +30,7 @@ CREATE TABLE `item` (
   `VAT` int(10) NOT NULL,
   `UPrice` int(10) NOT NULL,
   `SPrice` int(10) NOT NULL,
-  `Description` varchar(30),
+  `Description` varchar(30) DEFAULT NULL,
   `Status` bit(1) NOT NULL,
   PRIMARY KEY (`Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -132,7 +130,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `Username` varchar(15) NOT NULL,
   `Password` varchar(15) NOT NULL,
-  `Type` varchar (10) NOT NULL,
+  `Type` varchar(10) NOT NULL,
   PRIMARY KEY (`Username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -143,7 +141,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('Root','Rootlindo','Admin');
+INSERT INTO `user` VALUES ('Gabriel','Kryger','Admin'),('Invitado','Invitado','Seller'),('Nahuel','Biladoniga','Admin'),('Nicolas','gabin','Admin'),('Root','Rootlindo','Admin');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -156,4 +154,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-14 19:01:34
+-- Dump completed on 2016-10-24  0:50:01

@@ -1,6 +1,5 @@
 import java.awt.BorderLayout;
 
-
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -109,18 +108,23 @@ public class Login_Frame extends JFrame {
 				if (empty()) {
 					MySQL.login(name.getText(), password.getText());
 
+				} else {
+
+					name.setText("");
+					password.setText("");
+					
 				}
 
 			}
 		});
 		LoginBoton.setBounds(287, 149, 89, 23);
 		Contenedor.add(LoginBoton);
-		
+
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(Login_Frame.class.getResource("/Imagenes/Icono2.png")));
 		lblNewLabel.setBounds(25, 45, 100, 100);
 		Contenedor.add(lblNewLabel);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setIcon(new ImageIcon(Login_Frame.class.getResource("/Imagenes/wood_1.jpg")));
 		lblNewLabel_1.setBounds(0, 0, 421, 204);
@@ -130,6 +134,7 @@ public class Login_Frame extends JFrame {
 	public static boolean empty() {
 		if (name.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "Error No Ingreso el Codigo... ingrese nuevamente");
+
 			return false;
 		}
 
