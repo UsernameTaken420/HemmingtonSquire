@@ -241,6 +241,7 @@ public class MySQL {
 		}
 
 	}
+	
 
 	public static boolean changeVAT(String code, int newPerc) {
 		boolean x = false;
