@@ -690,7 +690,7 @@ public class Root_Frame extends JFrame {
 		panel_4.add(get_year);
 
 		JLabel lblFechaABuscar = new JLabel("Fecha a buscar");
-		lblFechaABuscar.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblFechaABuscar.setFont(new Font("DokChampa", Font.BOLD, 14));
 		lblFechaABuscar.setBounds(140, 11, 157, 18);
 		panel_4.add(lblFechaABuscar);
 
@@ -748,7 +748,7 @@ public class Root_Frame extends JFrame {
 		panel_4.add(label_17);
 
 		JLabel lblGanancia = new JLabel("Ganancia");
-		lblGanancia.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblGanancia.setFont(new Font("DokChampa", Font.BOLD, 14));
 		lblGanancia.setBounds(741, 276, 89, 18);
 		panel_4.add(lblGanancia);
 
@@ -762,7 +762,7 @@ public class Root_Frame extends JFrame {
 		
 		JLabel lblNewLabel_3 = new JLabel("New label");
 		lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
-		lblNewLabel_3.setBounds(0, 0, 857, 405);
+		lblNewLabel_3.setBounds(0, 11, 857, 405);
 		panel_4.add(lblNewLabel_3);
 
 		JPanel panel_7 = new JPanel();
@@ -792,7 +792,7 @@ public class Root_Frame extends JFrame {
 		panel_7.add(vat_value_button);
 
 		JLabel lblNuevoPorcentaje = new JLabel("Nuevo Porcentaje");
-		lblNuevoPorcentaje.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		lblNuevoPorcentaje.setFont(new Font("DokChampa", Font.BOLD, 14));
 		lblNuevoPorcentaje.setBounds(458, 29, 120, 18);
 		panel_7.add(lblNuevoPorcentaje);
 
@@ -802,7 +802,7 @@ public class Root_Frame extends JFrame {
 		panel_7.add(vat_code);
 
 		JLabel label_21 = new JLabel("Codigo del producto");
-		label_21.setFont(new Font("DokChampa", Font.PLAIN, 14));
+		label_21.setFont(new Font("DokChampa", Font.BOLD, 14));
 		label_21.setBounds(10, 29, 157, 18);
 		panel_7.add(label_21);
 
@@ -936,6 +936,11 @@ public class Root_Frame extends JFrame {
 		lblConfirmarContrasea.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblConfirmarContrasea.setBounds(31, 233, 209, 16);
 		panel_1.add(lblConfirmarContrasea);
+		
+		JLabel lblNewLabel_5 = new JLabel("New label");
+		lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\Icono.png"));
+		lblNewLabel_5.setBounds(562, 232, 200, 200);
+		panel_1.add(lblNewLabel_5);
 		
 		JLabel label_18 = new JLabel("");
 		label_18.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_2.jpg"));
