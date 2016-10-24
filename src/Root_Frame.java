@@ -125,7 +125,7 @@ public class Root_Frame extends JFrame {
 	 * Create the frame.
 	 */
 	public Root_Frame() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\Icono.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Root_Frame.class.getResource("/Imagenes/Icono.png")));
 		setResizable(false);
 		setTitle("Administrador");
 
@@ -285,7 +285,7 @@ public class Root_Frame extends JFrame {
 		panel_2.add(twenty2);
 		
 		JLabel label_20 = new JLabel("");
-		label_20.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
+		label_20.setIcon(new ImageIcon(Root_Frame.class.getResource("/Imagenes/wood_3.jpg")));
 		label_20.setBounds(0, 0, 844, 405);
 		panel_2.add(label_20);
 
@@ -391,7 +391,7 @@ public class Root_Frame extends JFrame {
 		panel_3.add(sell_search_see);
 		
 		JLabel label_22 = new JLabel("");
-		label_22.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
+		label_22.setIcon(new ImageIcon(Root_Frame.class.getResource("/Imagenes/wood_3.jpg")));
 		label_22.setBounds(0, 0, 844, 405);
 		panel_3.add(label_22);
 
@@ -479,7 +479,7 @@ public class Root_Frame extends JFrame {
 		add_find.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
+		lblNewLabel.setIcon(new ImageIcon(Root_Frame.class.getResource("/Imagenes/wood_3.jpg")));
 		lblNewLabel.setBounds(0, 0, 844, 405);
 		panel_9.add(lblNewLabel);
 
@@ -560,7 +560,7 @@ public class Root_Frame extends JFrame {
 		logicDeletion_search.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
+		lblNewLabel_1.setIcon(new ImageIcon(Root_Frame.class.getResource("/Imagenes/wood_3.jpg")));
 		lblNewLabel_1.setBounds(0, 0, 844, 405);
 		panel_6.add(lblNewLabel_1);
 
@@ -615,7 +615,7 @@ public class Root_Frame extends JFrame {
 		panel_8.add(up_button);
 		
 		JLabel label_23 = new JLabel("");
-		label_23.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
+		label_23.setIcon(new ImageIcon(Root_Frame.class.getResource("/Imagenes/wood_3.jpg")));
 		label_23.setBounds(0, 0, 844, 405);
 		panel_8.add(label_23);
 
@@ -676,7 +676,7 @@ public class Root_Frame extends JFrame {
 		update_search.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
+		lblNewLabel_2.setIcon(new ImageIcon(Root_Frame.class.getResource("/Imagenes/wood_3.jpg")));
 		lblNewLabel_2.setBounds(0, 0, 844, 405);
 		panel_5.add(lblNewLabel_2);
 
@@ -761,8 +761,8 @@ public class Root_Frame extends JFrame {
 		panel_4.add(get_total);
 		
 		JLabel lblNewLabel_3 = new JLabel("New label");
-		lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
-		lblNewLabel_3.setBounds(0, 11, 857, 405);
+		lblNewLabel_3.setIcon(new ImageIcon(Root_Frame.class.getResource("/Imagenes/wood_3.jpg")));
+		lblNewLabel_3.setBounds(0, 0, 857, 416);
 		panel_4.add(lblNewLabel_3);
 
 		JPanel panel_7 = new JPanel();
@@ -842,12 +842,12 @@ public class Root_Frame extends JFrame {
 		panel_7.add(Twenty2);
 		
 		JLabel lblNewLabel_4 = new JLabel("New label");
-		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_3.jpg"));
+		lblNewLabel_4.setIcon(new ImageIcon(Root_Frame.class.getResource("/Imagenes/wood_3.jpg")));
 		lblNewLabel_4.setBounds(0, 0, 844, 405);
 		panel_7.add(lblNewLabel_4);
 		
 		JLabel label_4 = new JLabel("");
-		label_4.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_2.jpg"));
+		label_4.setIcon(new ImageIcon(Root_Frame.class.getResource("/Imagenes/wood_2.jpg")));
 		label_4.setBounds(0, 0, 869, 473);
 		panel.add(label_4);
 
@@ -938,17 +938,17 @@ public class Root_Frame extends JFrame {
 		panel_1.add(lblConfirmarContrasea);
 		
 		JLabel lblNewLabel_5 = new JLabel("New label");
-		lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\Icono.png"));
+		lblNewLabel_5.setIcon(new ImageIcon(Root_Frame.class.getResource("/Imagenes/Icono.png")));
 		lblNewLabel_5.setBounds(562, 232, 200, 200);
 		panel_1.add(lblNewLabel_5);
 		
 		JLabel label_18 = new JLabel("");
-		label_18.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_2.jpg"));
+		label_18.setIcon(new ImageIcon(Root_Frame.class.getResource("/Imagenes/wood_2.jpg")));
 		label_18.setBounds(0, 0, 869, 473);
 		panel_1.add(label_18);
 		
 		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon("C:\\Users\\Usuario\\Documents\\HemmingtonSquire\\src\\Imagenes\\wood_1.jpg"));
+		label_1.setIcon(new ImageIcon(Root_Frame.class.getResource("/Imagenes/wood_1.jpg")));
 		label_1.setBounds(0, 0, 896, 522);
 		contentPane.add(label_1);
 	}
